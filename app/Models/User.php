@@ -9,12 +9,14 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Support\Str;
+use Laravel\Sanctum\HasApiTokens;
+use Laravel\Scout\Searchable;
 
 // use Laravel\Sanctum\HasApiTokens;
 
 class User extends Authenticatable
 {
-    use HasFactory, HasUuids;
+    use HasFactory, HasUuids, HasApiTokens, Searchable;
 
     public $incrementing = false;
 

@@ -8,10 +8,11 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Support\Str;
+use Laravel\Scout\Searchable;
 
 class Episode extends Authenticatable
 {
-    use HasFactory, HasUuids;
+    use HasFactory, HasUuids, Searchable;
 
     public $incrementing = false;
 
@@ -34,11 +35,18 @@ class Episode extends Authenticatable
         'story_id'
     ];
 
+    public function toSearchableArray()
+    {
+        return [
+            'title' => $this->title
+        ];
+    }
+
     public function story(): BelongsTo
     {
         return $this->belongsTo(Story::class);
     }
-    
+
     public function comments(): BelongsToMany
     {
         return $this->belongsToMany(Comment::class);

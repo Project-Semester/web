@@ -9,10 +9,11 @@ use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Support\Str;
+use Laravel\Scout\Searchable;
 
 class Story extends Authenticatable
 {
-    use HasFactory, HasUuids;
+    use HasFactory, HasUuids, Searchable;
 
     public $incrementing = false;
 
@@ -28,14 +29,21 @@ class Story extends Authenticatable
             }
         });
     }
-    
+
     protected $fillable = [
         'title',
         'synopsis',
         'user_id',
         'category_id'
     ];
-    
+
+    public function toSearchableArray()
+    {
+        return [
+            'title' => $this->title
+        ];
+    }
+
     public function episodes(): HasMany
     {
         return $this->hasMany(Episode::class);

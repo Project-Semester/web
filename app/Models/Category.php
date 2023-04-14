@@ -7,10 +7,11 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Support\Str;
+use Laravel\Scout\Searchable;
 
 class Category extends Authenticatable
 {
-   use HasFactory, HasUuids;
+    use HasFactory, HasUuids, Searchable;
 
     public $incrementing = false;
 
@@ -30,6 +31,13 @@ class Category extends Authenticatable
     protected $fillable = [
         'name',
     ];
+
+    public function toSearchableArray()
+    {
+        return [
+            'name' => $this->name
+        ];
+    }
 
     public function stories(): HasMany
     {
