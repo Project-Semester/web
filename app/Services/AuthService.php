@@ -3,12 +3,17 @@
 namespace App\Services;
 
 use App\Models\User;
+use Illuminate\Support\Facades\Auth;
 
 class AuthService
 {
     public function loggingIn(array $request)
     {
-        return 'hello';
+        if (!Auth::attempt($request)) {
+            return false;
+        }
+
+        return true;
     }
 
     public function signingUp(array $request)
@@ -22,8 +27,17 @@ class AuthService
         return $user;
     }
 
-    public function loggingOut(array $request)
+    public function loggingOut($user)
     {
-        return 'hello';
+        $response = $user->currentAccessToken()->delete();
+
+        return $response ? true : false;
+    }
+
+    public function findingUserByEmail(string $email)
+    {
+        $user = User::where('email', $email)->first();
+
+        return $user;
     }
 }
