@@ -32,10 +32,10 @@ class Category extends Authenticatable
         'name',
     ];
 
-    public function toSearchableArray()
+    public function toSearchableArray(): array
     {
         return [
-            'name' => $this->name
+            'name' => $this->name,
         ];
     }
 

@@ -32,13 +32,13 @@ class Episode extends Authenticatable
     protected $fillable = [
         'title',
         'body',
-        'story_id'
+        'story_id',
     ];
 
-    public function toSearchableArray()
+    public function toSearchableArray(): array
     {
         return [
-            'title' => $this->title
+            'title' => $this->title,
         ];
     }
 

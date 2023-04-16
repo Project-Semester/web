@@ -34,13 +34,13 @@ class Story extends Authenticatable
         'title',
         'synopsis',
         'user_id',
-        'category_id'
+        'category_id',
     ];
 
-    public function toSearchableArray()
+    public function toSearchableArray(): array
     {
         return [
-            'title' => $this->title
+            'title' => $this->title,
         ];
     }
 

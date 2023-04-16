@@ -12,8 +12,6 @@ use Illuminate\Support\Str;
 use Laravel\Sanctum\HasApiTokens;
 use Laravel\Scout\Searchable;
 
-// use Laravel\Sanctum\HasApiTokens;
-
 class User extends Authenticatable
 {
     use HasFactory, HasUuids, HasApiTokens, Searchable;
@@ -43,6 +41,13 @@ class User extends Authenticatable
         'email',
         'password',
     ];
+
+    public function toSearchableArray(): array
+    {
+        return [
+            'username' => $this->username,
+        ];
+    }
 
     /**
      * The attributes that should be hidden for serialization.
