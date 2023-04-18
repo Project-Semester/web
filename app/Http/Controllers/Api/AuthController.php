@@ -38,11 +38,11 @@ class AuthController extends Controller
 
         $data = [
             'user' => $user,
-            'token' => $user->createToken('API Token of ' . $user->username)
-                ->plainTextToken
+            'token' => $user->createToken('API Token of '.$user->username)
+                ->plainTextToken,
         ];
 
-        return $this->success($data, "A user logged successfully");
+        return $this->success($data, 'A user logged successfully');
     }
 
     public function register(RegisterUserRequest $request)
@@ -57,11 +57,11 @@ class AuthController extends Controller
 
         $data = [
             'user' => $user,
-            'token' => $user->createToken('API Token of ' . $user->username)
-                ->plainTextToken
+            'token' => $user->createToken('API Token of '.$user->username)
+                ->plainTextToken,
         ];
 
-        return $this->success($data, "A new user added successfully", 201);
+        return $this->success($data, 'A new user added successfully', 201);
     }
 
     public function logout()
@@ -74,6 +74,6 @@ class AuthController extends Controller
             return $this->error($e->getMessage(), $e->getCode());
         }
 
-        return $this->success([], "A user logged out successfully");
+        return $this->success([], 'A user logged out successfully');
     }
 }

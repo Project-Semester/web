@@ -2,17 +2,16 @@
 
 namespace Database\Factories;
 
-use App\Models\Category;
-use App\Models\Story;
+use App\Models\Comment;
 use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
- * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Story>
+ * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Comment>
  */
-class StoryFactory extends Factory
+class CommentFactory extends Factory
 {
-    protected $model = Story::class;
+    protected $model = Comment::class;
 
     /**
      * Define the model's default state.
@@ -22,10 +21,8 @@ class StoryFactory extends Factory
     public function definition(): array
     {
         return [
-            'title' => fake()->sentence(),
-            'synopsis' => fake()->paragraph(5),
+            'body' => fake()->text(),
             'user_id' => User::all()->random()->id,
-            'category_id' => Category::all()->random()->id,
         ];
     }
 }

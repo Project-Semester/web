@@ -1,6 +1,8 @@
 <?php
 
 use App\Http\Controllers\Api\AuthController;
+use App\Http\Controllers\Api\CategoryController;
+use App\Http\Controllers\Api\StoryController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -25,5 +27,18 @@ Route::controller(AuthController::class)->group(function () {
 });
 
 Route::group(['middleware' => ['auth:sanctum']], function () {
+    Route::controller(StoryController::class)->prefix('/stories')->group(function () {
+        Route::get('/', 'index');
+        Route::post('/', 'store');
+        Route::get('/{id}', 'show');
+        Route::patch('/{id}', 'update');
+        Route::delete('/{id}', 'destroy');
+    });
+
+    Route::controller(CategoryController::class)->prefix('/categories')->group(function () {
+        Route::get('/', 'index');
+        Route::get('/{id}', 'show');
+    });
+
     Route::post('/logout', [AuthController::class, 'logout']);
 });

@@ -40,6 +40,6 @@ class Comment extends Authenticatable
 
     public function replies(): BelongsToMany
     {
-        return $this->belongsToMany(Comment::class);
+        return $this->belongsToMany(Comment::class, 'replies', 'replying_comment_id', 'replied_comment_id');
     }
 }

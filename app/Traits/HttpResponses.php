@@ -4,7 +4,7 @@ namespace App\Traits;
 
 trait HttpResponses
 {
-    protected function success(array $data, string $message, int $code = 200)
+    protected function success(mixed $data, string $message, int $code = 200)
     {
         return response()->json([
             'status' => true,

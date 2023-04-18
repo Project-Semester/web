@@ -3,6 +3,11 @@
 namespace Database\Seeders;
 
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
+
+use App\Models\Category;
+use App\Models\Comment;
+use App\Models\Story;
+use App\Models\User;
 use Illuminate\Database\Seeder;
 
 class DatabaseSeeder extends Seeder
@@ -12,11 +17,19 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
-        // \App\Models\User::factory(10)->create();
+        User::factory(4)->create();
+        User::factory()->create([
+            'username' => 'author',
+            'email' => 'author@gmail.com',
+            'password' => 'Author123!',
+        ]);
+        Category::factory(4)->create();
+        Story::factory(20)->create();
+        Comment::factory(15)->create();
 
-        // \App\Models\User::factory()->create([
-        //     'name' => 'Test User',
-        //     'email' => 'test@example.com',
-        // ]);
+        $comments = Comment::all();
+        Story::all()->each(function ($story) use ($comments) {
+            $story->comments()->saveMany($comments);
+        });
     }
 }

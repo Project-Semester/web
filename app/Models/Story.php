@@ -49,7 +49,7 @@ class Story extends Authenticatable
         return $this->hasMany(Episode::class);
     }
 
-    public function author(): BelongsTo
+    public function user(): BelongsTo
     {
         return $this->belongsTo(User::class);
     }
@@ -62,5 +62,10 @@ class Story extends Authenticatable
     public function comments(): BelongsToMany
     {
         return $this->belongsToMany(Comment::class);
+    }
+
+    public function likes(): BelongsToMany
+    {
+        return $this->belongsToMany(User::class)->as('likes');
     }
 }

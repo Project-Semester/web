@@ -22,7 +22,7 @@ return new class extends Migration
             $table->timestamps();
         });
 
-        Schema::create('story_comment', function (Blueprint $table) {
+        Schema::create('comment_story', function (Blueprint $table) {
             $table->foreignUuid('comment_id')
                 ->constrained()
                 ->cascadeOnUpdate()
@@ -33,7 +33,7 @@ return new class extends Migration
                 ->cascadeOnDelete();
         });
 
-        Schema::create('episode_comment', function (Blueprint $table) {
+        Schema::create('comment_episode', function (Blueprint $table) {
             $table->foreignUuid('comment_id')
                 ->constrained()
                 ->cascadeOnUpdate()
@@ -62,8 +62,8 @@ return new class extends Migration
     public function down(): void
     {
         Schema::dropIfExists('replies');
-        Schema::dropIfExists('episode_comment');
-        Schema::dropIfExists('story_comment');
+        Schema::dropIfExists('comment_episode');
+        Schema::dropIfExists('comments_story');
         Schema::dropIfExists('comments');
     }
 };

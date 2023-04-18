@@ -9,7 +9,7 @@ class AuthService
 {
     public function loggingIn(array $request)
     {
-        if (!Auth::attempt($request)) {
+        if (! Auth::attempt($request)) {
             return false;
         }
 
@@ -21,7 +21,7 @@ class AuthService
         $user = User::create([
             'username' => $request['username'],
             'email' => $request['email'],
-            'password' => bcrypt($request['password'])
+            'password' => bcrypt($request['password']),
         ]);
 
         return $user;

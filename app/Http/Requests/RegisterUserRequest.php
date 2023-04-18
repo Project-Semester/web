@@ -42,8 +42,8 @@ class RegisterUserRequest extends FormRequest
                     ->mixedCase()
                     ->numbers()
                     ->symbols()
-                    ->uncompromised()
-            ]
+                    ->uncompromised(),
+            ],
         ];
     }
 
