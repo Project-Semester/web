@@ -7,7 +7,6 @@ use App\Http\Requests\StoryStoreRequest;
 use App\Http\Requests\StoryUpdateRequest;
 use App\Services\StoryService;
 use App\Traits\HttpResponses;
-use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 
 class StoryController extends Controller
@@ -24,12 +23,18 @@ class StoryController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
+        $query = $request->search;
+
         try {
-            $stories = $this->service->findAll();
+            $stories = $this->service->findAllStories($query);
         } catch (\Exception $e) {
             return $this->error($e->getMessage(), $e->getCode());
+        }
+
+        if ($stories == null) {
+            $this->success([], "No Story yet");
         }
 
         return $this->success($stories, 'These all stories');
@@ -48,7 +53,7 @@ class StoryController extends Controller
             return $this->error($e->getMessage(), $e->getCode());
         }
 
-        return $this->success($story, "A new story has been added", 201);
+        return $this->success($story, 'A new story has been added', 201);
     }
 
     /**
@@ -57,9 +62,13 @@ class StoryController extends Controller
     public function show(string $id)
     {
         try {
-            $story = $this->service->findById($id);
+            $story = $this->service->findStoryById($id);
         } catch (\Exception $e) {
             return $this->error($e->getMessage(), $e->getCode());
+        }
+
+        if ($story == null) {
+            return $this->error("Story not Found", 404);
         }
 
         return $this->success($story, 'This is the story');
@@ -71,15 +80,14 @@ class StoryController extends Controller
     public function update(StoryUpdateRequest $request, string $id)
     {
         $validated = $request->validated();
-        // return $validated;
 
         try {
             $story = $this->service->changeStory($validated, $id);
         } catch (\Exception $e) {
-            return $this->error($e->getMessage(), (int)$e->getCode());
+            return $this->error($e->getMessage());
         }
 
-        return $this->success($story, "This is yout updated story");
+        return $this->success($story, 'This is yout updated story');
     }
 
     /**
@@ -90,9 +98,9 @@ class StoryController extends Controller
         try {
             $this->service->deleteStory($id);
         } catch (\Exception $e) {
-            return $this->error($e->getMessage(), (int)$e->getCode());
+            return $this->error($e->getMessage(), (int) $e->getCode());
         }
 
-        return $this->success(null, "Story was deleted successfully");
+        return $this->success(null, 'Story was deleted successfully');
     }
 }

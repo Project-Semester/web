@@ -2,6 +2,7 @@
 
 namespace Database\Factories;
 
+use App\Models\Story;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
@@ -17,7 +18,9 @@ class EpisodeFactory extends Factory
     public function definition(): array
     {
         return [
-            //
+            'title' => fake()->sentence(),
+            'body' => fake()->text(),
+            'story_id' => Story::all()->random()->id,
         ];
     }
 }

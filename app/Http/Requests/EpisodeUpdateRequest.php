@@ -4,7 +4,7 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class StoryUpdateRequest extends FormRequest
+class EpisodeUpdateRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -22,9 +22,8 @@ class StoryUpdateRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'title' => ['sometimes', 'string', 'max:255'],
-            'synopsis' => ['sometimes', 'string'],
-            'category_id' => ['sometimes', 'string', 'uuid'],
+            'title' => 'sometimes|string|max:255',
+            'body' => 'sometimes|string'
         ];
     }
 }

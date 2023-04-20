@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Api\AuthController;
 use App\Http\Controllers\Api\CategoryController;
+use App\Http\Controllers\Api\EpisodeController;
 use App\Http\Controllers\Api\StoryController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -33,6 +34,14 @@ Route::group(['middleware' => ['auth:sanctum']], function () {
         Route::get('/{id}', 'show');
         Route::patch('/{id}', 'update');
         Route::delete('/{id}', 'destroy');
+    });
+
+    Route::controller(EpisodeController::class)->group(function () {
+        Route::get('stories/{id}/episodes', 'index');
+        Route::post('stories/{id}/episodes', 'store');
+        Route::get('/episodes/{id}', 'show');
+        Route::patch('/episodes/{id}', 'update');
+        Route::delete('/episodes/{id}', 'destroy');
     });
 
     Route::controller(CategoryController::class)->prefix('/categories')->group(function () {
