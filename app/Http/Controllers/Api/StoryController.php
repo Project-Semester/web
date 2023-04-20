@@ -7,6 +7,7 @@ use App\Http\Requests\StoryStoreRequest;
 use App\Http\Requests\StoryUpdateRequest;
 use App\Services\StoryService;
 use App\Traits\HttpResponses;
+use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 
 class StoryController extends Controller
@@ -23,7 +24,7 @@ class StoryController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index(Request $request)
+    public function index(Request $request): JsonResponse
     {
         $query = $request->search;
 
@@ -43,7 +44,7 @@ class StoryController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(StoryStoreRequest $request)
+    public function store(StoryStoreRequest $request): JsonResponse
     {
         $validated = $request->validated();
 
@@ -59,7 +60,7 @@ class StoryController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(string $id)
+    public function show(string $id): JsonResponse
     {
         try {
             $story = $this->service->findStoryById($id);
@@ -77,7 +78,7 @@ class StoryController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(StoryUpdateRequest $request, string $id)
+    public function update(StoryUpdateRequest $request, string $id): JsonResponse
     {
         $validated = $request->validated();
 
@@ -93,7 +94,7 @@ class StoryController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy(string $id): JsonResponse
     {
         try {
             $this->service->deleteStory($id);

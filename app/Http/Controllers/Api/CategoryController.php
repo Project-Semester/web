@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Api;
 use App\Http\Controllers\Controller;
 use App\Services\CategoryService;
 use App\Traits\HttpResponses;
+use Illuminate\Http\JsonResponse;
 
 class CategoryController extends Controller
 {
@@ -17,7 +18,7 @@ class CategoryController extends Controller
         $this->service = $categoryService;
     }
 
-    public function index()
+    public function index(): JsonResponse
     {
         try {
             $categories = $this->service->findAll();
@@ -28,7 +29,7 @@ class CategoryController extends Controller
         return $this->success($categories, 'These all categories');
     }
 
-    public function show(string $id)
+    public function show(string $id): JsonResponse
     {
         try {
             $category = $this->service->findById($id);

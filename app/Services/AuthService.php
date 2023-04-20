@@ -3,20 +3,22 @@
 namespace App\Services;
 
 use App\Models\User;
+use Illuminate\Database\Eloquent\Collection;
+use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Auth;
 
 class AuthService
 {
-    public function loggingIn(array $request)
+    public function loggingIn(array $request): bool
     {
-        if (! Auth::attempt($request)) {
+        if (!Auth::attempt($request)) {
             return false;
         }
 
         return true;
     }
 
-    public function signingUp(array $request)
+    public function signingUp(array $request): Collection
     {
         $user = User::create([
             'username' => $request['username'],
@@ -27,16 +29,16 @@ class AuthService
         return $user;
     }
 
-    public function loggingOut($user)
+    public function loggingOut($user): bool
     {
         $response = $user->currentAccessToken()->delete();
 
         return $response ? true : false;
     }
 
-    public function findingUserByEmail(string $email)
+    public function findingUserByEmail(string $email): Model
     {
-        $user = User::where('email', $email)->first();
+        $user = User::firstWhere('email', $email);
 
         return $user;
     }

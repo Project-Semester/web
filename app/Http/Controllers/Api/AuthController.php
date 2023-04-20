@@ -7,6 +7,7 @@ use App\Http\Requests\LoginUserRequest;
 use App\Http\Requests\RegisterUserRequest;
 use App\Services\AuthService;
 use App\Traits\HttpResponses;
+use Illuminate\Http\JsonResponse;
 use Illuminate\Support\Facades\Auth;
 
 class AuthController extends Controller
@@ -20,7 +21,7 @@ class AuthController extends Controller
         $this->service = $authService;
     }
 
-    public function login(LoginUserRequest $request)
+    public function login(LoginUserRequest $request): JsonResponse
     {
         $validated = $request->validated();
 
@@ -38,14 +39,14 @@ class AuthController extends Controller
 
         $data = [
             'user' => $user,
-            'token' => $user->createToken('API Token of '.$user->username)
+            'token' => $user->createToken('API Token of ' . $user->username)
                 ->plainTextToken,
         ];
 
         return $this->success($data, 'A user logged successfully');
     }
 
-    public function register(RegisterUserRequest $request)
+    public function register(RegisterUserRequest $request): JsonResponse
     {
         $validated = $request->validated();
 
@@ -57,14 +58,14 @@ class AuthController extends Controller
 
         $data = [
             'user' => $user,
-            'token' => $user->createToken('API Token of '.$user->username)
+            'token' => $user->createToken('API Token of ' . $user->username)
                 ->plainTextToken,
         ];
 
         return $this->success($data, 'A new user added successfully', 201);
     }
 
-    public function logout()
+    public function logout(): JsonResponse
     {
         $user = Auth::user();
 

@@ -3,11 +3,13 @@
 namespace App\Services;
 
 use App\Models\Story;
+use Illuminate\Database\Eloquent\Collection;
+use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Auth;
 
 class StoryService
 {
-    public function findAllStories(?string $query)
+    public function findAllStories(?string $query): Collection
     {
         $stories = Story::search($query)->query(function ($builder) {
             $builder->with(['category', 'user', 'likes'])->withCount(['episodes', 'comments', 'likes']);
@@ -16,7 +18,7 @@ class StoryService
         return $stories;
     }
 
-    public function findStoryById(string $id)
+    public function findStoryById(string $id): Model
     {
         $story = Story::with(['user', 'category', 'episodes' => function ($query) {
             $query->orderBy('title');
@@ -25,7 +27,7 @@ class StoryService
         return $story;
     }
 
-    public function addStory(array $request)
+    public function addStory(array $request): Collection
     {
         $story = Story::create([
             'title' => $request['title'],
@@ -37,7 +39,7 @@ class StoryService
         return $story;
     }
 
-    public function changeStory(array $request, string $id)
+    public function changeStory(array $request, string $id): Model
     {
         $story = Story::where('id', $id)->update($request);
 
@@ -46,8 +48,12 @@ class StoryService
         return $story;
     }
 
-    public function deleteStory(string $id)
+    public function deleteStory(string $id): bool
     {
-        Story::destroy($id);
+        if (Story::destroy($id)) {
+            return true;
+        }
+
+        return false;
     }
 }
