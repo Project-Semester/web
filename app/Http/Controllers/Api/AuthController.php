@@ -39,7 +39,7 @@ class AuthController extends Controller
 
         $data = [
             'user' => $user,
-            'token' => $user->createToken('API Token of ' . $user->username)
+            'token' => $user->createToken('API Token of '.$user->username)
                 ->plainTextToken,
         ];
 
@@ -58,7 +58,7 @@ class AuthController extends Controller
 
         $data = [
             'user' => $user,
-            'token' => $user->createToken('API Token of ' . $user->username)
+            'token' => $user->createToken('API Token of '.$user->username)
                 ->plainTextToken,
         ];
 

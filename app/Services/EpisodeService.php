@@ -29,7 +29,7 @@ class EpisodeService
         $episode = Episode::create([
             'title' => $request['title'],
             'body' => $request['body'],
-            'story_id' => $id
+            'story_id' => $id,
         ]);
 
         return $episode;

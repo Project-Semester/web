@@ -13,21 +13,30 @@ class StoryService
     {
         $stories = Story::search($query)->query(function ($builder) {
             $builder->with(['category', 'user', 'likes'])->withCount(['episodes', 'comments', 'likes']);
+        })->orderBy('created_at', 'desc')->get();
+
+        return $stories;
+    }
+
+    public function findAllUserStories(?string $query): Collection
+    {
+        $stories = Story::search($query)->query(function ($builder) {
+            $builder->with(['category', 'user', 'likes'])->withCount(['episodes', 'comments', 'likes']);
         })->where('user_id', Auth::id())->orderBy('created_at', 'desc')->get();
 
         return $stories;
     }
 
-    public function findStoryById(string $id): Model
+    public function findStoryById(Story $story): Model
     {
-        $story = Story::with(['user', 'category', 'episodes' => function ($query) {
+        $story->load(['user', 'category', 'episodes' => function ($query) {
             $query->orderBy('title');
-        }, 'comments.replies', 'likes'])->withCount(['comments', 'likes'])->firstWhere('id', $id);
+        }, 'comments.replies', 'likes'])->loadCount(['episodes', 'comments', 'likes']);
 
         return $story;
     }
 
-    public function addStory(array $request): Collection
+    public function addStory(array $request): Model
     {
         $story = Story::create([
             'title' => $request['title'],
@@ -39,18 +48,18 @@ class StoryService
         return $story;
     }
 
-    public function changeStory(array $request, string $id): Model
+    public function changeStory(array $request, Story $story): Model
     {
-        $story = Story::where('id', $id)->update($request);
+        $story->update($request);
 
-        $story = Story::with(['user', 'category', 'episodes', 'comments'])->withCount(['comments', 'likes'])->firstWhere('id', $id);
+        $story->with(['user', 'category', 'episodes', 'comments'])->withCount(['comments', 'likes']);
 
         return $story;
     }
 
-    public function deleteStory(string $id): bool
+    public function deleteStory(Story $story): bool
     {
-        if (Story::destroy($id)) {
+        if ($story->delete()) {
             return true;
         }
 

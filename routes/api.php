@@ -1,6 +1,8 @@
 <?php
 
 use App\Http\Controllers\Api\AuthController;
+use App\Http\Controllers\Api\Author\AuthorStoryController;
+use App\Http\Controllers\Api\AuthorEpisodeController;
 use App\Http\Controllers\Api\CategoryController;
 use App\Http\Controllers\Api\EpisodeController;
 use App\Http\Controllers\Api\StoryController;
@@ -28,20 +30,32 @@ Route::controller(AuthController::class)->group(function () {
 });
 
 Route::group(['middleware' => ['auth:sanctum']], function () {
+    Route::prefix('/me')->group(function () {
+        Route::controller(AuthorStoryController::class)->prefix('/stories')->group(function () {
+            Route::get('/', 'index');
+            Route::post('/', 'store');
+            Route::get('/{story}', 'show');
+            Route::patch('/{story}', 'update');
+            Route::delete('/{story}', 'destroy');
+        });
+
+        Route::controller(AuthorEpisodeController::class)->group(function () {
+            Route::get('stories/{id}/episodes', 'index');
+            Route::post('stories/{id}/episodes', 'store');
+            Route::get('/episodes/{id}', 'show');
+            Route::patch('/episodes/{id}', 'update');
+            Route::delete('/episodes/{id}', 'destroy');
+        });
+    });
+
     Route::controller(StoryController::class)->prefix('/stories')->group(function () {
         Route::get('/', 'index');
-        Route::post('/', 'store');
-        Route::get('/{id}', 'show');
-        Route::patch('/{id}', 'update');
-        Route::delete('/{id}', 'destroy');
+        Route::get('/{story}', 'show');
     });
 
     Route::controller(EpisodeController::class)->group(function () {
-        Route::get('stories/{id}/episodes', 'index');
-        Route::post('stories/{id}/episodes', 'store');
+        Route::get('/stories/{id}/episodes', 'index');
         Route::get('/episodes/{id}', 'show');
-        Route::patch('/episodes/{id}', 'update');
-        Route::delete('/episodes/{id}', 'destroy');
     });
 
     Route::controller(CategoryController::class)->prefix('/categories')->group(function () {

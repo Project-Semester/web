@@ -3,12 +3,11 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
-use App\Http\Requests\StoryStoreRequest;
-use App\Http\Requests\StoryUpdateRequest;
+use App\Models\Story;
 use App\Services\StoryService;
 use App\Traits\HttpResponses;
-use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class StoryController extends Controller
 {
@@ -21,87 +20,35 @@ class StoryController extends Controller
         $this->service = $storyService;
     }
 
-    /**
-     * Display a listing of the resource.
-     */
-    public function index(Request $request): JsonResponse
+    public function index(Request $request)
     {
+        if ($request->user()->cant('viewAny', Story::class)) {
+            $this->error('Unauthorized', 403);
+        }
+
         $query = $request->search;
 
         try {
             $stories = $this->service->findAllStories($query);
         } catch (\Exception $e) {
-            return $this->error($e->getMessage(), $e->getCode());
+            return $this->error($e->getMessage());
         }
 
-        if ($stories == null) {
-            $this->success([], "No Story yet");
-        }
-
-        return $this->success($stories, 'These all stories');
+        return $this->success($stories, 'There All Your Stories');
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
-    public function store(StoryStoreRequest $request): JsonResponse
+    public function show(Story $story)
     {
-        $validated = $request->validated();
-
-        try {
-            $story = $this->service->addStory($validated);
-        } catch (\Exception $e) {
-            return $this->error($e->getMessage(), $e->getCode());
+        if (Auth::user()->cant('view', $story)) {
+            return $this->error('Unauthorized', 403);
         }
 
-        return $this->success($story, 'A new story has been added', 201);
-    }
-
-    /**
-     * Display the specified resource.
-     */
-    public function show(string $id): JsonResponse
-    {
         try {
-            $story = $this->service->findStoryById($id);
-        } catch (\Exception $e) {
-            return $this->error($e->getMessage(), $e->getCode());
-        }
-
-        if ($story == null) {
-            return $this->error("Story not Found", 404);
-        }
-
-        return $this->success($story, 'This is the story');
-    }
-
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(StoryUpdateRequest $request, string $id): JsonResponse
-    {
-        $validated = $request->validated();
-
-        try {
-            $story = $this->service->changeStory($validated, $id);
+            $result = $this->service->findStoryById($story);
         } catch (\Exception $e) {
             return $this->error($e->getMessage());
         }
 
-        return $this->success($story, 'This is yout updated story');
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(string $id): JsonResponse
-    {
-        try {
-            $this->service->deleteStory($id);
-        } catch (\Exception $e) {
-            return $this->error($e->getMessage(), (int) $e->getCode());
-        }
-
-        return $this->success(null, 'Story was deleted successfully');
+        return $this->success($result, 'This is your Story');
     }
 }

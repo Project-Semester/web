@@ -11,7 +11,7 @@ class AuthService
 {
     public function loggingIn(array $request): bool
     {
-        if (!Auth::attempt($request)) {
+        if (! Auth::attempt($request)) {
             return false;
         }
 

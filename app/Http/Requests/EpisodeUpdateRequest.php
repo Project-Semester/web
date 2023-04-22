@@ -23,7 +23,7 @@ class EpisodeUpdateRequest extends FormRequest
     {
         return [
             'title' => 'sometimes|string|max:255',
-            'body' => 'sometimes|string'
+            'body' => 'sometimes|string',
         ];
     }
 }
