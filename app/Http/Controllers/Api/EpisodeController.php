@@ -3,9 +3,13 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
+use App\Models\Episode;
+use App\Models\Story;
 use App\Services\EpisodeService;
 use App\Traits\HttpResponses;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Symfony\Component\HttpFoundation\JsonResponse;
 
 class EpisodeController extends Controller
 {
@@ -18,12 +22,16 @@ class EpisodeController extends Controller
         $this->service = $episodeService;
     }
 
-    public function index(Request $request, string $id)
+    public function index(Request $request, Story $story): JsonResponse
     {
+        if ($request->user()->cant('viewAny', $story)) {
+            return $this->error("Unauthorized", 403);
+        }
+
         $query = $request->search;
 
         try {
-            $episodes = $this->service->findAllEpisode($query, $id);
+            $episodes = $this->service->findAllEpisode($query, $story);
         } catch (\Exception $e) {
             return $this->error($e->getMessage());
         }
@@ -31,14 +39,18 @@ class EpisodeController extends Controller
         return $this->success($episodes, 'These all your episodes');
     }
 
-    public function show(string $id)
+    public function show(Episode $episode): JsonResponse
     {
+        if (Auth::user()->cant('viewAny', $episode)) {
+            return $this->error("Unauthorized", 403);
+        }
+
         try {
-            $episode = $this->service->findEpisodeById($id);
+            $result = $this->service->findEpisodeById($episode);
         } catch (\Exception $e) {
             return $this->error($e->getMessage());
         }
 
-        return $this->success($episode, 'This is your episode');
+        return $this->success($result, 'This is your episode');
     }
 }

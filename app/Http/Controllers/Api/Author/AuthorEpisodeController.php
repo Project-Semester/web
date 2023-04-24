@@ -1,14 +1,17 @@
 <?php
 
-namespace App\Http\Controllers\Api;
+namespace App\Http\Controllers\Api\Author;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\EpisodeStoreRequest;
 use App\Http\Requests\EpisodeUpdateRequest;
+use App\Models\Episode;
+use App\Models\Story;
 use App\Services\EpisodeService;
 use App\Traits\HttpResponses;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class AuthorEpisodeController extends Controller
 {
@@ -24,28 +27,36 @@ class AuthorEpisodeController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index(Request $request, string $id): JsonResponse
+    public function index(Request $request, Story $story): JsonResponse
     {
+        if ($request->user()->cant('view', $story)) {
+            return $this->error("Unauthorized", 403);
+        }
+
         $query = $request->search;
 
         try {
-            $stories = $this->service->findAllEpisode($query, $id);
+            $episodes = $this->service->findAllEpisode($query, $story);
         } catch (\Exception $e) {
             return $this->error($e->getMessage(), 404);
         }
 
-        return $this->success($stories, 'These All Your Episodes');
+        return $this->success($episodes, 'These All Your Episodes');
     }
 
     /**
      * Store a newly created resource in storage.
      */
-    public function store(EpisodeStoreRequest $request, string $id): JsonResponse
+    public function store(EpisodeStoreRequest $request, Story $story): JsonResponse
     {
+        if ($request->user()->cant('create', Episode::class)) {
+            return $this->error("Unauthorized", 403);
+        }
+
         $validated = $request->validated();
 
         try {
-            $episode = $this->service->addEpisode($validated, $id);
+            $episode = $this->service->addEpisode($validated, $story);
         } catch (\Exception $e) {
             return $this->error($e->getMessage());
         }
@@ -56,30 +67,33 @@ class AuthorEpisodeController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(string $id): JsonResponse
+    public function show(Episode $episode): JsonResponse
     {
+        if (Auth::user()->cant('view', $episode)) {
+            return $this->error("Unauthorized", 403);
+        }
+
         try {
-            $episode = $this->service->findEpisodeById($id);
+            $result = $this->service->findEpisodeById($episode);
         } catch (\Exception $e) {
             return $this->error($e->getMessage());
         }
 
-        if ($episode == null) {
-            return $this->error('Episode not Found', 404);
-        }
-
-        return $this->success($episode, 'This is your episode');
+        return $this->success($result, 'This is your episode');
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(EpisodeUpdateRequest $request, string $id): JsonResponse
+    public function update(EpisodeUpdateRequest $request, Episode $episode): JsonResponse
     {
+        if ($request->user()->cant('update', $episode)) {
+            return $this->error("Unauthorized", 403);
+        }
         $validated = $request->validated();
 
         try {
-            $episode = $this->service->changeEpisode($validated, $id);
+            $episode = $this->service->changeEpisode($validated, $episode);
         } catch (\Exception $e) {
             return $this->error($e->getMessage());
         }
@@ -90,16 +104,16 @@ class AuthorEpisodeController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id): JsonResponse
+    public function destroy(Episode $episode): JsonResponse
     {
-        try {
-            $response = $this->service->deleteEpisode($id);
-        } catch (\Exception $e) {
-            return $this->error($e->getMessage());
+        if (Auth::user()->cant('delete', $episode)) {
+            return $this->error("Unauthorized", 403);
         }
 
-        if (! $response) {
-            return $this->error('Failed to delete episode');
+        try {
+            $this->service->deleteEpisode($episode);
+        } catch (\Exception $e) {
+            return $this->error($e->getMessage());
         }
 
         return $this->success([], 'An Episode deleted successfully');

@@ -35,16 +35,16 @@ class AuthorStoryController extends Controller
         $query = $request->search;
 
         try {
-            $stories = $this->service->findAllUserStories($query);
+            $result = $this->service->findAllUserStories($query);
         } catch (\Exception $e) {
             return $this->error($e->getMessage());
         }
 
-        if ($stories == null) {
+        if ($result == null) {
             $this->success([], 'No Story yet');
         }
 
-        return $this->success($stories, 'These all stories');
+        return $this->success($result, 'These all stories');
     }
 
     /**
@@ -52,19 +52,19 @@ class AuthorStoryController extends Controller
      */
     public function store(StoryStoreRequest $request): JsonResponse
     {
-        if ($request->user()->cannot('create', Story::class)) {
+        if ($request->user()->cant('create', Story::class)) {
             return $this->error('Unauthorize', 403);
         }
 
         $validated = $request->validated();
 
         try {
-            $story = $this->service->addStory($validated);
+            $result = $this->service->addStory($validated);
         } catch (\Exception $e) {
             return $this->error($e->getMessage(), $e->getCode());
         }
 
-        return $this->success($story, 'A new story has been added', 201);
+        return $this->success($result, 'A new story has been added', 201);
     }
 
     /**
@@ -110,6 +110,10 @@ class AuthorStoryController extends Controller
      */
     public function destroy(Story $story): JsonResponse
     {
+        if (Auth::user()->cant('delete', $story)) {
+            return $this->error('Unauthorized', 403);
+        }
+
         try {
             $this->service->deleteStory($story);
         } catch (\Exception $e) {

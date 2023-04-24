@@ -2,7 +2,7 @@
 
 use App\Http\Controllers\Api\AuthController;
 use App\Http\Controllers\Api\Author\AuthorStoryController;
-use App\Http\Controllers\Api\AuthorEpisodeController;
+use App\Http\Controllers\Api\Author\AuthorEpisodeController;
 use App\Http\Controllers\Api\CategoryController;
 use App\Http\Controllers\Api\EpisodeController;
 use App\Http\Controllers\Api\StoryController;
@@ -40,11 +40,11 @@ Route::group(['middleware' => ['auth:sanctum']], function () {
         });
 
         Route::controller(AuthorEpisodeController::class)->group(function () {
-            Route::get('stories/{id}/episodes', 'index');
-            Route::post('stories/{id}/episodes', 'store');
-            Route::get('/episodes/{id}', 'show');
-            Route::patch('/episodes/{id}', 'update');
-            Route::delete('/episodes/{id}', 'destroy');
+            Route::get('/stories/{story}/episodes', 'index');
+            Route::post('/stories/{story}/episodes', 'store');
+            Route::get('/episodes/{episode}', 'show');
+            Route::patch('/episodes/{episode}', 'update');
+            Route::delete('/episodes/{episode}', 'destroy');
         });
     });
 
@@ -54,8 +54,8 @@ Route::group(['middleware' => ['auth:sanctum']], function () {
     });
 
     Route::controller(EpisodeController::class)->group(function () {
-        Route::get('/stories/{id}/episodes', 'index');
-        Route::get('/episodes/{id}', 'show');
+        Route::get('/stories/{story}/episodes', 'index');
+        Route::get('/episodes/{episode}', 'show');
     });
 
     Route::controller(CategoryController::class)->prefix('/categories')->group(function () {

@@ -4,12 +4,11 @@ namespace App\Services;
 
 use App\Models\Story;
 use Illuminate\Database\Eloquent\Collection;
-use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Auth;
 
 class StoryService
 {
-    public function findAllStories(?string $query): Collection
+    public static function findAllStories(?string $query): Collection
     {
         $stories = Story::search($query)->query(function ($builder) {
             $builder->with(['category', 'user', 'likes'])->withCount(['episodes', 'comments', 'likes']);
@@ -18,7 +17,7 @@ class StoryService
         return $stories;
     }
 
-    public function findAllUserStories(?string $query): Collection
+    public static function findAllUserStories(?string $query): Collection
     {
         $stories = Story::search($query)->query(function ($builder) {
             $builder->with(['category', 'user', 'likes'])->withCount(['episodes', 'comments', 'likes']);
@@ -27,7 +26,7 @@ class StoryService
         return $stories;
     }
 
-    public function findStoryById(Story $story): Model
+    public static function findStoryById(Story $story): Story
     {
         $story->load(['user', 'category', 'episodes' => function ($query) {
             $query->orderBy('title');
@@ -36,7 +35,7 @@ class StoryService
         return $story;
     }
 
-    public function addStory(array $request): Model
+    public static function addStory(array $request): Story
     {
         $story = Story::create([
             'title' => $request['title'],
@@ -48,16 +47,16 @@ class StoryService
         return $story;
     }
 
-    public function changeStory(array $request, Story $story): Model
+    public static function changeStory(array $request, Story $story): Story
     {
         $story->update($request);
 
-        $story->with(['user', 'category', 'episodes', 'comments'])->withCount(['comments', 'likes']);
+        $story->load(['user', 'category', 'episodes', 'comments'])->loadCount(['comments', 'likes']);
 
         return $story;
     }
 
-    public function deleteStory(Story $story): bool
+    public static function deleteStory(Story $story): bool
     {
         if ($story->delete()) {
             return true;

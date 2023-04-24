@@ -39,7 +39,7 @@ class StoryController extends Controller
 
     public function show(Story $story)
     {
-        if (Auth::user()->cant('view', $story)) {
+        if (Auth::user()->cant('viewAny', $story)) {
             return $this->error('Unauthorized', 403);
         }
 
