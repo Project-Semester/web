@@ -3,9 +3,12 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
+use App\Models\Category;
 use App\Services\CategoryService;
 use App\Traits\HttpResponses;
 use Illuminate\Http\JsonResponse;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class CategoryController extends Controller
 {
@@ -18,23 +21,33 @@ class CategoryController extends Controller
         $this->service = $categoryService;
     }
 
-    public function index(): JsonResponse
+    public function index(Request $request): JsonResponse
     {
+        $query = $request->search;
+
+        if ($request->user()->cant('viewAny', Category::class)) {
+            return $this->error('Unauthorized', 403);
+        }
+
         try {
-            $categories = $this->service->findAll();
+            $categories = $this->service->findAll($query);
         } catch (\Exception $e) {
-            return $this->error($e->getMessage(), (int) $e->getCode());
+            return $this->error($e->getMessage());
         }
 
         return $this->success($categories, 'These all categories');
     }
 
-    public function show(string $id): JsonResponse
+    public function show(Category $category): JsonResponse
     {
+        if (Auth::user()->cant('viewAny', $category)) {
+            return $this->error('Unauthorized', 403);
+        }
+
         try {
-            $category = $this->service->findById($id);
+            $category = $this->service->findById($category);
         } catch (\Exception $e) {
-            return $this->error($e->getMessage(), (int) $e->getCode());
+            return $this->error($e->getMessage());
         }
 
         return $this->success($category, 'This is your category and all the story it has');

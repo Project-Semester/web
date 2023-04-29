@@ -1,12 +1,11 @@
 <?php
 
 use App\Http\Controllers\Api\AuthController;
-use App\Http\Controllers\Api\Author\AuthorStoryController;
 use App\Http\Controllers\Api\Author\AuthorEpisodeController;
+use App\Http\Controllers\Api\Author\AuthorStoryController;
 use App\Http\Controllers\Api\CategoryController;
 use App\Http\Controllers\Api\EpisodeController;
 use App\Http\Controllers\Api\StoryController;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -19,10 +18,6 @@ use Illuminate\Support\Facades\Route;
 | be assigned to the "api" middleware group. Make something great!
 |
 */
-
-Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
-    return $request->user();
-});
 
 Route::controller(AuthController::class)->group(function () {
     Route::post('/login', 'login');
@@ -60,7 +55,7 @@ Route::group(['middleware' => ['auth:sanctum']], function () {
 
     Route::controller(CategoryController::class)->prefix('/categories')->group(function () {
         Route::get('/', 'index');
-        Route::get('/{id}', 'show');
+        Route::get('/{category}', 'show');
     });
 
     Route::post('/logout', [AuthController::class, 'logout']);

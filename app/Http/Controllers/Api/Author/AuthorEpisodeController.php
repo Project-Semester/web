@@ -30,7 +30,7 @@ class AuthorEpisodeController extends Controller
     public function index(Request $request, Story $story): JsonResponse
     {
         if ($request->user()->cant('view', $story)) {
-            return $this->error("Unauthorized", 403);
+            return $this->error('Unauthorized', 403);
         }
 
         $query = $request->search;
@@ -50,7 +50,7 @@ class AuthorEpisodeController extends Controller
     public function store(EpisodeStoreRequest $request, Story $story): JsonResponse
     {
         if ($request->user()->cant('create', Episode::class)) {
-            return $this->error("Unauthorized", 403);
+            return $this->error('Unauthorized', 403);
         }
 
         $validated = $request->validated();
@@ -70,7 +70,7 @@ class AuthorEpisodeController extends Controller
     public function show(Episode $episode): JsonResponse
     {
         if (Auth::user()->cant('view', $episode)) {
-            return $this->error("Unauthorized", 403);
+            return $this->error('Unauthorized', 403);
         }
 
         try {
@@ -88,7 +88,7 @@ class AuthorEpisodeController extends Controller
     public function update(EpisodeUpdateRequest $request, Episode $episode): JsonResponse
     {
         if ($request->user()->cant('update', $episode)) {
-            return $this->error("Unauthorized", 403);
+            return $this->error('Unauthorized', 403);
         }
         $validated = $request->validated();
 
@@ -107,7 +107,7 @@ class AuthorEpisodeController extends Controller
     public function destroy(Episode $episode): JsonResponse
     {
         if (Auth::user()->cant('delete', $episode)) {
-            return $this->error("Unauthorized", 403);
+            return $this->error('Unauthorized', 403);
         }
 
         try {

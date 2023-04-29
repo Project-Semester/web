@@ -4,23 +4,22 @@ namespace App\Services;
 
 use App\Models\Category;
 use Illuminate\Database\Eloquent\Collection;
-use Illuminate\Database\Eloquent\Model;
 
 class CategoryService
 {
-    public function findAll(): Collection
+    public function findAll(?string $query): Collection
     {
-        $data = Category::orderBy('name')->get();
+        $categories = Category::search($query)->orderBy('name')->get();
 
-        return $data;
+        return $categories;
     }
 
-    public function findById(string $id): Model
+    public function findById(Category $category): Category
     {
-        $data = Category::with(['stories' => function ($query) {
+        $category->load(['stories' => function ($query) {
             $query->orderBy('title');
-        }])->firstWhere('id', $id);
+        }]);
 
-        return $data;
+        return $category;
     }
 }

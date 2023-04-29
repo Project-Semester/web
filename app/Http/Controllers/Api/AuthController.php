@@ -31,11 +31,7 @@ class AuthController extends Controller
             return $this->error($e->getMessage(), $e->getCode());
         }
 
-        try {
-            $user = $this->service->findingUserByEmail($validated['email']);
-        } catch (\Exception $e) {
-            return $this->error($e->getMessage(), $e->getCode());
-        }
+        $user = Auth::user();
 
         $data = [
             'user' => $user,
