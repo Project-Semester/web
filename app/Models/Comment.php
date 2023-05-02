@@ -38,8 +38,18 @@ class Comment extends Authenticatable
         return $this->belongsTo(User::class);
     }
 
-    public function replies(): BelongsToMany
+    public function stories(): BelongsToMany
     {
-        return $this->belongsToMany(Comment::class, 'replies', 'replying_comment_id', 'replied_comment_id');
+        return $this->belongsToMany(Story::class);
     }
+
+    public function episodes(): BelongsToMany
+    {
+        return $this->belongsToMany(Episode::class);
+    }
+
+        public function replies(): BelongsToMany
+        {
+            return $this->belongsToMany(Comment::class, 'replies', 'replying_comment_id', 'replied_comment_id');
+        }
 }

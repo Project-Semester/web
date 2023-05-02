@@ -26,7 +26,7 @@ class AuthController extends Controller
         $validated = $request->validated();
 
         try {
-            $this->service->loggingIn($validated);
+            $result = $this->service->loggingIn($validated);
         } catch (\Exception $e) {
             return $this->error($e->getMessage(), $e->getCode());
         }

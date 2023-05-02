@@ -3,7 +3,8 @@
 namespace App\Services;
 
 use App\Models\User;
-use Illuminate\Auth\Authenticatable;
+// use Illuminate\Auth\Authenticatable;
+use Illuminate\Contracts\Auth\Authenticatable;
 use Illuminate\Support\Facades\Auth;
 
 class AuthService
