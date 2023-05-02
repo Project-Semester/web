@@ -3,8 +3,8 @@
 namespace App\Http\Controllers\Api\Author;
 
 use App\Http\Controllers\Controller;
-use App\Http\Requests\StoryStoreRequest;
-use App\Http\Requests\StoryUpdateRequest;
+use App\Http\Requests\StoreStoryRequest;
+use App\Http\Requests\UpdateStoryRequest;
 use App\Models\Story;
 use App\Services\StoryService;
 use App\Traits\HttpResponses;
@@ -50,7 +50,7 @@ class AuthorStoryController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(StoryStoreRequest $request): JsonResponse
+    public function store(StoreStoryRequest $request): JsonResponse
     {
         if ($request->user()->cant('create', Story::class)) {
             return $this->error('Unauthorize', 403);
@@ -88,7 +88,7 @@ class AuthorStoryController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(StoryUpdateRequest $request, Story $story): JsonResponse
+    public function update(UpdateStoryRequest $request, Story $story): JsonResponse
     {
         if ($request->user()->cant('update', $story)) {
             return $this->error('Unauthorized', 403);

@@ -58,10 +58,6 @@ class StoryService
 
     public static function deleteStory(Story $story): bool
     {
-        if ($story->delete()) {
-            return true;
-        }
-
-        return false;
+        return $story->delete();
     }
 }

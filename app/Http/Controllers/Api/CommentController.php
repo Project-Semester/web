@@ -3,8 +3,8 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
-use App\Http\Requests\CommentStoreRequest;
-use App\Http\Requests\CommentUpdateRequest;
+use App\Http\Requests\StoreCommentRequest;
+use App\Http\Requests\UpdateCommentRequest;
 use App\Models\Comment;
 use App\Models\Episode;
 use App\Models\Story;
@@ -23,7 +23,7 @@ class CommentController extends Controller
         $this->service = $commentService;
     }
 
-    public function story(CommentStoreRequest $request, Story $story): JsonResponse
+    public function story(StoreCommentRequest $request, Story $story): JsonResponse
     {
         $validated = $request->validated();
 
@@ -36,7 +36,7 @@ class CommentController extends Controller
         return $this->success($comment, 'Comment Story success', 201);
     }
 
-    public function episode(CommentStoreRequest $request, Episode $episode): JsonResponse
+    public function episode(StoreCommentRequest $request, Episode $episode): JsonResponse
     {
         $validated = $request->validated();
 
@@ -49,7 +49,7 @@ class CommentController extends Controller
         return $this->success($comment, 'Comment Episode Success', 201);
     }
 
-    public function reply(CommentStoreRequest $request, Comment $comment): JsonResponse
+    public function reply(StoreCommentRequest $request, Comment $comment): JsonResponse
     {
         $validated = $request->validated();
 
@@ -62,7 +62,7 @@ class CommentController extends Controller
         return $this->success($comment, 'Reply Success', 201);
     }
 
-    public function update(CommentUpdateRequest $request, Comment $comment): JsonResponse
+    public function update(UpdateCommentRequest $request, Comment $comment): JsonResponse
     {
         $validated = $request->validated();
 

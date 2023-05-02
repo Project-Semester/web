@@ -12,7 +12,7 @@ use Illuminate\Database\Eloquent\Model;
  */
 class CommentService
 {
-    public function addStoryComment(array $request, Story $story): Model
+    public static function addStoryComment(array $request, Story $story): Model
     {
         $comment = $story->comments()->create([
             'body' => $request['body'],
@@ -22,7 +22,7 @@ class CommentService
         return $comment;
     }
 
-    public function addEpisodeComment(array $request, Episode $episode): Model
+    public static function addEpisodeComment(array $request, Episode $episode): Model
     {
         $comment = $episode->comments()->create([
             'body' => $request['body'],
@@ -32,7 +32,7 @@ class CommentService
         return $comment;
     }
 
-    public function addReplyComment(array $request, Comment $comment): Model
+    public static function addReplyComment(array $request, Comment $comment): Model
     {
         $reply = $comment->replies()->create([
             'body' => $request['body'],
@@ -42,14 +42,14 @@ class CommentService
         return $reply;
     }
 
-    public function changeComment(array $request, Comment $comment): Comment
+    public static function changeComment(array $request, Comment $comment): Comment
     {
         $comment->update($request);
 
         return $comment;
     }
 
-    public function deleteComment(Comment $comment): bool
+    public static function deleteComment(Comment $comment): bool
     {
         if ($comment->replies()->delete()) {
             $comment->delete();

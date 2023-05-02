@@ -3,8 +3,8 @@
 namespace App\Http\Controllers\Api\Author;
 
 use App\Http\Controllers\Controller;
-use App\Http\Requests\EpisodeStoreRequest;
-use App\Http\Requests\EpisodeUpdateRequest;
+use App\Http\Requests\StoreEpisodeRequest;
+use App\Http\Requests\UpdateStoryRequest;
 use App\Models\Episode;
 use App\Models\Story;
 use App\Services\EpisodeService;
@@ -47,7 +47,7 @@ class AuthorEpisodeController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(EpisodeStoreRequest $request, Story $story): JsonResponse
+    public function store(StoreEpisodeRequest $request, Story $story): JsonResponse
     {
         if ($request->user()->cant('create', Episode::class)) {
             return $this->error('Unauthorized', 403);
@@ -85,7 +85,7 @@ class AuthorEpisodeController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(EpisodeUpdateRequest $request, Episode $episode): JsonResponse
+    public function update(UpdateStoryRequest $request, Episode $episode): JsonResponse
     {
         if ($request->user()->cant('update', $episode)) {
             return $this->error('Unauthorized', 403);
