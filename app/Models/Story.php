@@ -64,6 +64,11 @@ class Story extends Authenticatable
         return $this->belongsToMany(Comment::class);
     }
 
+    public function like(): BelongsToMany
+    {
+        return $this->belongsToMany(User::class)->wherePivot('user_id', auth()->id());
+    }
+
     public function likes(): BelongsToMany
     {
         return $this->belongsToMany(User::class)->as('likes');

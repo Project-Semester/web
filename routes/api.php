@@ -7,6 +7,7 @@ use App\Http\Controllers\Api\CategoryController;
 use App\Http\Controllers\Api\CommentController;
 use App\Http\Controllers\Api\EpisodeController;
 use App\Http\Controllers\Api\StoryController;
+use App\Http\Controllers\LikeController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -50,6 +51,7 @@ Route::group(['middleware' => ['auth:sanctum']], function () {
         Route::get('/{story}', [StoryController::class, 'show']);
         Route::get('/{story}/episodes', [EpisodeController::class, 'index']);
         Route::post('/{story}/comments', [CommentController::class, 'story']);
+        Route::get('/{story}/like', [LikeController::class, 'story']);
     });
 
     Route::prefix('/episodes')->group(function () {

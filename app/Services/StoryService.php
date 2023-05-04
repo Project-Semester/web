@@ -11,7 +11,7 @@ class StoryService
     public static function findAllStories(?string $query): Collection
     {
         $stories = Story::search($query)->query(function ($builder) {
-            $builder->with(['category', 'user', 'likes'])->withCount(['episodes', 'comments', 'likes']);
+            $builder->with(['category', 'user', 'like', 'likes'])->withCount(['episodes', 'comments', 'likes']);
         })->orderBy('created_at', 'desc')->get();
 
         return $stories;
