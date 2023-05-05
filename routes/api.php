@@ -57,6 +57,7 @@ Route::group(['middleware' => ['auth:sanctum']], function () {
     Route::prefix('/episodes')->group(function () {
         Route::get('/{episode}', [EpisodeController::class, 'show']);
         Route::post('/{episode}/comments', [CommentController::class, 'episode']);
+        Route::get('/{episode}/like', [LikeController::class, 'episode']);
     });
 
     Route::prefix('/categories')->group(function () {
@@ -68,48 +69,8 @@ Route::group(['middleware' => ['auth:sanctum']], function () {
         Route::patch('/{comment}', [CommentController::class, 'update']);
         Route::delete('/{comment}', [CommentController::class, 'destroy']);
         Route::post('/{comment}/replies', [CommentController::class, 'reply']);
+        Route::get('/{comment}/like', [LikeController::class, 'comment']);
     });
 
     Route::post('/logout', [AuthController::class, 'logout']);
-
-    // Route::prefix('/me')->group(function () {
-    //     Route::controller(AuthorStoryController::class)->prefix('/stories')->group(function () {
-    //         Route::get('/', 'index');
-    //         Route::post('/', 'store');
-    //         Route::get('/{story}', 'show');
-    //         Route::patch('/{story}', 'update');
-    //         Route::delete('/{story}', 'destroy');
-    //     });
-
-    //     Route::controller(AuthorEpisodeController::class)->group(function () {
-    //         Route::get('/stories/{story}/episodes', 'index');
-    //         Route::post('/stories/{story}/episodes', 'store');
-    //         Route::get('/episodes/{episode}', 'show');
-    //         Route::patch('/episodes/{episode}', 'update');
-    //         Route::delete('/episodes/{episode}', 'destroy');
-    //     });
-    // });
-
-    // Route::controller(StoryController::class)->prefix('/stories')->group(function () {
-    //     Route::get('/', 'index');
-    //     Route::get('/{story}', 'show');
-    // });
-
-    // Route::controller(EpisodeController::class)->group(function () {
-    //     Route::get('/stories/{story}/episodes', 'index');
-    //     Route::get('/episodes/{episode}', 'show');
-    // });
-
-    // Route::controller(CategoryController::class)->prefix('/categories')->group(function () {
-    //     Route::get('/', 'index');
-    //     Route::get('/{category}', 'show');
-    // });
-
-    // Route::controller(CommentController::class)->group(function () {
-    //     Route::post('/stories/{story}/comments', 'story');
-    //     Route::post('/episodes/{episode}/comments', 'episode');
-    //     Route::post('/comments/{comment}/replies', 'reply');
-    // });
-
-    // Route::post('/logout', [AuthController::class, 'logout']);
 });

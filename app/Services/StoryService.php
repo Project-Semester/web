@@ -28,9 +28,17 @@ class StoryService
 
     public static function findStoryById(Story $story): Story
     {
-        $story->load(['user', 'category', 'episodes' => function ($query) {
-            $query->orderBy('title');
-        }, 'comments.replies', 'likes'])->loadCount(['episodes', 'comments', 'likes']);
+        $story->load([
+            'user',
+            'category',
+            'like',
+            'episodes' => function ($query) {
+                $query->orderBy('title');
+            },
+            'comments' => function ($query) {
+                $query->with('like', 'replies')->withCount('likes');
+            }
+        ])->loadCount(['episodes', 'comments', 'likes']);
 
         return $story;
     }

@@ -72,7 +72,7 @@ class CommentController extends Controller
             return $this->error($e->getMessage());
         }
 
-        return $this->success($comment, "Comment updated successfully");
+        return $this->success($comment, 'Comment updated successfully');
     }
 
     public function destroy(Comment $comment): JsonResponse
@@ -83,6 +83,6 @@ class CommentController extends Controller
             return $this->error($e->getMessage());
         }
 
-        return $this->success([], "Comment deleted successfully");
+        return $this->success([], 'Comment deleted successfully');
     }
 }
