@@ -13,7 +13,7 @@ class StoryPolicy
      */
     public function viewAny(User $user): bool
     {
-        return $user->id === Auth::id();
+        return $user->id === auth()->id();
     }
 
     /**
@@ -29,7 +29,7 @@ class StoryPolicy
      */
     public function create(User $user): bool
     {
-        return $user->id === Auth::id();
+        return $user->role == 'author';
     }
 
     /**
@@ -46,5 +46,10 @@ class StoryPolicy
     public function delete(User $user, Story $story): bool
     {
         return $user->id === $story->user_id;
+    }
+
+    public function like(User $user)
+    {
+        return $user->role == 'author';
     }
 }

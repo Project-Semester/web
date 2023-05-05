@@ -36,7 +36,13 @@ class StoryService
                 $query->orderBy('title');
             },
             'comments' => function ($query) {
-                $query->with('like', 'replies')->withCount('likes');
+                $query->with([
+                    'user',
+                    'like', 
+                    'replies' => function($query) {
+                        $query->with(['like', 'user'])->withCount('likes');
+                    }, 
+                ])->withCount('likes');
             }
         ])->loadCount(['episodes', 'comments', 'likes']);
 
@@ -51,6 +57,8 @@ class StoryService
             'user_id' => Auth::id(),
             'category_id' => $request['category_id'],
         ]);
+
+        $story->load('category');
 
         return $story;
     }

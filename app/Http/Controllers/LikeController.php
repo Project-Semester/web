@@ -22,6 +22,10 @@ class LikeController extends Controller
 
     public function story(Story $story): JsonResponse
     {
+        if (auth()->user()->cant('like', Story::class)) {
+            return $this->error('Unauthorize', 403);
+        };
+
         try {
             $like = $this->service->likeStory($story);
         } catch (\Exception $e) {
@@ -33,6 +37,10 @@ class LikeController extends Controller
 
     public function episode(Episode $episode)
     {
+        if (auth()->user()->cant('like', $episode)) {
+            return $this->error('Unauthorize', 403);
+        };
+        
         try {
             $like = $this->service->likeEpisode($episode);
         } catch (\Exception $e) {
@@ -44,6 +52,10 @@ class LikeController extends Controller
 
     public function comment(Comment $comment)
     {
+        if (auth()->user()->cant('like', $comment)) {
+            $this->error('Unauthorized', 403);
+        }
+
         try {
             $like = $this->service->likeComment($comment);
         } catch (\Exception $e) {

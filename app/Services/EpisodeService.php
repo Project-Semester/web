@@ -22,7 +22,11 @@ class EpisodeService
         $episode->load([
             'like',
             'comments' => function ($query) {
-                $query->with(['replies', 'like'])->withCount('likes');
+                $query->with([
+                    'replies' => function ($query) {
+                        $query->with('like', 'user')->withCount('likes');
+                    }, 'like', 'user'
+                ])->withCount('likes');
             }
         ])->loadCount(['comments', 'likes']);
 

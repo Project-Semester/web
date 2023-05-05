@@ -27,7 +27,6 @@ Route::controller(AuthController::class)->group(function () {
 });
 
 Route::group(['middleware' => ['auth:sanctum']], function () {
-
     Route::prefix('/me')->group(function () {
         Route::prefix('/stories')->group(function () {
             Route::get('/', [AuthorStoryController::class, 'index']);
