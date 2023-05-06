@@ -3,12 +3,15 @@
 use App\Http\Controllers\Api\AuthController;
 use App\Http\Controllers\Api\Author\AuthorEpisodeController;
 use App\Http\Controllers\Api\Author\AuthorStoryController;
+use App\Http\Controllers\Api\AuthorController;
 use App\Http\Controllers\Api\CategoryController;
 use App\Http\Controllers\Api\CommentController;
 use App\Http\Controllers\Api\EpisodeController;
+use App\Http\Controllers\Api\ProfileController;
 use App\Http\Controllers\Api\StoryController;
 use App\Http\Controllers\LikeController;
 use Illuminate\Support\Facades\Route;
+use Symfony\Component\HttpKernel\Profiler\Profile;
 
 /*
 |--------------------------------------------------------------------------
@@ -69,6 +72,17 @@ Route::group(['middleware' => ['auth:sanctum']], function () {
         Route::delete('/{comment}', [CommentController::class, 'destroy']);
         Route::post('/{comment}/replies', [CommentController::class, 'reply']);
         Route::get('/{comment}/like', [LikeController::class, 'comment']);
+    });
+
+    Route::prefix('/profile')->group(function () {
+        Route::get('/', [ProfileController::class, 'index']);
+        Route::put('/{user}', [ProfileController::class, 'update']);
+        Route::put('/{user}/password', [ProfileController::class, 'password']);
+    });
+
+    Route::prefix('/authors')->group(function () {
+        Route::get('/', [AuthorController::class, 'index']);
+        Route::get('/{user}', [AuthorController::class, 'show']);
     });
 
     Route::post('/logout', [AuthController::class, 'logout']);

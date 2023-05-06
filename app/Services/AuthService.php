@@ -23,6 +23,7 @@ class AuthService
         $user = User::create([
             'username' => $request['username'],
             'email' => $request['email'],
+            'role' => 'author',
             'password' => bcrypt($request['password']),
         ]);
 

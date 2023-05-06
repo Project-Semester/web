@@ -23,7 +23,7 @@ class StoryController extends Controller
     public function index(Request $request)
     {
         if ($request->user()->cant('viewAny', Story::class)) {
-            $this->error('Unauthorized', 403);
+            return $this->error('Unauthorized', 403);
         }
 
         $query = $request->search;

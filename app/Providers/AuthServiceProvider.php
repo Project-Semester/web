@@ -11,6 +11,7 @@ use App\Policies\CategoryPolicy;
 use App\Policies\CommentPolicy;
 use App\Policies\EpisodePolicy;
 use App\Policies\StoryPolicy;
+use App\Policies\UserPolicy;
 use Illuminate\Foundation\Support\Providers\AuthServiceProvider as ServiceProvider;
 
 class AuthServiceProvider extends ServiceProvider
@@ -21,6 +22,7 @@ class AuthServiceProvider extends ServiceProvider
      * @var array<class-string, class-string>
      */
     protected $policies = [
+        User::class => UserPolicy::class,
         Category::class => CategoryPolicy::class,
         Story::class => StoryPolicy::class,
         Episode::class => EpisodePolicy::class,
