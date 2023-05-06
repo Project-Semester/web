@@ -5,7 +5,6 @@ namespace App\Http\Controllers\Api;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\LoginUserRequest;
 use App\Http\Requests\RegisterUserRequest;
-use App\Models\User;
 use App\Services\AuthService;
 use App\Traits\HttpResponses;
 use Illuminate\Http\JsonResponse;
@@ -46,9 +45,10 @@ class AuthController extends Controller
     public function register(RegisterUserRequest $request): JsonResponse
     {
         $validated = $request->validated();
+        $picture = $request->file('picture');
 
         try {
-            $user = $this->service->signingUp($validated);
+            $user = $this->service->signingUp($validated, $picture);
         } catch (\Exception $e) {
             return $this->error($e->getMessage(), $e->getCode());
         }

@@ -24,7 +24,7 @@ class LikeController extends Controller
     {
         if (auth()->user()->cant('like', Story::class)) {
             return $this->error('Unauthorize', 403);
-        };
+        }
 
         try {
             $like = $this->service->likeStory($story);
@@ -39,8 +39,8 @@ class LikeController extends Controller
     {
         if (auth()->user()->cant('like', $episode)) {
             return $this->error('Unauthorize', 403);
-        };
-        
+        }
+
         try {
             $like = $this->service->likeEpisode($episode);
         } catch (\Exception $e) {

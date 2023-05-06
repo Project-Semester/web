@@ -33,6 +33,7 @@ class Story extends Authenticatable
     protected $fillable = [
         'title',
         'synopsis',
+        'image',
         'user_id',
         'category_id',
     ];

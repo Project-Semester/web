@@ -62,7 +62,7 @@ class CommentController extends Controller
         if (auth()->user()->cant('create', $comment)) {
             return $this->error('Unauthorized', 403);
         }
-        
+
         $validated = $request->validated();
 
         try {
@@ -79,7 +79,7 @@ class CommentController extends Controller
         if (auth()->user()->cant('update', $comment)) {
             return $this->error('Unauthorized', 403);
         }
-        
+
         $validated = $request->validated();
 
         try {
@@ -96,7 +96,7 @@ class CommentController extends Controller
         if (auth()->user()->cant('delete', $comment)) {
             return $this->error('Unauthorized', 403);
         }
-        
+
         try {
             $this->service->deleteComment($comment);
         } catch (\Exception $e) {

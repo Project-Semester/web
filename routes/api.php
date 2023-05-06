@@ -11,7 +11,6 @@ use App\Http\Controllers\Api\ProfileController;
 use App\Http\Controllers\Api\StoryController;
 use App\Http\Controllers\LikeController;
 use Illuminate\Support\Facades\Route;
-use Symfony\Component\HttpKernel\Profiler\Profile;
 
 /*
 |--------------------------------------------------------------------------
@@ -76,8 +75,8 @@ Route::group(['middleware' => ['auth:sanctum']], function () {
 
     Route::prefix('/profile')->group(function () {
         Route::get('/', [ProfileController::class, 'index']);
-        Route::put('/{user}', [ProfileController::class, 'update']);
-        Route::put('/{user}/password', [ProfileController::class, 'password']);
+        Route::patch('/{user}', [ProfileController::class, 'update']);
+        Route::patch('/{user}/password', [ProfileController::class, 'password']);
     });
 
     Route::prefix('/authors')->group(function () {

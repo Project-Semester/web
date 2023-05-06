@@ -1,8 +1,11 @@
 <?php
 
 namespace App\Services;
+
 use App\Models\User;
 use Illuminate\Database\Eloquent\Collection;
+use Illuminate\Http\UploadedFile;
+use Illuminate\Support\Facades\Storage;
 
 /**
  * Class UserService.
@@ -22,23 +25,28 @@ class UserService
 
         return $user;
     }
-    
+
     public static function findUserById(User $user): User
     {
         $user->load(['stories' => function ($query) {
             $query->with(['category', 'like'])
-                    ->withCount(['episodes', 'likes', 'comments']);
+                ->withCount(['episodes', 'likes', 'comments']);
         }]);
 
         return $user;
     }
 
-    public static function changeUser(array $request, User $user): User
+    public static function changeUser(array $request, ?UploadedFile $picture, User $user): User
     {
-        $user->update([
-            'username' => $request['username'],
-            'email' => $request['email']
-        ]);
+        if ($picture) {
+            if ($user->picture) {
+                Storage::move($user->picture, $picture);
+            }
+
+            $request['picture'] = $picture->store('picture');
+        }
+
+        $user->updateOrFail($request);
 
         $user->fresh();
 
@@ -47,12 +55,19 @@ class UserService
 
     public static function changePassword(array $request, User $user): User
     {
-        $user->update([
-            'password' => bcrypt($request['password'])
+        $user->updateOrFail([
+            'password' => bcrypt($request['password']),
         ]);
 
         $user->fresh();
 
         return $user;
+    }
+
+    public function deleteUser(User $user): bool
+    {
+        Storage::delete($user->picture);
+
+        return $user->deleteOrFail();
     }
 }

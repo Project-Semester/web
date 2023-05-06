@@ -6,7 +6,6 @@ use App\Http\Controllers\Controller;
 use App\Models\User;
 use App\Services\UserService;
 use App\Traits\HttpResponses;
-use Illuminate\Http\Request;
 
 class AuthorController extends Controller
 {
@@ -31,7 +30,7 @@ class AuthorController extends Controller
             return $this->error($e->getMessage());
         }
 
-        return $this->success($authors, "These All Authors");
+        return $this->success($authors, 'These All Authors');
     }
 
     public function show(User $user)
@@ -46,6 +45,6 @@ class AuthorController extends Controller
             return $this->error($e->getMessage());
         }
 
-        return $this->success($authors, "This is Your Author");
+        return $this->success($authors, 'This is Your Author');
     }
 }

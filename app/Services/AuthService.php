@@ -5,6 +5,7 @@ namespace App\Services;
 use App\Models\User;
 // use Illuminate\Auth\Authenticatable;
 use Illuminate\Contracts\Auth\Authenticatable;
+use Illuminate\Http\UploadedFile;
 use Illuminate\Support\Facades\Auth;
 
 class AuthService
@@ -18,10 +19,15 @@ class AuthService
         return true;
     }
 
-    public static function signingUp(array $request): User
+    public static function signingUp(array $request, ?UploadedFile $picture): User
     {
+        if ($picture) {
+            $request['picture'] = $picture->store('picture');
+        }
+
         $user = User::create([
             'username' => $request['username'],
+            'picture' => $request['picture'],
             'email' => $request['email'],
             'role' => 'author',
             'password' => bcrypt($request['password']),

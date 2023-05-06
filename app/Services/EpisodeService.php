@@ -25,9 +25,9 @@ class EpisodeService
                 $query->with([
                     'replies' => function ($query) {
                         $query->with('like', 'user')->withCount('likes');
-                    }, 'like', 'user'
+                    }, 'like', 'user',
                 ])->withCount('likes');
-            }
+            },
         ])->loadCount(['comments', 'likes']);
 
         return $episode;
@@ -46,7 +46,7 @@ class EpisodeService
 
     public static function changeEpisode(array $request, Episode $episode): Episode
     {
-        $episode->update($request);
+        $episode->updateOrFail($request);
 
         $episode->load(['comments.replies', 'likes'])->loadCount(['comments', 'likes']);
 
@@ -55,10 +55,6 @@ class EpisodeService
 
     public static function deleteEpisode(Episode $episode): bool
     {
-        if ($episode->delete()) {
-            return true;
-        }
-
-        return false;
+        return $episode->deleteOrFail();
     }
 }

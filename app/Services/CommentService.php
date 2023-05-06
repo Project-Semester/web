@@ -44,7 +44,7 @@ class CommentService
 
     public static function changeComment(array $request, Comment $comment): Comment
     {
-        $comment->update($request);
+        $comment->updateOrFail($request);
 
         return $comment;
     }
@@ -52,12 +52,12 @@ class CommentService
     public static function deleteComment(Comment $comment): bool
     {
         if ($comment->replies()->delete()) {
-            $comment->delete();
+            $comment->deleteOrFail();
 
             return true;
         }
 
-        if ($comment->delete()) {
+        if ($comment->deleteOrFail()) {
             return true;
         }
 

@@ -57,9 +57,10 @@ class AuthorStoryController extends Controller
         }
 
         $validated = $request->validated();
+        $image = $request->file('image');
 
         try {
-            $result = $this->service->addStory($validated);
+            $result = $this->service->addStory($validated, $image);
         } catch (\Exception $e) {
             return $this->error($e->getMessage(), $e->getCode());
         }
@@ -95,9 +96,10 @@ class AuthorStoryController extends Controller
         }
 
         $validated = $request->validated();
+        $image = $request->file('image');
 
         try {
-            $result = $this->service->changeStory($validated, $story);
+            $result = $this->service->changeStory($validated, $image, $story);
         } catch (\Exception $e) {
             return $this->error($e->getMessage());
         }

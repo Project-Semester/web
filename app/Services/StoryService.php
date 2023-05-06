@@ -4,7 +4,9 @@ namespace App\Services;
 
 use App\Models\Story;
 use Illuminate\Database\Eloquent\Collection;
+use Illuminate\Http\UploadedFile;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Storage;
 
 class StoryService
 {
@@ -38,23 +40,28 @@ class StoryService
             'comments' => function ($query) {
                 $query->with([
                     'user',
-                    'like', 
-                    'replies' => function($query) {
+                    'like',
+                    'replies' => function ($query) {
                         $query->with(['like', 'user'])->withCount('likes');
-                    }, 
+                    },
                 ])->withCount('likes');
-            }
+            },
         ])->loadCount(['episodes', 'comments', 'likes']);
 
         return $story;
     }
 
-    public static function addStory(array $request): Story
+    public static function addStory(array $request, ?UploadedFile $image): Story
     {
+        if ($image) {
+            $request['image'] = $image->store('image');
+        }
+
         $story = Story::create([
             'title' => $request['title'],
             'synopsis' => $request['synopsis'],
-            'user_id' => Auth::id(),
+            'image' => $request['image'],
+            'user_id' => auth()->id(),
             'category_id' => $request['category_id'],
         ]);
 
@@ -63,9 +70,17 @@ class StoryService
         return $story;
     }
 
-    public static function changeStory(array $request, Story $story): Story
+    public static function changeStory(array $request, ?UploadedFile $image, Story $story): Story
     {
-        $story->update($request);
+        if ($image) {
+            if ($story->image) {
+                Storage::move($story->image, $image);
+            }
+
+            $request['image'] = $image->store('image');
+        }
+
+        $story->updateOrFail($request);
 
         $story->load(['user', 'category', 'episodes', 'comments'])->loadCount(['comments', 'likes']);
 
@@ -74,6 +89,8 @@ class StoryService
 
     public static function deleteStory(Story $story): bool
     {
-        return $story->delete();
+        Storage::delete($story->image);
+
+        return $story->deleteOrFail();
     }
 }

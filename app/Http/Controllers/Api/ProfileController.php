@@ -7,7 +7,6 @@ use App\Http\Requests\UpdateUserRequest;
 use App\Models\User;
 use App\Services\UserService;
 use App\Traits\HttpResponses;
-use Illuminate\Http\Request;
 use Illuminate\Validation\Rules\Password;
 
 class ProfileController extends Controller
@@ -27,7 +26,7 @@ class ProfileController extends Controller
     public function index()
     {
         if (auth()->user()->cant('viewAny', User::class)) {
-            return $this->error("Unauthorized", 403);
+            return $this->error('Unauthorized', 403);
         }
 
         $userId = auth()->id();
@@ -51,9 +50,10 @@ class ProfileController extends Controller
         }
 
         $validated = $request->validated();
+        $picture = $request->file('picture');
 
         try {
-            $user = $this->service->changeUser($validated, $user);
+            $user = $this->service->changeUser($validated, $picture, $user);
         } catch (\Exception $e) {
             return $this->error($e->getMessage());
         }
