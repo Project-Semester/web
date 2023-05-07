@@ -13,7 +13,7 @@ class StoryService
     public static function findAllStories(?string $query): Collection
     {
         $stories = Story::search($query)->query(function ($builder) {
-            $builder->with(['category', 'user', 'like', 'likes'])->withCount(['episodes', 'comments', 'likes']);
+            $builder->with(['category', 'user', 'like'])->withCount(['episodes', 'comments', 'likes']);
         })->orderBy('created_at', 'desc')->get();
 
         return $stories;
@@ -22,8 +22,8 @@ class StoryService
     public static function findAllUserStories(?string $query): Collection
     {
         $stories = Story::search($query)->query(function ($builder) {
-            $builder->with(['category', 'user', 'likes'])->withCount(['episodes', 'comments', 'likes']);
-        })->where('user_id', Auth::id())->orderBy('created_at', 'desc')->get();
+            $builder->with(['category', 'like'])->withCount(['episodes', 'comments', 'likes']);
+        })->where('user_id', auth()->id())->orderBy('created_at', 'desc')->get();
 
         return $stories;
     }
@@ -31,7 +31,6 @@ class StoryService
     public static function findStoryById(Story $story): Story
     {
         $story->load([
-            'user',
             'category',
             'like',
             'episodes' => function ($query) {
@@ -42,9 +41,9 @@ class StoryService
                     'user',
                     'like',
                     'replies' => function ($query) {
-                        $query->with(['like', 'user'])->withCount('likes');
+                        $query->with(['like', 'user'])->withCount(['likes']);
                     },
-                ])->withCount('likes');
+                ])->withCount(['replies', 'likes']);
             },
         ])->loadCount(['episodes', 'comments', 'likes']);
 
@@ -82,7 +81,7 @@ class StoryService
 
         $story->updateOrFail($request);
 
-        $story->load(['user', 'category', 'episodes', 'comments'])->loadCount(['comments', 'likes']);
+        $story->load(['category', 'episodes', 'comments'])->loadCount(['comments', 'likes']);
 
         return $story;
     }

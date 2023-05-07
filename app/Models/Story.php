@@ -62,16 +62,16 @@ class Story extends Authenticatable
 
     public function comments(): BelongsToMany
     {
-        return $this->belongsToMany(Comment::class);
+        return $this->belongsToMany(Comment::class)->withTimestamps();
     }
 
     public function like(): BelongsToMany
     {
-        return $this->belongsToMany(User::class)->wherePivot('user_id', auth()->id());
+        return $this->belongsToMany(User::class)->wherePivot('user_id', auth()->id())->withTimestamps();
     }
 
     public function likes(): BelongsToMany
     {
-        return $this->belongsToMany(User::class)->as('likes');
+        return $this->belongsToMany(User::class)->as('likes')->withTimestamps();
     }
 }

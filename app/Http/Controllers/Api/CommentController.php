@@ -10,7 +10,7 @@ use App\Models\Episode;
 use App\Models\Story;
 use App\Services\CommentService;
 use App\Traits\HttpResponses;
-use Symfony\Component\HttpFoundation\JsonResponse;
+use Illuminate\Http\JsonResponse;
 
 class CommentController extends Controller
 {

@@ -7,9 +7,9 @@ use App\Models\Episode;
 use App\Models\Story;
 use App\Services\EpisodeService;
 use App\Traits\HttpResponses;
+use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use Symfony\Component\HttpFoundation\JsonResponse;
 
 class EpisodeController extends Controller
 {

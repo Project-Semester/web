@@ -40,7 +40,7 @@ class CategoryController extends Controller
 
     public function show(Category $category): JsonResponse
     {
-        if (Auth::user()->cant('viewAny', $category)) {
+        if (auth()->user()->cant('viewAny', $category)) {
             return $this->error('Unauthorized', 403);
         }
 

@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Story;
 use App\Services\StoryService;
 use App\Traits\HttpResponses;
+use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -20,7 +21,7 @@ class StoryController extends Controller
         $this->service = $storyService;
     }
 
-    public function index(Request $request)
+    public function index(Request $request): JsonResponse
     {
         if ($request->user()->cant('viewAny', Story::class)) {
             return $this->error('Unauthorized', 403);
@@ -37,7 +38,7 @@ class StoryController extends Controller
         return $this->success($stories, 'There All Your Stories');
     }
 
-    public function show(Story $story)
+    public function show(Story $story): JsonResponse
     {
         if (Auth::user()->cant('viewAny', $story)) {
             return $this->error('Unauthorized', 403);

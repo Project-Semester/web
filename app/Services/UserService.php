@@ -29,8 +29,7 @@ class UserService
     public static function findUserById(User $user): User
     {
         $user->load(['stories' => function ($query) {
-            $query->with(['category', 'like'])
-                ->withCount(['episodes', 'likes', 'comments']);
+            $query->with(['category', 'like'])->withCount(['episodes', 'likes', 'comments']);
         }]);
 
         return $user;
@@ -48,8 +47,6 @@ class UserService
 
         $user->updateOrFail($request);
 
-        $user->fresh();
-
         return $user;
     }
 
@@ -58,8 +55,6 @@ class UserService
         $user->updateOrFail([
             'password' => bcrypt($request['password']),
         ]);
-
-        $user->fresh();
 
         return $user;
     }
