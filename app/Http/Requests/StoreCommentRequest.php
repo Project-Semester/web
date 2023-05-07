@@ -2,7 +2,9 @@
 
 namespace App\Http\Requests;
 
+use Illuminate\Contracts\Validation\Validator;
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Http\Exceptions\HttpResponseException;
 
 class StoreCommentRequest extends FormRequest
 {
@@ -24,5 +26,13 @@ class StoreCommentRequest extends FormRequest
         return [
             'body' => 'required|string|',
         ];
+    }
+
+    protected function failedValidation(Validator $validator)
+    {
+        throw new HttpResponseException(response()->json([
+            'status' => false,
+            'message' => $validator->errors(),
+        ], 422));
     }
 }
