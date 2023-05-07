@@ -8,7 +8,6 @@ use App\Http\Requests\RegisterUserRequest;
 use App\Services\AuthService;
 use App\Traits\HttpResponses;
 use Illuminate\Http\JsonResponse;
-use Illuminate\Support\Facades\Auth;
 
 class AuthController extends Controller
 {

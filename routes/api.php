@@ -7,9 +7,9 @@ use App\Http\Controllers\Api\AuthorController;
 use App\Http\Controllers\Api\CategoryController;
 use App\Http\Controllers\Api\CommentController;
 use App\Http\Controllers\Api\EpisodeController;
+use App\Http\Controllers\Api\LikeController;
 use App\Http\Controllers\Api\ProfileController;
 use App\Http\Controllers\Api\StoryController;
-use App\Http\Controllers\Api\LikeController;
 use Illuminate\Support\Facades\Route;
 
 /*
