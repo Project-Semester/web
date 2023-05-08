@@ -15,7 +15,7 @@ return new class extends Migration
             $table->uuid('id')->primary();
             $table->string('title');
             $table->text('synopsis');
-            $table->string('image')->nullable();
+            $table->string('cover')->nullable();
             $table->foreignUuid('user_id')
                 ->constrained()
                 ->cascadeOnUpdate()

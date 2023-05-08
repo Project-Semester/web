@@ -50,10 +50,10 @@ class ProfileController extends Controller
         }
 
         $validated = $request->validated();
-        $picture = $request->file('picture');
+        $photo = $request->file('photo');
 
         try {
-            $user = $this->service->changeUser($validated, $picture, $user);
+            $user = $this->service->changeUser($validated, $photo, $user);
         } catch (\Exception $e) {
             return $this->error($e->getMessage());
         }

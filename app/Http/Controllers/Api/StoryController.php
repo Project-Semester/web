@@ -40,7 +40,7 @@ class StoryController extends Controller
 
     public function show(Story $story): JsonResponse
     {
-        if (Auth::user()->cant('viewAny', $story)) {
+        if (auth()->user()->cant('viewAny', $story)) {
             return $this->error('Forbidden', 403);
         }
 

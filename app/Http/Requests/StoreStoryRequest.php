@@ -26,7 +26,7 @@ class StoreStoryRequest extends FormRequest
         return [
             'title' => ['required', 'string', 'max:225'],
             'synopsis' => ['required', 'string'],
-            'image' => ['image', 'file', 'max:2048'],
+            'cover' => ['image', 'file', 'max:2048'],
             'category_id' => ['required', 'string', 'uuid'],
         ];
     }

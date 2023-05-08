@@ -51,16 +51,16 @@ class StoryService
         return $story;
     }
 
-    public static function addStory(array $request, ?UploadedFile $image): Story
+    public static function addStory(array $request, ?UploadedFile $cover): Story
     {
-        if ($image) {
-            $request['image'] = $image->store('image');
+        if ($cover) {
+            $request['cover'] = $cover->store('cover');
         }
 
         $story = Story::create([
             'title' => $request['title'],
             'synopsis' => $request['synopsis'],
-            'image' => $request['image'],
+            'cover' => $request['cover'],
             'user_id' => auth()->id(),
             'category_id' => $request['category_id'],
         ]);
@@ -70,14 +70,14 @@ class StoryService
         return $story;
     }
 
-    public static function changeStory(array $request, ?UploadedFile $image, Story $story): Story
+    public static function changeStory(array $request, ?UploadedFile $cover, Story $story): Story
     {
-        if ($image) {
-            if ($story->image) {
-                Storage::move($story->image, $image);
+        if ($cover) {
+            if ($story->cover) {
+                Storage::move($story->cover, $cover);
             }
 
-            $request['image'] = $image->store('image');
+            $request['cover'] = $cover->store('cover');
         }
 
         $story->updateOrFail($request);
@@ -89,7 +89,7 @@ class StoryService
 
     public static function deleteStory(Story $story): bool
     {
-        Storage::delete($story->image);
+        Storage::delete($story->cover);
 
         return $story->deleteOrFail();
     }

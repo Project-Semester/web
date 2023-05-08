@@ -44,10 +44,10 @@ class AuthController extends Controller
     public function register(RegisterUserRequest $request): JsonResponse
     {
         $validated = $request->validated();
-        $picture = $request->file('picture');
+        $photo = $request->file('photo');
 
         try {
-            $user = $this->service->signingUp($validated, $picture);
+            $user = $this->service->signingUp($validated, $photo);
         } catch (\Exception $e) {
             return $this->error($e->getMessage());
         }

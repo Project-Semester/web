@@ -35,14 +35,14 @@ class UserService
         return $user;
     }
 
-    public static function changeUser(array $request, ?UploadedFile $picture, User $user): User
+    public static function changeUser(array $request, ?UploadedFile $photo, User $user): User
     {
-        if ($picture) {
-            if ($user->picture) {
-                Storage::move($user->picture, $picture);
+        if ($photo) {
+            if ($user->photo) {
+                Storage::move($user->photo, $photo);
             }
 
-            $request['picture'] = $picture->store('picture');
+            $request['photo'] = $photo->store('photo');
         }
 
         $user->updateOrFail($request);
