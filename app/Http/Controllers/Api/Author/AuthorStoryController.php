@@ -29,7 +29,7 @@ class AuthorStoryController extends Controller
     public function index(Request $request): JsonResponse
     {
         if ($request->user()->cant('viewAny', Story::class)) {
-            return $this->error('Unauthorized', 403);
+            return $this->error('Forbidden', 403);
         }
 
         $query = $request->search;
@@ -74,7 +74,7 @@ class AuthorStoryController extends Controller
     public function show(Story $story): JsonResponse
     {
         if (Auth::user()->cant('view', $story)) {
-            return $this->error('Unauthorized', 403);
+            return $this->error('Forbidden', 403);
         }
 
         try {
@@ -92,7 +92,7 @@ class AuthorStoryController extends Controller
     public function update(UpdateStoryRequest $request, Story $story): JsonResponse
     {
         if ($request->user()->cant('update', $story)) {
-            return $this->error('Unauthorized', 403);
+            return $this->error('Forbidden', 403);
         }
 
         $validated = $request->validated();
@@ -113,7 +113,7 @@ class AuthorStoryController extends Controller
     public function destroy(Story $story): JsonResponse
     {
         if (Auth::user()->cant('delete', $story)) {
-            return $this->error('Unauthorized', 403);
+            return $this->error('Forbidden', 403);
         }
 
         try {

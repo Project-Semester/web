@@ -26,7 +26,7 @@ class ProfileController extends Controller
     public function index()
     {
         if (auth()->user()->cant('viewAny', User::class)) {
-            return $this->error('Unauthorized', 403);
+            return $this->error('Forbidden', 403);
         }
 
         $userId = auth()->id();
@@ -46,7 +46,7 @@ class ProfileController extends Controller
     public function update(UpdateUserRequest $request, User $user)
     {
         if ($request->user()->cant('update', $user)) {
-            return $this->error('Unauthorized', 403);
+            return $this->error('Forbidden', 403);
         }
 
         $validated = $request->validated();
@@ -67,7 +67,7 @@ class ProfileController extends Controller
     public function password(UpdateUserRequest $request, User $user)
     {
         if ($request->user()->cant('update', $user)) {
-            return $this->error('Unauthorized', 403);
+            return $this->error('Forbidden', 403);
         }
 
         $validated = $request->validate([

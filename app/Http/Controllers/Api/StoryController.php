@@ -24,7 +24,7 @@ class StoryController extends Controller
     public function index(Request $request): JsonResponse
     {
         if ($request->user()->cant('viewAny', Story::class)) {
-            return $this->error('Unauthorized', 403);
+            return $this->error('Forbidden', 403);
         }
 
         $query = $request->search;
@@ -41,7 +41,7 @@ class StoryController extends Controller
     public function show(Story $story): JsonResponse
     {
         if (Auth::user()->cant('viewAny', $story)) {
-            return $this->error('Unauthorized', 403);
+            return $this->error('Forbidden', 403);
         }
 
         try {

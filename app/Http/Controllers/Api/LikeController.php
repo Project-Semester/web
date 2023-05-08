@@ -24,7 +24,7 @@ class LikeController extends Controller
     public function story(Story $story): JsonResponse
     {
         if (auth()->user()->cant('like', Story::class)) {
-            return $this->error('Unauthorize', 403);
+            return $this->error('Forbidden', 403);
         }
 
         try {
@@ -39,7 +39,7 @@ class LikeController extends Controller
     public function episode(Episode $episode): JsonResponse
     {
         if (auth()->user()->cant('like', $episode)) {
-            return $this->error('Unauthorize', 403);
+            return $this->error('Forbidden', 403);
         }
 
         try {

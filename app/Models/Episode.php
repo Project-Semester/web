@@ -2,6 +2,8 @@
 
 namespace App\Models;
 
+use Coderflex\Laravisit\Concerns\CanVisit;
+use Coderflex\Laravisit\Concerns\HasVisits;
 use Illuminate\Database\Eloquent\Concerns\HasUuids;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
@@ -10,9 +12,9 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Support\Str;
 use Laravel\Scout\Searchable;
 
-class Episode extends Authenticatable
+class Episode extends Authenticatable implements CanVisit
 {
-    use HasFactory, HasUuids, Searchable;
+    use HasFactory, HasUuids, HasVisits, Searchable;
 
     public $incrementing = false;
 

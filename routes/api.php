@@ -83,6 +83,6 @@ Route::middleware('auth:sanctum')->group(function () {
             Route::delete('/{episode}', [AuthorEpisodeController::class, 'destroy']);
         });
     });
-    
+
     Route::get('/logout', [AuthController::class, 'logout']);
 });

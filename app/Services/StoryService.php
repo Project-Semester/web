@@ -12,7 +12,7 @@ class StoryService
     public static function findAllStories(?string $query): Collection
     {
         $stories = Story::search($query)->query(function ($builder) {
-            $builder->with(['category', 'user', 'like'])->withCount(['episodes', 'comments', 'likes']);
+            $builder->with(['category', 'user', 'like'])->withCount(['episodes', 'comments', 'likes', 'visits as views']);
         })->orderBy('created_at', 'desc')->get();
 
         return $stories;
@@ -21,7 +21,7 @@ class StoryService
     public static function findAllUserStories(?string $query): Collection
     {
         $stories = Story::search($query)->query(function ($builder) {
-            $builder->with(['category', 'like'])->withCount(['episodes', 'comments', 'likes']);
+            $builder->with(['category', 'like'])->withCount(['episodes', 'comments', 'likes', 'visits as views']);
         })->where('user_id', auth()->id())->orderBy('created_at', 'desc')->get();
 
         return $stories;
@@ -29,6 +29,8 @@ class StoryService
 
     public static function findStoryById(Story $story): Story
     {
+        $story->visit();
+
         $story->load([
             'category',
             'like',
@@ -44,7 +46,7 @@ class StoryService
                     },
                 ])->withCount(['replies', 'likes']);
             },
-        ])->loadCount(['episodes', 'comments', 'likes']);
+        ])->loadCount(['episodes', 'comments', 'likes', 'visits as views']);
 
         return $story;
     }

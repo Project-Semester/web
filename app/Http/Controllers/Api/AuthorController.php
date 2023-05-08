@@ -22,7 +22,7 @@ class AuthorController extends Controller
     public function index(): JsonResponse
     {
         if (auth()->user()->cant('viewAny', User::class)) {
-            return $this->error('Unauthorized', 403);
+            return $this->error('Forbidden', 403);
         }
 
         try {
@@ -37,7 +37,7 @@ class AuthorController extends Controller
     public function show(User $user): JsonResponse
     {
         if (auth()->user()->cant('viewAny', User::class)) {
-            return $this->error('Unauthorized', 403);
+            return $this->error('Forbidden', 403);
         }
 
         try {

@@ -25,7 +25,7 @@ class CategoryController extends Controller
         $query = $request->search;
 
         if ($request->user()->cant('viewAny', Category::class)) {
-            return $this->error('Unauthorized', 403);
+            return $this->error('Forbidden', 403);
         }
 
         try {
@@ -40,7 +40,7 @@ class CategoryController extends Controller
     public function show(Category $category): JsonResponse
     {
         if (auth()->user()->cant('viewAny', $category)) {
-            return $this->error('Unauthorized', 403);
+            return $this->error('Forbidden', 403);
         }
 
         try {
