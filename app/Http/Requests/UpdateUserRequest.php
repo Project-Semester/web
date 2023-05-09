@@ -2,7 +2,9 @@
 
 namespace App\Http\Requests;
 
+use Illuminate\Contracts\Validation\Validator;
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Http\Exceptions\HttpResponseException;
 use Illuminate\Validation\Rules\Password;
 
 class UpdateUserRequest extends FormRequest
@@ -24,7 +26,7 @@ class UpdateUserRequest extends FormRequest
     {
         return [
             'username' => ['sometimes', 'string', 'max:255'],
-            'picture' => ['sometimes', 'image', 'file', 'max:2048'],
+            'photo' => ['sometimes', 'image', 'file', 'max:2048'],
             'email' => ['sometimes', 'email:dns', 'unique:users,email', 'string'],
             'password' => [
                 'sometimes',
@@ -37,5 +39,13 @@ class UpdateUserRequest extends FormRequest
                     ->uncompromised(),
             ],
         ];
+    }
+
+    protected function failedValidation(Validator $validator)
+    {
+        throw new HttpResponseException(response()->json([
+            'status' => false,
+            'message' => $validator->errors(),
+        ], 422));
     }
 }

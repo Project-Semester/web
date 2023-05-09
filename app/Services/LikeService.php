@@ -5,58 +5,69 @@ namespace App\Services;
 use App\Models\Comment;
 use App\Models\Episode;
 use App\Models\Story;
-use Illuminate\Database\Eloquent\Collection;
 
 /**
  * Class LikeService.
  */
 class LikeService
 {
-    public static function likeStory(Story $story): Collection
+    public static function likeStory(Story $story): Story
     {
         $like = $story->like();
         $userId = auth()->id();
 
-        if ($like->get()->isEmpty()) {
-            $like->attach($userId);
+        if ($like->count() > 0) {
+            $like->detach($userId);
 
-            return $like->get();
+            $story->load('like')->loadCount('likes');
+
+            return $story;
         }
 
-        $like->detach($userId);
+        $like->attach($userId);
 
-        return $like->get();
+        $story->load('like')->loadCount('likes');
+
+        return $story;
     }
 
-    public static function likeEpisode(Episode $episode): Collection
+    public static function likeEpisode(Episode $episode): Episode
     {
         $like = $episode->like();
         $userId = auth()->id();
 
-        if ($like->get()->isEmpty()) {
-            $like->attach($userId);
+        if ($like->count() > 0) {
+            $like->detach($userId);
 
-            return $like->get();
+            $episode->load('like')->loadCount('likes');
+
+            return $episode;
         }
 
-        $like->detach($userId);
+        $like->attach($userId);
 
-        return $like->get();
+        $episode->load('like')->loadCount('likes');
+
+        return $episode;
     }
 
-    public function likeComment(Comment $comment): Collection
+    public function likeComment(Comment $comment): Comment
     {
         $like = $comment->like();
         $userId = auth()->id();
 
-        if ($like->get()->isEmpty()) {
-            $like->attach($userId);
+        if ($like->count() > 0) {
+            $like->detach($userId);
 
-            return $like->get();
+            $comment->load('like')->loadCount('likes');
+
+            return $comment;
         }
 
-        $like->detach($userId);
+        $like->attach($userId);
 
-        return $like->get();
+        $comment->load('like')->loadCount('likes');
+
+        return $comment;
     }
 }

@@ -7,9 +7,9 @@ use App\Models\Episode;
 use App\Models\Story;
 use App\Services\EpisodeService;
 use App\Traits\HttpResponses;
+use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use Symfony\Component\HttpFoundation\JsonResponse;
 
 class EpisodeController extends Controller
 {
@@ -25,7 +25,7 @@ class EpisodeController extends Controller
     public function index(Request $request, Story $story): JsonResponse
     {
         if ($request->user()->cant('viewAny', $story)) {
-            return $this->error('Unauthorized', 403);
+            return $this->error('Forbidden', 403);
         }
 
         $query = $request->search;
@@ -42,7 +42,7 @@ class EpisodeController extends Controller
     public function show(Episode $episode): JsonResponse
     {
         if (Auth::user()->cant('viewAny', $episode)) {
-            return $this->error('Unauthorized', 403);
+            return $this->error('Forbidden', 403);
         }
 
         try {

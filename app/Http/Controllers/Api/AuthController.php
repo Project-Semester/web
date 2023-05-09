@@ -8,7 +8,6 @@ use App\Http\Requests\RegisterUserRequest;
 use App\Services\AuthService;
 use App\Traits\HttpResponses;
 use Illuminate\Http\JsonResponse;
-use Illuminate\Support\Facades\Auth;
 
 class AuthController extends Controller
 {
@@ -26,12 +25,12 @@ class AuthController extends Controller
         $validated = $request->validated();
 
         try {
-            $result = $this->service->loggingIn($validated);
+            $this->service->loggingIn($validated);
         } catch (\Exception $e) {
-            return $this->error($e->getMessage(), $e->getCode());
+            return $this->error($e->getMessage());
         }
 
-        $user = Auth::user();
+        $user = auth()->user();
 
         $data = [
             'user' => $user,
@@ -45,12 +44,12 @@ class AuthController extends Controller
     public function register(RegisterUserRequest $request): JsonResponse
     {
         $validated = $request->validated();
-        $picture = $request->file('picture');
+        $photo = $request->file('photo');
 
         try {
-            $user = $this->service->signingUp($validated, $picture);
+            $user = $this->service->signingUp($validated, $photo);
         } catch (\Exception $e) {
-            return $this->error($e->getMessage(), $e->getCode());
+            return $this->error($e->getMessage());
         }
 
         $data = [
@@ -64,12 +63,12 @@ class AuthController extends Controller
 
     public function logout(): JsonResponse
     {
-        $user = Auth::user();
+        $user = auth()->user();
 
         try {
             $this->service->loggingOut($user);
         } catch (\Exception $e) {
-            return $this->error($e->getMessage(), $e->getCode());
+            return $this->error($e->getMessage());
         }
 
         return $this->success([], 'A user logged out successfully');

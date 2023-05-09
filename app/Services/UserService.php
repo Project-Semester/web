@@ -29,26 +29,23 @@ class UserService
     public static function findUserById(User $user): User
     {
         $user->load(['stories' => function ($query) {
-            $query->with(['category', 'like'])
-                ->withCount(['episodes', 'likes', 'comments']);
+            $query->with(['category', 'like'])->withCount(['episodes', 'likes', 'comments']);
         }]);
 
         return $user;
     }
 
-    public static function changeUser(array $request, ?UploadedFile $picture, User $user): User
+    public static function changeUser(array $request, ?UploadedFile $photo, User $user): User
     {
-        if ($picture) {
-            if ($user->picture) {
-                Storage::move($user->picture, $picture);
+        if ($photo) {
+            if ($user->photo) {
+                Storage::move($user->photo, $photo);
             }
 
-            $request['picture'] = $picture->store('picture');
+            $request['photo'] = $photo->store('photo');
         }
 
         $user->updateOrFail($request);
-
-        $user->fresh();
 
         return $user;
     }
@@ -58,8 +55,6 @@ class UserService
         $user->updateOrFail([
             'password' => bcrypt($request['password']),
         ]);
-
-        $user->fresh();
 
         return $user;
     }

@@ -2,7 +2,9 @@
 
 namespace App\Http\Requests;
 
+use Illuminate\Contracts\Validation\Validator;
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Http\Exceptions\HttpResponseException;
 
 class StoreStoryRequest extends FormRequest
 {
@@ -24,8 +26,16 @@ class StoreStoryRequest extends FormRequest
         return [
             'title' => ['required', 'string', 'max:225'],
             'synopsis' => ['required', 'string'],
-            'image' => ['image', 'file', 'max:2048'],
+            'cover' => ['image', 'file', 'max:2048'],
             'category_id' => ['required', 'string', 'uuid'],
         ];
+    }
+
+    protected function failedValidation(Validator $validator)
+    {
+        throw new HttpResponseException(response()->json([
+            'status' => false,
+            'message' => $validator->errors(),
+        ], 422));
     }
 }

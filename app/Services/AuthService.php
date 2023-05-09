@@ -3,7 +3,6 @@
 namespace App\Services;
 
 use App\Models\User;
-// use Illuminate\Auth\Authenticatable;
 use Illuminate\Contracts\Auth\Authenticatable;
 use Illuminate\Http\UploadedFile;
 use Illuminate\Support\Facades\Auth;
@@ -40,6 +39,6 @@ class AuthService
     {
         $response = $user->currentAccessToken()->delete();
 
-        return $response ? true : false;
+        return $response;
     }
 }

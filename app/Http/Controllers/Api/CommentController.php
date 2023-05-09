@@ -10,7 +10,7 @@ use App\Models\Episode;
 use App\Models\Story;
 use App\Services\CommentService;
 use App\Traits\HttpResponses;
-use Symfony\Component\HttpFoundation\JsonResponse;
+use Illuminate\Http\JsonResponse;
 
 class CommentController extends Controller
 {
@@ -26,7 +26,7 @@ class CommentController extends Controller
     public function story(StoreCommentRequest $request, Story $story): JsonResponse
     {
         if (auth()->user()->cant('create', $story)) {
-            return $this->error('Unauthorized', 403);
+            return $this->error('Forbidden', 403);
         }
 
         $validated = $request->validated();
@@ -43,7 +43,7 @@ class CommentController extends Controller
     public function episode(StoreCommentRequest $request, Episode $episode): JsonResponse
     {
         if (auth()->user()->cant('create', $episode)) {
-            return $this->error('Unauthorized', 403);
+            return $this->error('Forbidden', 403);
         }
 
         $validated = $request->validated();
@@ -60,7 +60,7 @@ class CommentController extends Controller
     public function reply(StoreCommentRequest $request, Comment $comment): JsonResponse
     {
         if (auth()->user()->cant('create', $comment)) {
-            return $this->error('Unauthorized', 403);
+            return $this->error('Forbidden', 403);
         }
 
         $validated = $request->validated();
@@ -77,7 +77,7 @@ class CommentController extends Controller
     public function update(UpdateCommentRequest $request, Comment $comment): JsonResponse
     {
         if (auth()->user()->cant('update', $comment)) {
-            return $this->error('Unauthorized', 403);
+            return $this->error('Forbidden', 403);
         }
 
         $validated = $request->validated();
@@ -94,7 +94,7 @@ class CommentController extends Controller
     public function destroy(Comment $comment): JsonResponse
     {
         if (auth()->user()->cant('delete', $comment)) {
-            return $this->error('Unauthorized', 403);
+            return $this->error('Forbidden', 403);
         }
 
         try {

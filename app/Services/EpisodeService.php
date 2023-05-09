@@ -11,7 +11,7 @@ class EpisodeService
     public static function findAllEpisode(?string $query, Story $story): Collection
     {
         $episodes = Episode::search($query)->query(function ($builder) {
-            $builder->with(['story', 'like'])->withCount(['comments', 'likes']);
+            $builder->with(['story', 'like'])->withCount(['comments', 'likes', 'visits as views']);
         })->where('story_id', $story->id)->orderBy('title')->get();
 
         return $episodes;
@@ -19,6 +19,8 @@ class EpisodeService
 
     public static function findEpisodeById(Episode $episode): Episode
     {
+        $episode->visit();
+
         $episode->load([
             'like',
             'comments' => function ($query) {
@@ -26,9 +28,9 @@ class EpisodeService
                     'replies' => function ($query) {
                         $query->with('like', 'user')->withCount('likes');
                     }, 'like', 'user',
-                ])->withCount('likes');
+                ])->withCount(['replies', 'likes']);
             },
-        ])->loadCount(['comments', 'likes']);
+        ])->loadCount(['comments', 'likes', 'visits as views']);
 
         return $episode;
     }

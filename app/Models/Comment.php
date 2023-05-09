@@ -40,26 +40,26 @@ class Comment extends Authenticatable
 
     public function stories(): BelongsToMany
     {
-        return $this->belongsToMany(Story::class);
+        return $this->belongsToMany(Story::class)->withTimestamps();
     }
 
     public function episodes(): BelongsToMany
     {
-        return $this->belongsToMany(Episode::class);
+        return $this->belongsToMany(Episode::class)->withTimestamps();
     }
 
     public function replies(): BelongsToMany
     {
-        return $this->belongsToMany(Comment::class, 'replies', 'replying_comment_id', 'replied_comment_id');
+        return $this->belongsToMany(Comment::class, 'replies', 'replying_comment_id', 'replied_comment_id')->withTimestamps();
     }
 
     public function like(): BelongsToMany
     {
-        return $this->belongsToMany(User::class)->wherePivot('user_id', auth()->id());
+        return $this->belongsToMany(User::class)->wherePivot('user_id', auth()->id())->withTimestamps();
     }
 
     public function likes(): BelongsToMany
     {
-        return $this->belongsToMany(User::class);
+        return $this->belongsToMany(User::class)->withTimestamps();
     }
 }

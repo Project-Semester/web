@@ -2,6 +2,8 @@
 
 namespace App\Models;
 
+use Coderflex\Laravisit\Concerns\CanVisit;
+use Coderflex\Laravisit\Concerns\HasVisits;
 use Illuminate\Database\Eloquent\Concerns\HasUuids;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
@@ -10,9 +12,9 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Support\Str;
 use Laravel\Scout\Searchable;
 
-class Episode extends Authenticatable
+class Episode extends Authenticatable implements CanVisit
 {
-    use HasFactory, HasUuids, Searchable;
+    use HasFactory, HasUuids, HasVisits, Searchable;
 
     public $incrementing = false;
 
@@ -49,16 +51,16 @@ class Episode extends Authenticatable
 
     public function comments(): BelongsToMany
     {
-        return $this->belongsToMany(Comment::class);
+        return $this->belongsToMany(Comment::class)->withTimestamps();
     }
 
     public function like(): BelongsToMany
     {
-        return $this->belongsToMany(User::class)->wherePivot('user_id', auth()->id());
+        return $this->belongsToMany(User::class)->wherePivot('user_id', auth()->id())->withTimestamps();
     }
 
     public function likes(): BelongsToMany
     {
-        return $this->belongsToMany(User::class)->as('likes');
+        return $this->belongsToMany(User::class)->as('likes')->withTimestamps();
     }
 }

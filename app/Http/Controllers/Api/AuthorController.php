@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\User;
 use App\Services\UserService;
 use App\Traits\HttpResponses;
+use Illuminate\Http\JsonResponse;
 
 class AuthorController extends Controller
 {
@@ -18,10 +19,10 @@ class AuthorController extends Controller
         $this->service = $userService;
     }
 
-    public function index()
+    public function index(): JsonResponse
     {
         if (auth()->user()->cant('viewAny', User::class)) {
-            return $this->error('Unauthorized', 403);
+            return $this->error('Forbidden', 403);
         }
 
         try {
@@ -33,10 +34,10 @@ class AuthorController extends Controller
         return $this->success($authors, 'These All Authors');
     }
 
-    public function show(User $user)
+    public function show(User $user): JsonResponse
     {
         if (auth()->user()->cant('viewAny', User::class)) {
-            return $this->error('Unauthorized', 403);
+            return $this->error('Forbidden', 403);
         }
 
         try {

@@ -52,15 +52,9 @@ class CommentService
     public static function deleteComment(Comment $comment): bool
     {
         if ($comment->replies()->delete()) {
-            $comment->deleteOrFail();
-
-            return true;
+            return $comment->deleteOrFail();
         }
 
-        if ($comment->deleteOrFail()) {
-            return true;
-        }
-
-        return false;
+        return $comment->deleteOrFail();
     }
 }

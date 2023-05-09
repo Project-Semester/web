@@ -31,6 +31,7 @@ return new class extends Migration
                 ->constrained()
                 ->cascadeOnUpdate()
                 ->cascadeOnDelete();
+            $table->timestamps();
         });
 
         Schema::create('comment_episode', function (Blueprint $table) {
@@ -42,6 +43,7 @@ return new class extends Migration
                 ->constrained()
                 ->cascadeOnUpdate()
                 ->cascadeOnDelete();
+            $table->timestamps();
         });
 
         Schema::create('replies', function (Blueprint $table) {
@@ -53,6 +55,7 @@ return new class extends Migration
                 ->constrained('comments')
                 ->cascadeOnUpdate()
                 ->cascadeOnDelete();
+            $table->timestamps();
         });
     }
 

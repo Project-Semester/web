@@ -7,9 +7,9 @@ use App\Http\Controllers\Api\AuthorController;
 use App\Http\Controllers\Api\CategoryController;
 use App\Http\Controllers\Api\CommentController;
 use App\Http\Controllers\Api\EpisodeController;
+use App\Http\Controllers\Api\LikeController;
 use App\Http\Controllers\Api\ProfileController;
 use App\Http\Controllers\Api\StoryController;
-use App\Http\Controllers\LikeController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -28,25 +28,7 @@ Route::controller(AuthController::class)->group(function () {
     Route::post('/register', 'register');
 });
 
-Route::group(['middleware' => ['auth:sanctum']], function () {
-    Route::prefix('/me')->group(function () {
-        Route::prefix('/stories')->group(function () {
-            Route::get('/', [AuthorStoryController::class, 'index']);
-            Route::post('/', [AuthorStoryController::class, 'store']);
-            Route::get('/{story}', [AuthorStoryController::class, 'show']);
-            Route::patch('/{story}', [AuthorStoryController::class, 'update']);
-            Route::delete('/{story}', [AuthorStoryController::class, 'destroy']);
-            Route::get('/{story}/episodes', [AuthorEpisodeController::class, 'index']);
-            Route::post('/{story}/episodes', [AuthorEpisodeController::class, 'store']);
-        });
-
-        Route::prefix('/episodes')->group(function () {
-            Route::get('/{episode}', [AuthorEpisodeController::class, 'show']);
-            Route::patch('/{episode}', [AuthorEpisodeController::class, 'update']);
-            Route::delete('/{episode}', [AuthorEpisodeController::class, 'destroy']);
-        });
-    });
-
+Route::middleware('auth:sanctum')->group(function () {
     Route::prefix('/stories')->group(function () {
         Route::get('/', [StoryController::class, 'index']);
         Route::get('/{story}', [StoryController::class, 'show']);
@@ -66,6 +48,11 @@ Route::group(['middleware' => ['auth:sanctum']], function () {
         Route::get('/{category}', [CategoryController::class, 'show']);
     });
 
+    Route::prefix('/authors')->group(function () {
+        Route::get('/', [AuthorController::class, 'index']);
+        Route::get('/{user}', [AuthorController::class, 'show']);
+    });
+
     Route::prefix('/comments')->group(function () {
         Route::patch('/{comment}', [CommentController::class, 'update']);
         Route::delete('/{comment}', [CommentController::class, 'destroy']);
@@ -79,10 +66,23 @@ Route::group(['middleware' => ['auth:sanctum']], function () {
         Route::patch('/{user}/password', [ProfileController::class, 'password']);
     });
 
-    Route::prefix('/authors')->group(function () {
-        Route::get('/', [AuthorController::class, 'index']);
-        Route::get('/{user}', [AuthorController::class, 'show']);
+    Route::prefix('/me')->group(function () {
+        Route::prefix('/stories')->group(function () {
+            Route::get('/', [AuthorStoryController::class, 'index']);
+            Route::post('/', [AuthorStoryController::class, 'store']);
+            Route::get('/{story}', [AuthorStoryController::class, 'show']);
+            Route::patch('/{story}', [AuthorStoryController::class, 'update']);
+            Route::delete('/{story}', [AuthorStoryController::class, 'destroy']);
+            Route::get('/{story}/episodes', [AuthorEpisodeController::class, 'index']);
+            Route::post('/{story}/episodes', [AuthorEpisodeController::class, 'store']);
+        });
+
+        Route::prefix('/episodes')->group(function () {
+            Route::get('/{episode}', [AuthorEpisodeController::class, 'show']);
+            Route::patch('/{episode}', [AuthorEpisodeController::class, 'update']);
+            Route::delete('/{episode}', [AuthorEpisodeController::class, 'destroy']);
+        });
     });
 
-    Route::post('/logout', [AuthController::class, 'logout']);
+    Route::get('/logout', [AuthController::class, 'logout']);
 });
