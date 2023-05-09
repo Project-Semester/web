@@ -24,4 +24,23 @@ class CategoryService
 
         return $category;
     }
+
+    public static function addCategory(array $request): Category
+    {
+        $category = Category::create($request);
+
+        return $category;
+    }
+
+    public static function changeCategory(array $request, Category $category): Category
+    {
+        $category->updateOrFail($request);
+
+        return $category;
+    }
+
+    public static function deleteCategory(Category $category): bool
+    {
+        return $category->deleteOrFail();
+    }
 }
