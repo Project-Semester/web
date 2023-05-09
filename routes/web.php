@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use PharIo\Manifest\Author;
 
 /*
 |--------------------------------------------------------------------------
@@ -14,17 +15,21 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('landing');
-});
+    return view('author/landing');
+})->name('landing');
 
 Route::get('/home', function () {
-    return view('home');
-});
-
-Route::get('/tuliscerita', function () {
-    return view('tulisStory');
-});
+    return view('author/home');
+})->name('home');
 
 Route::get('/tambahcerita', function () {
-    return view('addStory');
-});
+    return view('author/tambahCerita');
+})->name('tambahCerita');
+
+Route::get('/tuliscerita', function () {
+    return view('author/tulisCerita');
+})->name('tulisCerita');
+
+Route::get('/kategoricerita', function () {
+    return view('author/kategoriCerita');
+})->name('kategoriCerita');

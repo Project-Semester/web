@@ -1,13 +1,10 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
 <head>
     <meta charset="utf-8">
     <title>YUKNULIS!-Home</title>
 
     <meta name="viewport" content="width=device-width, initial-scale=1">
-
-    <link rel="stylesheet" href="D:\Project\web\bootstrap\bootstrap.css">
-    <link rel="stylesheet" href="D:\Project\web\bootstrap\bootstrap.min.css">
 
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.bunny.net">
@@ -33,7 +30,7 @@
     <script id="_carbonads_projs" type="text/javascript" src="https://srv.carbonads.net/ads/CKYIE23N.json?segment=placement:bootswatchcom&amp;callback=_carbonads_go"></script>
 </head>
 <body>  
-    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <div class="navbar navbar-expand-lg navbar-dark bg-dark">
       <div class="container">
         <a href="" class="navbar-brand">YUKNULIS!</a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
@@ -46,19 +43,35 @@
               <div class="dropdown-menu" aria-labelledby="themes">
                 <a class="dropdown-item">Pilih Kategori</a>
                 <div class="dropdown-divider"></div>
+                <a class="dropdown-item" href="kategoricerita">Aksi</a>
+                <a class="dropdown-item" href="#">Horor</a>
+                <a class="dropdown-item" href="#">Legenda</a>
               </div>
           </ul>
           <ul class="navbar-nav ms-md-auto">
             <li class="nav-item">
               <a class="nav-link" href="tambahcerita"><i class="bi bi-plus-cirlce"></i>Tambah Cerita</a>
             </li>
-            <li class="nav-item">
-              <a target="_blank" rel="noopener" class="nav-link" href=""> Twitter</a>
+            <div class="d-flex" style="height: 20px; width: 15px;">
+              <div class="vr"></div>
+            </div>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar-list-4" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+              <span class="navbar-toggler-icon"></span>
+            </button>
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" href="#" id="themes" data-bs-toggle="dropdown"
+              data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              <img src="D:\topek\46r.jpg" width="25" height="25" class="rounded-circle"></a>
+              <div class="dropdown-menu" aria-labelledby="themes">
+                <a class="dropdown-item" href="#">Dashboard</a>
+                <a class="dropdown-item" href="#">Edit Profile</a>
+                <a class="dropdown-item" href="#">Log Out</a>
+              </div>
             </li>
           </ul>
         </div>
       </div>
-    </nav>
+    </div>
 
     <div class="container" style="padding-top: 100px;">
         <h1>Selamat Datang, User!</h1>
