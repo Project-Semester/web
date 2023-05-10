@@ -36,11 +36,11 @@ class LoginUserRequest extends FormRequest
         ];
     }
 
-    protected function failedValidation(Validator $validator)
-    {
-        throw new HttpResponseException(response()->json([
-            'status' => false,
-            'message' => $validator->errors(),
-        ], 422));
-    }
+    // protected function failedValidation(Validator $validator)
+    // {
+    //     throw new HttpResponseException(response()->json([
+    //         'status' => false,
+    //         'message' => $validator->errors(),
+    //     ], 422));
+    // }
 }

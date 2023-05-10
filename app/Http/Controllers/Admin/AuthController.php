@@ -4,7 +4,9 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\LoginUserRequest;
+use App\Http\Requests\RegisterUserRequest;
 use App\Services\AuthService;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\View\View;
 
 class AuthController extends Controller
@@ -21,8 +23,42 @@ class AuthController extends Controller
         return view('admin.login');
     }
 
-    public function login(LoginUserRequest $request)
+    public function authenticate(LoginUserRequest $request): RedirectResponse
     {
-        # code...
+        $validated = $request->validated();
+
+        try {
+            $response = $this->service->loggingIn($validated);
+        } catch (\Exception $error) {
+            return back()->with('failed', 'Login anda gagal!');
+        }
+
+        if (! $response) {
+            return back()->with('failed', 'Login anda gagal!');
+        }
+
+        $request->session()->regenerate();
+
+        return redirect()->route('admin.home');
+    }
+
+    public function create(): View
+    {
+        return view('admin.register');
+    }
+
+    public function register(RegisterUserRequest $request)
+    {
+        // code...
+    }
+
+    public function logout(): RedirectResponse
+    {
+        auth()->logout();
+
+        request()->session()->invalidate();
+        request()->session()->regenerateToken();
+
+        return redirect()->route('admin.login.page');
     }
 }
