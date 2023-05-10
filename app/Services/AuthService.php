@@ -9,6 +9,9 @@ use Illuminate\Support\Facades\Auth;
 
 class AuthService
 {
+    /**
+     * Login a user
+     */
     public static function loggingIn(array $request): bool
     {
         if (! Auth::attempt($request)) {
@@ -18,15 +21,20 @@ class AuthService
         return true;
     }
 
-    public static function signingUp(array $request, ?UploadedFile $picture): User
+    /**
+     * Register a new user
+     *
+     * @param  UploadedFile  $photo
+     */
+    public static function signingUp(array $request, ?UploadedFile $photo): User
     {
-        if ($picture) {
-            $request['picture'] = $picture->store('picture');
+        if ($photo) {
+            $request['photo'] = $photo->store('photo');
         }
 
         $user = User::create([
             'username' => $request['username'],
-            'picture' => $request['picture'],
+            'photo' => $request['photo'],
             'email' => $request['email'],
             'role' => 'author',
             'password' => bcrypt($request['password']),
@@ -35,6 +43,9 @@ class AuthService
         return $user;
     }
 
+    /**
+     * Logout a user
+     */
     public static function loggingOut(Authenticatable $user): bool
     {
         $response = $user->currentAccessToken()->delete();

@@ -8,6 +8,11 @@ use Illuminate\Database\Eloquent\Collection;
 
 class EpisodeService
 {
+    /**
+     * Get all episodes from a story
+     *
+     * @param  string  $query
+     */
     public static function findAllEpisode(?string $query, Story $story): Collection
     {
         $episodes = Episode::search($query)->query(function ($builder) {
@@ -17,6 +22,9 @@ class EpisodeService
         return $episodes;
     }
 
+    /**
+     * Get a episode
+     */
     public static function findEpisodeById(Episode $episode): Episode
     {
         $episode->visit();
@@ -35,6 +43,9 @@ class EpisodeService
         return $episode;
     }
 
+    /**
+     * Create an Episode from a story
+     */
     public static function addEpisode(array $request, Story $story): Episode
     {
         $episode = Episode::create([
@@ -46,6 +57,9 @@ class EpisodeService
         return $episode;
     }
 
+    /**
+     * Edit a episode
+     */
     public static function changeEpisode(array $request, Episode $episode): Episode
     {
         $episode->updateOrFail($request);
@@ -55,6 +69,9 @@ class EpisodeService
         return $episode;
     }
 
+    /**
+     * Delete a episode
+     */
     public static function deleteEpisode(Episode $episode): bool
     {
         return $episode->deleteOrFail();
