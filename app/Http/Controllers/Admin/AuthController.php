@@ -47,9 +47,21 @@ class AuthController extends Controller
         return view('admin.register');
     }
 
-    public function register(RegisterUserRequest $request)
+    public function register(RegisterUserRequest $request): RedirectResponse
     {
-        // code...
+        $validated = $request->validated();
+
+        try {
+            $user = $this->service->registerAdmin($validated);
+        } catch (\Exception $error) {
+            return back()->with('failed', 'Registrasi anda gagal!');
+        }
+
+        if (! $user) {
+            return back()->with('failed', 'Registrasi anda gagal!');
+        }
+
+        return redirect()->route('admin.login.page');
     }
 
     public function logout(): RedirectResponse

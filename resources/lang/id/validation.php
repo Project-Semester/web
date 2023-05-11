@@ -150,6 +150,7 @@ return [
         'email' => 'e-mail',
         'photo' => 'foto',
         'password' => 'kata sandi',
+        'password_confirmation' => 'konfirmasi kata sandi',
         'title' => 'judul',
         'synopsis' => 'sinopsis',
         'cover' => 'sampul',

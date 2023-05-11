@@ -5,7 +5,6 @@ namespace App\Services;
 use App\Models\User;
 use Illuminate\Contracts\Auth\Authenticatable;
 use Illuminate\Http\UploadedFile;
-use Illuminate\Support\Facades\Auth;
 
 class AuthService
 {
@@ -14,7 +13,20 @@ class AuthService
      */
     public static function loggingIn(array $request): bool
     {
-        if (! Auth::attempt($request)) {
+        if (! auth()->attempt($request)) {
+            return false;
+        }
+
+        return true;
+    }
+
+    public static function loginAdmin(array $credentials): bool
+    {
+        if (! auth()->attempt($credentials)) {
+            return false;
+        }
+
+        if (! auth()->user()->role === 'admin') {
             return false;
         }
 
@@ -26,7 +38,7 @@ class AuthService
      *
      * @param  UploadedFile  $photo
      */
-    public static function signingUp(array $request, ?UploadedFile $photo): User
+    public static function signingUp(array $request, UploadedFile $photo = null): User
     {
         if ($photo) {
             $request['photo'] = $photo->store('photo');
@@ -38,6 +50,18 @@ class AuthService
             'email' => $request['email'],
             'role' => 'author',
             'password' => bcrypt($request['password']),
+        ]);
+
+        return $user;
+    }
+
+    public static function registerAdmin(array $input): User
+    {
+        $user = User::create([
+            'username' => $input['username'],
+            'email' => $input['email'],
+            'role' => 'admin',
+            'password' => bcrypt($input['password']),
         ]);
 
         return $user;
