@@ -2,8 +2,8 @@
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
 <head>
     <meta charset="utf-8">
-    <title>YUKNULIS!-Aksi</title>
-
+    <title>YukNulis-Aksi</title>
+    <link rel="icon" type="image" href="C:\Users\taufi\Downloads\Black And White Business Logo\3.png">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
     <!-- Fonts -->
@@ -32,7 +32,7 @@
 <body>  
     <div class="navbar navbar-expand-lg navbar-dark bg-dark">
       <div class="container">
-        <a href="" class="navbar-brand">YUKNULIS!</a>
+        <a href="" class="navbar-brand">YukNulis</a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
           <span class="navbar-toggler-icon"></span>
         </button>
@@ -57,9 +57,9 @@
               data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
               <img src="D:\topek\46r.jpg" width="25" height="25" class="rounded-circle"></a>
               <div class="dropdown-menu" aria-labelledby="themes">
-                <a class="dropdown-item" href="#">Dashboard</a>
+                <a class="dropdown-item" href="home">Dashboard</a>
                 <a class="dropdown-item" href="#">Edit Profile</a>
-                <a class="dropdown-item" href="#">Log Out</a>
+                <a class="dropdown-item" href="/">Log Out</a>
               </div>
             </li>
           </ul>
@@ -68,12 +68,45 @@
     </div>
 
     <div class="container" style="padding-top: 60px;">
+      <div class="container">
         <h2>Cerita Aksi</h2>
         <hr class="solid">
         <br>
         <div class="container">
-
+          <div class="col-lg-12">
+            <div class="container" style="padding-left: 150px; ">
+              <div class="row">
+                <div class="card mb-3" style="max-width: 450px;">
+                  <div class="row g-0">
+                    <div class="col-md-4">
+                      <img src="..." class="img-fluid rounded-start" alt="...">
+                    </div>
+                    <div class="col-md-8">
+                      <div class="card-body">
+                        <h5 class="card-title">Deskripsi</h5>
+                        <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="card mb-3" style="max-width: 450px; margin-left: 20px;">
+                  <div class="row g-0">
+                    <div class="col-md-4">
+                      <img src="..." class="img-fluid rounded-start" alt="...">
+                    </div>
+                    <div class="col-md-8">
+                      <div class="card-body">
+                        <h5 class="card-title">Deskripsi</h5>
+                        <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
+      </div>
     </div>
 
     <script src="../_vendor/bootstrap/dist/js/bootstrap.bundle.min.js"></script>

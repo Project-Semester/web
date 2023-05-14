@@ -2,7 +2,7 @@
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
 <head>
     <meta charset="utf-8">
-    <title>YUKNULIS!-Home</title>
+    <title>YukNulis-Home</title>
 
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
@@ -32,7 +32,7 @@
 <body>  
     <div class="navbar navbar-expand-lg navbar-dark bg-dark">
       <div class="container">
-        <a href="" class="navbar-brand">YUKNULIS!</a>
+        <a href="" class="navbar-brand">YukNulis</a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
           <span class="navbar-toggler-icon"></span>
         </button>
