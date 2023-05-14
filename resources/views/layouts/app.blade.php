@@ -15,7 +15,7 @@
 </head>
 <body>
     <header>
-        <x-navbar />
+        <x-navbar-admin />
     </header>
 
     <main>
@@ -28,6 +28,6 @@
     
     <!-- Scripts --->
     @stack('scripts')
-    <script src="{{ asset('js/bootstrap.min.js') }}"></script>
+    <script src="{{ asset('js/bootstrap.bundle.min.js') }}"></script>
 </body>
 </html>

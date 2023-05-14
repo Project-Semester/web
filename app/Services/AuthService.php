@@ -11,22 +11,9 @@ class AuthService
     /**
      * Login a user
      */
-    public static function loggingIn(array $request): bool
+    public static function login(array $creadentials): bool
     {
-        if (! auth()->attempt($request)) {
-            return false;
-        }
-
-        return true;
-    }
-
-    public static function loginAdmin(array $credentials): bool
-    {
-        if (! auth()->attempt($credentials)) {
-            return false;
-        }
-
-        if (! auth()->user()->role === 'admin') {
+        if (! auth()->attempt($creadentials)) {
             return false;
         }
 
@@ -38,18 +25,18 @@ class AuthService
      *
      * @param  UploadedFile  $photo
      */
-    public static function signingUp(array $request, UploadedFile $photo = null): User
+    public static function registerAuthor(array $input, ?UploadedFile $photo): User
     {
         if ($photo) {
-            $request['photo'] = $photo->store('photo');
+            $input['photo'] = $photo->store('photo');
         }
 
         $user = User::create([
-            'username' => $request['username'],
-            'photo' => $request['photo'],
-            'email' => $request['email'],
+            'username' => $input['username'],
+            'photo' => $input['photo'],
+            'email' => $input['email'],
             'role' => 'author',
-            'password' => bcrypt($request['password']),
+            'password' => bcrypt($input['password']),
         ]);
 
         return $user;
@@ -70,7 +57,7 @@ class AuthService
     /**
      * Logout a user
      */
-    public static function loggingOut(Authenticatable $user): bool
+    public static function logout(Authenticatable $user): bool
     {
         $response = $user->currentAccessToken()->delete();
 

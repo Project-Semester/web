@@ -28,7 +28,7 @@ class AuthController extends Controller
         $validated = $request->validated();
 
         try {
-            $response = $this->service->loggingIn($validated);
+            $response = $this->service->login($validated);
         } catch (\Exception $error) {
             return back()->with('failed', 'Login anda gagal!');
         }

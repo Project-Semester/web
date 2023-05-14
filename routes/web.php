@@ -22,7 +22,7 @@ Route::get('/', function () {
 
 Route::prefix('/admin')->group(function () {
     Route::middleware('guestAdmin')->group(function () {
-        Route::get('/', [LandingController::class, 'admin'])->name('admin.landing');
+        Route::redirect('/', '/admin/login');
         Route::get('/login', [AuthController::class, 'index'])->name('admin.login.page');
         Route::post('/login', [AuthController::class, 'authenticate'])->name('admin.login');
         Route::get('/register', [AuthController::class, 'create'])->name('admin.register.page');
