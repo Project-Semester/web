@@ -25,17 +25,17 @@ class AuthController extends Controller
         $validated = $request->validated();
 
         try {
-            $this->service->loggingIn($validated);
+            $this->service->login($validated);
         } catch (\Exception $e) {
             return $this->error($e->getMessage());
         }
 
         $user = auth()->user();
+        $token = $user->createToken('API Token of '.$user->username)->plainTextToken;
 
         $data = [
             'user' => $user,
-            'token' => $user->createToken('API Token of '.$user->username)
-                ->plainTextToken,
+            'token' => $token,
         ];
 
         return $this->success($data, 'A user logged successfully');
@@ -47,15 +47,16 @@ class AuthController extends Controller
         $photo = $request->file('photo');
 
         try {
-            $user = $this->service->signingUp($validated, $photo);
+            $user = $this->service->registerAuthor($validated, $photo);
         } catch (\Exception $e) {
             return $this->error($e->getMessage());
         }
 
+        $token = $user->createToken('API Token of '.$user->username)->plainTextToken;
+
         $data = [
             'user' => $user,
-            'token' => $user->createToken('API Token of '.$user->username)
-                ->plainTextToken,
+            'token' => $token,
         ];
 
         return $this->success($data, 'A new user added successfully', 201);
@@ -66,7 +67,7 @@ class AuthController extends Controller
         $user = auth()->user();
 
         try {
-            $this->service->loggingOut($user);
+            $this->service->logout($user);
         } catch (\Exception $e) {
             return $this->error($e->getMessage());
         }

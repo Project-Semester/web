@@ -12,6 +12,9 @@ use Illuminate\Support\Facades\Storage;
  */
 class UserService
 {
+    /**
+     * Get all users
+     */
     public static function findAllUsers(): Collection
     {
         $users = User::all();
@@ -19,13 +22,19 @@ class UserService
         return $users;
     }
 
-    public static function findUser(string $userId): User
+    /**
+     * Get a authenticated user
+     */
+    public static function findUser(string $user_id): User
     {
-        $user = User::findOrFail($userId);
+        $user = User::findOrFail($user_id);
 
         return $user;
     }
 
+    /**
+     * Get a user
+     */
     public static function findUserById(User $user): User
     {
         $user->load(['stories' => function ($query) {
@@ -35,6 +44,11 @@ class UserService
         return $user;
     }
 
+    /**
+     * Edit a user
+     *
+     * @param  UploadedFile  $photo
+     */
     public static function changeUser(array $request, ?UploadedFile $photo, User $user): User
     {
         if ($photo) {
@@ -50,6 +64,9 @@ class UserService
         return $user;
     }
 
+    /**
+     * Edit user's password
+     */
     public static function changePassword(array $request, User $user): User
     {
         $user->updateOrFail([
@@ -59,6 +76,9 @@ class UserService
         return $user;
     }
 
+    /**
+     * Delete a user
+     */
     public function deleteUser(User $user): bool
     {
         Storage::delete($user->picture);

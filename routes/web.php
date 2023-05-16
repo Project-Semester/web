@@ -1,5 +1,8 @@
 <?php
 
+use App\Http\Controllers\Admin\AuthController;
+use App\Http\Controllers\Admin\HomeController;
+use App\Http\Controllers\LandingController;
 use Illuminate\Support\Facades\Route;
 use PharIo\Manifest\Author;
 
@@ -15,21 +18,20 @@ use PharIo\Manifest\Author;
 */
 
 Route::get('/', function () {
-    return view('author/landing');
-})->name('landing');
+    return view('welcome');
+});
 
-Route::get('/home', function () {
-    return view('author/home');
-})->name('home');
+Route::prefix('/admin')->group(function () {
+    Route::middleware('guestAdmin')->group(function () {
+        Route::redirect('/', '/admin/login');
+        Route::get('/login', [AuthController::class, 'index'])->name('admin.login.page');
+        Route::post('/login', [AuthController::class, 'authenticate'])->name('admin.login');
+        Route::get('/register', [AuthController::class, 'create'])->name('admin.register.page');
+        Route::post('/register', [AuthController::class, 'register'])->name('admin.register');
+    });
 
-Route::get('/tambahcerita', function () {
-    return view('author/tambahCerita');
-})->name('tambahCerita');
-
-Route::get('/tuliscerita', function () {
-    return view('author/tulisCerita');
-})->name('tulisCerita');
-
-Route::get('/kategoricerita', function () {
-    return view('author/kategoriCerita');
-})->name('kategoriCerita');
+    Route::middleware('isAdmin')->group(function () {
+        Route::get('/home', [HomeController::class, 'index'])->name('admin.home');
+        Route::get('/logout', [AuthController::class, 'logout'])->name('admin.logout');
+    });
+});

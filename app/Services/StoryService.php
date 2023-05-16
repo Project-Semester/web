@@ -9,6 +9,11 @@ use Illuminate\Support\Facades\Storage;
 
 class StoryService
 {
+    /**
+     * Get all stories
+     *
+     * @param  string  $query
+     */
     public static function findAllStories(?string $query): Collection
     {
         $stories = Story::search($query)->query(function ($builder) {
@@ -18,6 +23,11 @@ class StoryService
         return $stories;
     }
 
+    /**
+     * Get all user's stories
+     *
+     * @param  string  $query
+     */
     public static function findAllUserStories(?string $query): Collection
     {
         $stories = Story::search($query)->query(function ($builder) {
@@ -27,6 +37,9 @@ class StoryService
         return $stories;
     }
 
+    /**
+     * Get a story by Id
+     */
     public static function findStoryById(Story $story): Story
     {
         $story->visit();
@@ -51,6 +64,11 @@ class StoryService
         return $story;
     }
 
+    /**
+     * Create a user's story
+     *
+     * @param  UploadedFile  $cover
+     */
     public static function addStory(array $request, ?UploadedFile $cover): Story
     {
         if ($cover) {
@@ -70,6 +88,11 @@ class StoryService
         return $story;
     }
 
+    /**
+     * Edit a Story
+     *
+     * @param  UploadedFile  $cover
+     */
     public static function changeStory(array $request, ?UploadedFile $cover, Story $story): Story
     {
         if ($cover) {
@@ -87,6 +110,9 @@ class StoryService
         return $story;
     }
 
+    /**
+     * Delete a story
+     */
     public static function deleteStory(Story $story): bool
     {
         Storage::delete($story->cover);

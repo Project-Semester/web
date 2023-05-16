@@ -5,37 +5,59 @@ namespace App\Services;
 use App\Models\User;
 use Illuminate\Contracts\Auth\Authenticatable;
 use Illuminate\Http\UploadedFile;
-use Illuminate\Support\Facades\Auth;
 
 class AuthService
 {
-    public static function loggingIn(array $request): bool
+    /**
+     * Login a user
+     */
+    public static function login(array $creadentials): bool
     {
-        if (! Auth::attempt($request)) {
+        if (! auth()->attempt($creadentials)) {
             return false;
         }
 
         return true;
     }
 
-    public static function signingUp(array $request, ?UploadedFile $picture): User
+    /**
+     * Register a new user
+     *
+     * @param  UploadedFile  $photo
+     */
+    public static function registerAuthor(array $input, ?UploadedFile $photo): User
     {
-        if ($picture) {
-            $request['picture'] = $picture->store('picture');
+        if ($photo) {
+            $input['photo'] = $photo->store('photo');
         }
 
         $user = User::create([
-            'username' => $request['username'],
-            'picture' => $request['picture'],
-            'email' => $request['email'],
+            'username' => $input['username'],
+            'photo' => $input['photo'],
+            'email' => $input['email'],
             'role' => 'author',
-            'password' => bcrypt($request['password']),
+            'password' => bcrypt($input['password']),
         ]);
 
         return $user;
     }
 
-    public static function loggingOut(Authenticatable $user): bool
+    public static function registerAdmin(array $input): User
+    {
+        $user = User::create([
+            'username' => $input['username'],
+            'email' => $input['email'],
+            'role' => 'admin',
+            'password' => bcrypt($input['password']),
+        ]);
+
+        return $user;
+    }
+
+    /**
+     * Logout a user
+     */
+    public static function logout(Authenticatable $user): bool
     {
         $response = $user->currentAccessToken()->delete();
 

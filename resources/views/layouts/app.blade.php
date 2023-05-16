@@ -14,7 +14,20 @@
     <script src="https://unpkg.com/@phosphor-icons/web"></script>
 </head>
 <body>
+    <header>
+        <x-navbar-admin />
+    </header>
+
+    <main>
+        @yield('content')
+    </main>
+
+    <footer>
+        
+    </footer>
     
+    <!-- Scripts --->
     @stack('scripts')
+    <script src="{{ asset('js/bootstrap.bundle.min.js') }}"></script>
 </body>
 </html>
