@@ -15,7 +15,7 @@
 </head>
 <body>
     <header>
-        <x-navbar-admin/>
+        <x-navbar-kategori/>
     </header>
 
     <main>

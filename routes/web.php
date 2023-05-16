@@ -35,3 +35,27 @@ Route::prefix('/admin')->group(function () {
         Route::get('/logout', [AuthController::class, 'logout'])->name('admin.logout');
     });
 });
+
+Route::get('/', function () {
+    return view('author/landing');
+})->name('landing');
+
+Route::get('/home', function () {
+    return view('author/home');
+})->name('home');
+
+Route::get('/tambahcerita', function () {
+    return view('author/tambahCerita');
+})->name('tambahCerita');
+
+Route::get('/tuliscerita', function () {
+    return view('author/tulisCerita');
+})->name('tulisCerita');
+
+Route::get('/kategoricerita', function () {
+    return view('author/kategoriCerita');
+})->name('kategoriCerita');
+
+Route::get('/bacacerita', function () {
+    return view('author/bacaCerita');
+})->name('bacaCerita');
