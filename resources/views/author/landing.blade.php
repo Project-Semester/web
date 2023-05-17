@@ -35,14 +35,14 @@
           <h5>YUKNULIS menghubungkan komuitas dari para pembaca dan penulis</h5>
           <h5>melalui ketukan cerita</h5>
       </div>
-      <div class="col-lg-4 col-md-5 col-sm-6" >
+      <div class="col-sm-4" >
           <div class="container">
-
+            <img src="/LogoApp.png">
           </div>
       </div>
     </div>
   </div>
-  <div class="container" style="padding-top: 100px;">
+  <div class="container" style="padding-top: 50px;">
   <div id="carouselExampleCaptions" class="carousel slide">
       <div class="carousel-indicators">
         <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
@@ -51,14 +51,14 @@
       </div>
       <div class="carousel-inner">
         <div class="carousel-item active">
-          <img src="" class="d-block w-100" alt="...">
+          <img src="/download (2).jpg" class="d-block w-100" alt="...">
           <div class="carousel-caption d-none d-md-block">
             <h5>First slide label</h5>
             <p>Some representative placeholder content for the first slide.</p>
           </div>
         </div>
         <div class="carousel-item">
-          <img src="..." class="d-block w-100" alt="...">
+          <img src="/c4fedab1-4041-4db5-9245-97439472cf2c.jpg" class="d-block w-100" alt="...">
           <div class="carousel-caption d-none d-md-block">
             <h5>Second slide label</h5>
             <p>Some representative placeholder content for the second slide.</p>
@@ -82,6 +82,8 @@
       </button>
     </div>
   </div>
+  <br>
+  <br>
 
 @endsection
 

@@ -19,7 +19,7 @@
                     <div class="card mb-3" style="max-width: 450px;">
                       <div class="row g-0">
                         <div class="col-md-4">
-                          <img src="" class="img-fluid rounded-start" alt="...">
+                          <img src="/wp1.jpg" class="img-fluid rounded-start" alt="...">
                         </div>
                         <div class="col-md-8">
                           <div class="card-body">
@@ -32,7 +32,7 @@
                     <div class="card mb-3" style="max-width: 450px; margin-left: 20px;">
                       <div class="row g-0">
                         <div class="col-md-4">
-                          <img src="..." class="img-fluid rounded-start" alt="...">
+                          <img src="/wp2.jpg" class="img-fluid rounded-start" alt="...">
                         </div>
                         <div class="col-md-8">
                           <div class="card-body">
@@ -48,7 +48,7 @@
                     <div class="card mb-3" style="max-width: 450px;">
                       <div class="row g-0">
                         <div class="col-md-4">
-                          <img src="..." class="img-fluid rounded-start" alt="...">
+                          <img src="/wp3.jpg" class="img-fluid rounded-start" alt="...">
                         </div>
                         <div class="col-md-8">
                           <div class="card-body">
@@ -61,7 +61,36 @@
                     <div class="card mb-3" style="max-width: 450px; margin-left: 20px;">
                       <div class="row g-0">
                         <div class="col-md-4">
-                          <img src="..." class="img-fluid rounded-start" alt="...">
+                          <img src="/wp4.jpg" class="img-fluid rounded-start" alt="...">
+                        </div>
+                        <div class="col-md-8">
+                          <div class="card-body">
+                            <h5 class="card-title">Deskripsi</h5>
+                            <p class="card-text"></p>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <br>
+                  <div class="row">
+                    <div class="card mb-3" style="max-width: 450px;">
+                      <div class="row g-0">
+                        <div class="col-md-4">
+                          <img src="/wp3.jpg" class="img-fluid rounded-start" alt="...">
+                        </div>
+                        <div class="col-md-8">
+                          <div class="card-body">
+                            <h5 class="card-title">Deskripsi</h5>
+                            <p class="card-text"></p>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="card mb-3" style="max-width: 450px; margin-left: 20px;">
+                      <div class="row g-0">
+                        <div class="col-md-4">
+                          <img src="/wp4.jpg" class="img-fluid rounded-start" alt="...">
                         </div>
                         <div class="col-md-8">
                           <div class="card-body">
@@ -76,6 +105,7 @@
               </div>
             </div>
           </div>
+          <br>
         </div>
       </div>
     </div>

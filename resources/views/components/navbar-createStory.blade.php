@@ -6,7 +6,7 @@
       <div class="collapse navbar-collapse" id="navbarResponsive">
         <ul class="navbar-nav">
           <li class="nav-item">
-            <a class="nav-link" href="home"><i class="bi bi-chevron-left" style="color: white;"></i></a>
+            <a class="nav-link" href="home"><i class="bi bi-chevron-left"></i></a>
           </li>
         </ul>
         <ul class="navbar-nav ms-md-auto">

@@ -5,9 +5,10 @@
 @endpush
 
 @section('content')
-    <div class="container" style="padding-top: 140px;">
+    <div class="container" style="padding-top: 130px;">
       <div class="card text-bg-dark">
         <div class="card-body">
+          <br>
           <h1>Selamat Datang, User!</h1>
           <hr class="solid">
         </div>
@@ -18,36 +19,33 @@
             <div class="row">
               <div class="col">
                 <div class="text-center">
-                  <img src="" class="rounded" alt="">
-                  <h5>Sampul</h5>
-                </div>
-              </div>
-              <div class="col" style="height: 100px;">
-                <div class="text-center">
-                  <img src="" class="rounded" alt="">
-                  <h5>Sampul</h5>
+                  <img src="/wp1.jpg" class="rounded" alt="">
                 </div>
               </div>
               <div class="col">
                 <div class="text-center">
-                  <img src="" class="rounded" alt="">
-                  <h5>Sampul</h5>
+                  <a href="bacacerita"><img src="{{ asset('/wp2.jpg') }}" class="rounded" alt=""></a>
                 </div>
               </div>
               <div class="col">
                 <div class="text-center">
-                  <img src="" class="rounded" alt="">
-                  <h5>Sampul</h5>
+                  <img src="/wp3.jpg" class="rounded" alt="">
                 </div>
               </div>
               <div class="col">
                 <div class="text-center">
-                  <img src="" class="rounded" alt="">
-                  <h5>Sampul</h5>
+                  <img src="/wp4.jpg" class="rounded" alt="">
+                </div>
+              </div>
+              <div class="col">
+                <div class="text-center">
+                  <img src="/wp5.jpg" class="rounded" alt="">
                 </div>
               </div>
             </div>
           </div>
+          <br>
+          <br>
       </div>
     </div>
 

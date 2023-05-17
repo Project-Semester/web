@@ -49,9 +49,6 @@
                     <div class="mb-3">
                       <textarea class="form-control" id="exampleFormControlTextarea1" rows="5"></textarea>
                     </div>
-                  <h5>Karakter Utama</h5>
-                  <input class="form-control form-control-sm" type="text" placeholder="Nama karakter utama" aria-label=".form-control-sm example">
-                  <br>
                   <h5>Pilih Kategori</h5>
                   <select class="form-select" aria-label="Default select example">
                     <option selected>Pilih kategori</option>
