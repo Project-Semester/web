@@ -11,7 +11,7 @@ class LoginForm extends Component
     public string $password;
 
     protected $rules = [
-        'email' => ['required', 'email:dns'],
+        'email' => ['required', 'email'],
         'password' => ['required'],
     ];
 

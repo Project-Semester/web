@@ -23,7 +23,7 @@
     </main>
 
     <footer>
-        
+        <div class="fixed-bottom bg-primary end-0" style="width: 20px; height: 20px;"></div>
     </footer>
     
     <!-- Scripts --->

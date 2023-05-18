@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Admin\AuthController;
+use App\Http\Controllers\Admin\CategoryController;
 use App\Http\Controllers\Admin\HomeController;
 use App\Http\Controllers\LandingController;
 use Illuminate\Support\Facades\Route;
@@ -31,6 +32,11 @@ Route::prefix('/admin')->group(function () {
 
     Route::middleware('isAdmin')->group(function () {
         Route::get('/home', [HomeController::class, 'index'])->name('admin.home');
+
+        Route::prefix('/categories')->group(function () {
+            Route::get('/', [CategoryController::class, 'index'])->name('admin.category.index');
+        });
+
         Route::get('/logout', [AuthController::class, 'logout'])->name('admin.logout');
     });
 });
