@@ -55,8 +55,6 @@ class AuthService
      */
     public static function logout(Authenticatable $user): bool
     {
-        $response = $user->currentAccessToken()->delete();
-
-        return $response;
+        return $user->currentAccessToken()->delete();
     }
 }

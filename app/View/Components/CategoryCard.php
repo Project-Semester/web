@@ -16,7 +16,6 @@ class CategoryCard extends Component
         public string $id,
         public string $name,
         public string $description,
-        public string $color
     ) {}
 
     /**

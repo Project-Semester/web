@@ -4,7 +4,7 @@
             <h5 class="card-title">{{ $name }}</h5>
             <p class="card-text">{{ $description }}</p>
             <div class="d-flex justify-content-end">
-                <a href="#" class="btn btn-primary">Lihat lebih...</a>
+                <a href="{{ route('admin.category.show', $id) }}" class="btn btn-primary">Lihat lebih...</a>
             </div>
         </div>
     </div>

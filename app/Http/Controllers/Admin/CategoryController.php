@@ -3,11 +3,21 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\StoreCategoryRequest;
+use App\Models\Category;
+use App\Services\CategoryService;
 use Illuminate\Contracts\View\View;
 use Illuminate\Http\Request;
 
 class CategoryController extends Controller
 {
+    private CategoryService $service;
+
+    public function __construct(CategoryService $categoryService)
+    {
+        $this->service = $categoryService;
+    }
+
     /**
      * Display a listing of the resource.
      */
@@ -27,17 +37,29 @@ class CategoryController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(StoreCategoryRequest $request)
     {
-        //
+        $validated = $request->validated();
+
+        try {
+            $category = $this->service->addCategory($validated);
+        } catch (\Exception $error) {
+            return back()->with('failed', 'Kategori gagal ditambah!');
+        }
+
+        if (! $category) {
+            return back()->with('failed', 'Kategori gagal ditambah!');
+        }
+
+        return redirect()->route('admin.category.index');
     }
 
     /**
      * Display the specified resource.
      */
-    public function show(string $id)
+    public function show(Category $category)
     {
-        //
+        return view('admin.category.show', compact('category'));
     }
 
     /**

@@ -5,12 +5,19 @@
                 <h4>Tambah Kategori Baru</h4>
             </div>
             <div class="card-body">
-                <form action="{{ route('admin.login') }}" method="POST" autocomplete="off">
+                <form action="{{ route('admin.category.store') }}" method="POST" autocomplete="off">
                 @csrf
                     <div class="form-group mb-4">
                         <label class="col-form-label mb-2" for="name">Nama</label>
-                        <input type="text" class="form-control @if ($errors->has('name')) is-invalid @elseif($email == null) @else is-valid @endif" placeholder="user@example.com" id="name" name="name" wire:model='name'>
+                        <input type="text" class="form-control @if ($errors->has('name')) is-invalid @elseif($name == null) @else is-valid @endif" placeholder="Kategori Baru..." id="name" name="name" wire:model='name'>
                         @error('name')
+                            <div class="invalid-feedback">{{ $message }}</div>
+                        @enderror
+                    </div>
+                    <div class="form-group mb-4">
+                        <label for="description" class="form-label mb-2">Deskripsi</label>
+                        <textarea class="form-control @if ($errors->has('description')) is-invalid @elseif($description == null) @else is-valid @endif" id="description" placeholder="Deskripsi..." name="description" wire:model='description' rows="6"></textarea>
+                        @error('description')
                             <div class="invalid-feedback">{{ $message }}</div>
                         @enderror
                     </div>
