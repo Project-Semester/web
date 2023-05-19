@@ -4,6 +4,8 @@
     @livewireStyles
 @endpush
 
+@section('title', 'Kategori')
+
 @section('content')
     <div class="container-md my-5 py-5 px-5">
         <div class="row justify-content-center align-items-center">

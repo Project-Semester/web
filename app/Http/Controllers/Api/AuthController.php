@@ -25,12 +25,23 @@ class AuthController extends Controller
         $validated = $request->validated();
 
         try {
-            $this->service->login($validated);
+            $response = $this->service->login($validated);
         } catch (\Exception $e) {
             return $this->error($e->getMessage());
         }
 
+        if (! $response) {
+            return $this->error("Login Fail!");
+        }
+        
         $user = auth()->user();
+        
+        if ($user->role !== 'author') {
+            $this->service->logout($user);
+            
+            return $this->error("Login Fail!");
+        }
+
         $token = $user->createToken('API Token of '.$user->username)->plainTextToken;
 
         $data = [

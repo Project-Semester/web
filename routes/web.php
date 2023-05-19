@@ -35,6 +35,7 @@ Route::prefix('/admin')->group(function () {
 
         Route::prefix('/categories')->group(function () {
             Route::get('/', [CategoryController::class, 'index'])->name('admin.category.index');
+            Route::get('/create', [CategoryController::class, 'create'])->name('admin.category.create');
         });
 
         Route::get('/logout', [AuthController::class, 'logout'])->name('admin.logout');

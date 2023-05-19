@@ -13,11 +13,7 @@ class AuthService
      */
     public static function login(array $creadentials): bool
     {
-        if (! auth()->attempt($creadentials)) {
-            return false;
-        }
-
-        return true;
+        return auth()->attempt($creadentials);
     }
 
     /**

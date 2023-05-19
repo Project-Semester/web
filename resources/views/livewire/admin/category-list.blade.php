@@ -6,7 +6,7 @@
             </div>
         </div>
         <div class="col-12 col-md-4 col-lg-2 align-self-end">
-            <a href="" class="btn btn-outline-primary text-white w-100">Tambah <i class="ph ph-plus-square align-middle"></i></a>
+            <a href="{{ route('admin.category.create') }}" class="btn btn-outline-primary text-white w-100">Tambah <i class="ph ph-plus-square align-middle"></i></a>
         </div>
     </div>
     <div class="row justify-content-center align-items-center">
