@@ -59,3 +59,7 @@ Route::get('/kategoricerita', function () {
 Route::get('/bacacerita', function () {
     return view('author/bacaCerita');
 })->name('bacaCerita');
+
+Route::get('/profil', function () {
+    return view('author/profil');
+})->name('profil');

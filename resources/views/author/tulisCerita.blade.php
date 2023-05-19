@@ -10,7 +10,8 @@
       <div class="card-body">
         <div class="col-lg-10" style="text-align: center; padding-left: 200px;">
           <div class="container-center" >
-            <h3 contenteditable="true">Part tak berjudul</h3>
+            <br>
+            <input type="text" class="form-control" id="exampleFormControlInput1" placeholder="part tak berjudul">
             <hr class="solid">
             <div class="mb-5">
               <textarea class="form-control" id="exampleFormControlTextarea1" rows="40"></textarea>

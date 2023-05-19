@@ -18,13 +18,13 @@
           <div class="container text-center">
             <div class="row">
               <div class="col">
-                <div class="text-center">
-                  <img src="/wp1.jpg" class="rounded" alt="">
+                <div class="text-center overflow-hidden">
+                  <img src="/wp1.jpg" class="img-fluid rounded" alt="">
                 </div>
               </div>
               <div class="col">
                 <div class="text-center">
-                  <a href="bacacerita"><img src="{{ asset('/wp2.jpg') }}" class="rounded" alt=""></a>
+                  <a href="bacacerita"><img src="{{ asset('/wp2.jpg') }}" class="rounded-full" alt=""></a>
                 </div>
               </div>
               <div class="col">
