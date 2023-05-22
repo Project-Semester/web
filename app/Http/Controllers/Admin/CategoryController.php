@@ -81,8 +81,16 @@ class CategoryController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy(Category $category)
     {
-        //
+        try {
+            $response = $this->service->deleteCategory($category);
+        } catch (\Exception $error) {
+            return back()->with('failed', 'Kategori gagal dihapus!');
+        }
+
+        if (! $response) return back()->with('failed', 'Kategori gagal dihapus!');
+
+        return redirect()->route('admin.category.index');
     }
 }

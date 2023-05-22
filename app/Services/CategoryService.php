@@ -27,7 +27,7 @@ class CategoryService
     public static function findById(Category $category): Category
     {
         $category->load([
-            'stories' => function ($query) {
+            'stories.user' => function ($query) {
                 $query->orderBy('title');
             },
         ]);
