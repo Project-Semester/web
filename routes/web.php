@@ -63,3 +63,4 @@ Route::get('/bacacerita', function () {
 Route::get('/profil', function () {
     return view('author/profil');
 })->name('profil');
+

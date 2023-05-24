@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\Admin;
+namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\LoginUserRequest;
@@ -8,8 +8,9 @@ use App\Http\Requests\RegisterUserRequest;
 use App\Services\AuthService;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\View\View;
+use Illuminate\Http\Request;
 
-class AuthController extends Controller
+class Authcontroller extends Controller
 {
     private $service;
 
@@ -20,7 +21,7 @@ class AuthController extends Controller
 
     public function index(): View
     {
-        return view('admin.login');
+        return view('auhtor.login');
     }
 
     public function authenticate(LoginUserRequest $request): RedirectResponse
@@ -39,20 +40,21 @@ class AuthController extends Controller
 
         $request->session()->regenerate();
 
-        return redirect()->route('admin.home');
+        return redirect()->route('author.home');
     }
 
     public function create(): View
     {
-        return view('admin.register');
+        return view('author.register');
     }
 
     public function register(RegisterUserRequest $request): RedirectResponse
     {
         $validated = $request->validated();
+        $photo = $request->validated();
 
         try {
-            $user = $this->service->registerAdmin($validated);
+            $user = $this->service->registerAuthor($validated, $photo);
         } catch (\Exception $error) {
             return back()->with('failed', 'Registrasi anda gagal!');
         }
@@ -61,7 +63,7 @@ class AuthController extends Controller
             return back()->with('failed', 'Registrasi anda gagal!');
         }
 
-        return redirect()->route('auhtor.login');
+        return redirect()->route('author.login.page');
     }
 
     public function logout(): RedirectResponse
@@ -71,6 +73,6 @@ class AuthController extends Controller
         request()->session()->invalidate();
         request()->session()->regenerateToken();
 
-        return redirect()->route('author.login');
+        return redirect()->route('author.login.page');
     }
 }

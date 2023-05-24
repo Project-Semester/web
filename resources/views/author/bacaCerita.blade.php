@@ -26,7 +26,6 @@
                         <div class="card mb-4">
                           <div class="card-body">
                             <p>Type your note, and hit enter to add it</p>
-
                             <div class="d-flex justify-content-between">
                               <div class="d-flex flex-row align-items-center">
                                 <img src="https://mdbcdn.b-cdn.net/img/Photos/Avatars/img%20(4).webp" alt="avatar" width="25"
