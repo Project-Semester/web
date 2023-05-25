@@ -5,7 +5,7 @@
             <p class="card-text">{{ $category->description }}</p>
             @if (auth()->user()->role === 'admin')
                 <div class="d-flex justify-content-end align-text-middle gap-2">
-                    <a href="" class="btn btn-primary">Edit <i class="ph ph-pencil-simple"></i></a>
+                    <a href="{{ route('admin.category.edit', $category->id) }}" class="btn btn-primary">Edit <i class="ph ph-pencil-simple"></i></a>
                     <form action="{{ route('admin.category.destroy', $category->id) }}" method="POST">
                         @method('DELETE')
                         @csrf
