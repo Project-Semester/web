@@ -16,7 +16,7 @@ class guestAdmin
     public function handle(Request $request, Closure $next): Response
     {
         if (auth()->check()) {
-            return redirect()->route('admin.home');
+            return redirect()->route('admin.story.index');
         }
 
         return $next($request);

@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\StoreCategoryRequest;
+use App\Http\Requests\UpdateCategoryRequest;
 use App\Models\Category;
 use App\Services\CategoryService;
 use Illuminate\Contracts\View\View;
@@ -65,17 +66,27 @@ class CategoryController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(string $id)
+    public function edit(Category $category)
     {
-        //
+        return view('admin.category.edit', compact('category'));
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(UpdateCategoryRequest $request, Category $category)
     {
-        //
+        $validated = $request->validated();
+
+        try {
+            $result = $this->service->changeCategory($validated, $category);
+        } catch (\Exception $error) {
+            return back()->with('failed', 'Kategori gagal diubah!');
+        }
+
+        if (! $result) return back()->with('failed', 'Kategori gagal diubah!');
+
+        return redirect()->route('admin.category.show', $category->id);
     }
 
     /**
@@ -84,12 +95,12 @@ class CategoryController extends Controller
     public function destroy(Category $category)
     {
         try {
-            $response = $this->service->deleteCategory($category);
+            $result = $this->service->deleteCategory($category);
         } catch (\Exception $error) {
             return back()->with('failed', 'Kategori gagal dihapus!');
         }
 
-        if (! $response) return back()->with('failed', 'Kategori gagal dihapus!');
+        if (! $result) return back()->with('failed', 'Kategori gagal dihapus!');
 
         return redirect()->route('admin.category.index');
     }

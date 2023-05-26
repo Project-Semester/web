@@ -1,6 +1,6 @@
 <nav class="navbar navbar-expand-lg fixed-top navbar-dark bg-dark">
   <div class="container">
-    <a class="navbar-brand" href="{{ route('admin.home') }}"><h3 class="fw-bold">YukNulis</h3></a>
+    <a class="navbar-brand" href="{{ route('admin.story.index') }}"><h3 class="fw-bold">YukNulis</h3></a>
     @guest
         <div class="d-flex gap-3">
           <a href="{{ route('admin.login.page') }}" class="btn btn-primary">Masuk</a>
@@ -14,10 +14,10 @@
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
           <ul class="navbar-nav me-auto mb-2 mb-lg-0">
             <li class="nav-item">
-              <a class="nav-link {{ request()->is('admin/home') ? 'active' : '' }}" href="{{ route('admin.home') }}">Beranda</a>
+              <a class="nav-link {{ request()->is('admin/stories*') || request()->is('admin/episode*') ? 'active' : '' }}" href="{{ route('admin.story.index') }}">Cerita</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link {{ request()->is('admin/categories') ? 'active' : '' }}" href="{{ route('admin.category.index') }}">Kategori</a>
+              <a class="nav-link {{ request()->is('admin/categories*') ? 'active' : '' }}" href="{{ route('admin.category.index') }}">Kategori</a>
             </li>
             <li class="nav-item">
               <a class="nav-link" href="">Pengguna</a>

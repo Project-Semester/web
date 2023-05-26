@@ -2,7 +2,9 @@
 
 use App\Http\Controllers\Admin\AuthController;
 use App\Http\Controllers\Admin\CategoryController;
+use App\Http\Controllers\Admin\EpisodeController;
 use App\Http\Controllers\Admin\HomeController;
+use App\Http\Controllers\Admin\StoryController;
 use App\Http\Controllers\LandingController;
 use Illuminate\Support\Facades\Route;
 use PharIo\Manifest\Author;
@@ -32,7 +34,10 @@ Route::prefix('/admin')->group(function () {
     });
 
     Route::middleware('isAdmin')->group(function () {
-        Route::get('/home', [HomeController::class, 'index'])->name('admin.home');
+        Route::get('/stories', [StoryController::class, 'index'])->name('admin.story.index');
+        Route::get('/stories/{story}', [StoryController::class, 'show'])->name('admin.story.show');
+
+        Route::get('/episodes/{episode}', [EpisodeController::class, 'show'])->name('admin.episode.show');
 
         Route::prefix('/categories')->group(function () {
             Route::get('/', [CategoryController::class, 'index'])->name('admin.category.index');

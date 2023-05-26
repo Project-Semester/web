@@ -39,7 +39,7 @@ class AuthController extends Controller
 
         $request->session()->regenerate();
 
-        return redirect()->route('admin.home');
+        return redirect()->route('admin.story.index');
     }
 
     public function create(): View
