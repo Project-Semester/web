@@ -18,9 +18,9 @@ use PharIo\Manifest\Author;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+// Route::get('/', function () {
+//     return view('welcome');
+// });
 
 Route::prefix('/admin')->group(function () {
     Route::middleware('guestAdmin')->group(function () {
@@ -49,8 +49,8 @@ Route::prefix('/admin')->group(function () {
 });
 
 Route::get('/', function () {
-    return view('author/landing');
-})->name('landing');
+    return view('landing');
+})->name('welcome');
 
 Route::get('/home', function () {
     return view('author/home');
@@ -75,4 +75,7 @@ Route::get('/bacacerita', function () {
 Route::get('/profil', function () {
     return view('author/profil');
 })->name('profil');
+
+Route::get('/login', [AuthController::class, 'index'])->name('author.login.page');
+Route::get('/register', [AuthController::class, 'index'])->name('author.register.page');
 

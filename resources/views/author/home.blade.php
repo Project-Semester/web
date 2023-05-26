@@ -9,7 +9,7 @@
       <div class="card text-bg-dark">
         <div class="card-body">
           <br>
-          <h1>Selamat Datang, User!</h1>
+          <h1 style="padding-left: 5px">Selamat Datang, User!</h1>
           <hr class="solid">
         </div>
         <br>
@@ -19,27 +19,27 @@
             <div class="row">
               <div class="col">
                 <div class="text-center overflow-hidden">
-                  <img src="/wp1.jpg" class="img-fluid rounded" alt="">
+                  <img src="{{ url('assets/wp1.jpg')}}" class="img-fluid rounded" alt="">
                 </div>
               </div>
               <div class="col">
                 <div class="text-center">
-                  <a href="bacacerita"><img src="{{ asset('/wp2.jpg') }}" class="rounded-full" alt=""></a>
+                  <a href="bacacerita"><img src="{{ url('assets/wp2.jpg') }}" class="rounded-full" alt=""></a>
                 </div>
               </div>
               <div class="col">
                 <div class="text-center">
-                  <img src="/wp3.jpg" class="rounded" alt="">
+                  <img src="{{ url('assets/wp3.jpg') }}" class="rounded" alt="">
                 </div>
               </div>
               <div class="col">
                 <div class="text-center">
-                  <img src="/wp4.jpg" class="rounded" alt="">
+                  <img src="{{ url('assets/wp4.jpg') }}" class="rounded" alt="">
                 </div>
               </div>
               <div class="col">
                 <div class="text-center">
-                  <img src="/wp5.jpg" class="rounded" alt="">
+                  <img src="{{ url('assets/wp5.jpg') }}" class="rounded" alt="">
                 </div>
               </div>
             </div>

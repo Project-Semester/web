@@ -18,22 +18,22 @@
           </ul>
           <ul class="navbar-nav ms-md-auto">
             <div class="d-flex gap-3" style="padding-right: 10px;">
-            <li class="nav-item" style="padding-top: 8px;">
-              <a class="nav-link" href="tambahcerita">Tambah Cerita<i class="bi bi-plus-circle" style="padding-left: 10px"></i></a>
-            </li>
-            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar-list-4" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-              <span class="navbar-toggler-icon"></span>
-            </button>
-            <li class="nav-item dropdown">
-              <a class="nav-link dropdown-toggle" href="#" id="themes" data-bs-toggle="dropdown"
-              data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-              <img src="/46r.jpg" width="40" height="40" class="rounded-circle"></a>
-              <div class="dropdown-menu" aria-labelledby="themes">
-                <a class="dropdown-item" href="home">Dashboard</a>
-                <a class="dropdown-item" href="profil">Profil Saya</a>
-                <a class="dropdown-item" href="#">Log Out</a>
-              </div>
-            </li>
+              <li class="nav-item" style="padding-top: 8px;">
+                <a class="nav-link" href="tambahcerita">Tambah Cerita<i class="bi bi-plus-circle" style="padding-left: 10px"></i></a>
+              </li>
+              <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar-list-4" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+              </button>
+              <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="#" id="themes" data-bs-toggle="dropdown"
+                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <img src="{{ url('assets/46r.jpg') }}" width="40" height="40" class="rounded-circle"></a>
+                <div class="dropdown-menu" aria-labelledby="themes">
+                  <a class="dropdown-item" href="home">Dashboard</a>
+                  <a class="dropdown-item" href="profil">Profil Saya</a>
+                  <a class="dropdown-item" href="#">Log Out</a>
+                </div>
+              </li>
             </div>
           </ul>
         </div>

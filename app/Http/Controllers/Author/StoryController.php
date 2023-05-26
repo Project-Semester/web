@@ -56,7 +56,10 @@ class StoryController extends Controller
      */
     public function show(string $id)
     {
+        $stories = Story::findOrFail($id);
+        $komentar = $stories->komentar;
 
+        return view('bacaCerita', compact('stories', 'komentar'));
     }
 
     /**

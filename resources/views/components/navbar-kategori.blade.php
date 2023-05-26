@@ -23,7 +23,7 @@
             <li class="nav-item dropdown">
               <a class="nav-link dropdown-toggle" href="#" id="themes" data-bs-toggle="dropdown"
               data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-              <img src="/46r.jpg" width="40" height="40" class="rounded-circle"></a>
+              <img src="{{ url('assets/46r.jpg') }}" width="40" height="40" class="rounded-circle"></a>
               <div class="dropdown-menu" aria-labelledby="themes">
                 <a class="dropdown-item" href="home">Dashboard</a>
                 <a class="dropdown-item" href="profil">Profil Saya</a>

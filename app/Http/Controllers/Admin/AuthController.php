@@ -61,7 +61,7 @@ class AuthController extends Controller
             return back()->with('failed', 'Registrasi anda gagal!');
         }
 
-        return redirect()->route('auhtor.login');
+        return redirect()->route('admin.login.page');
     }
 
     public function logout(): RedirectResponse
@@ -71,6 +71,6 @@ class AuthController extends Controller
         request()->session()->invalidate();
         request()->session()->regenerateToken();
 
-        return redirect()->route('author.login');
+        return redirect()->route('admin.login.page');
     }
 }
