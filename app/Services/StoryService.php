@@ -2,6 +2,7 @@
 
 namespace App\Services;
 
+use App\Models\Category;
 use App\Models\Story;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Http\UploadedFile;
@@ -62,6 +63,13 @@ class StoryService
         ])->loadCount(['episodes', 'comments', 'likes', 'visits as views']);
 
         return $story;
+    }
+
+    public static function findStoriesByCategory(Category $category): Collection
+    {
+        $stories = Story::with('user')->where('category_id', $category->id)->orderBy('title')->get();
+
+        return $stories;
     }
 
     /**

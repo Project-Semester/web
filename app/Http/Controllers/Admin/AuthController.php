@@ -6,8 +6,8 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\LoginUserRequest;
 use App\Http\Requests\RegisterUserRequest;
 use App\Services\AuthService;
+use Illuminate\Contracts\View\View;
 use Illuminate\Http\RedirectResponse;
-use Illuminate\View\View;
 
 class AuthController extends Controller
 {
@@ -20,7 +20,7 @@ class AuthController extends Controller
 
     public function index(): View
     {
-        return view('admin.login');
+        return view('admin.auth.login');
     }
 
     public function authenticate(LoginUserRequest $request): RedirectResponse
@@ -44,7 +44,7 @@ class AuthController extends Controller
 
     public function create(): View
     {
-        return view('admin.register');
+        return view('admin.auth.register');
     }
 
     public function register(RegisterUserRequest $request): RedirectResponse

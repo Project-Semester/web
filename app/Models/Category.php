@@ -30,6 +30,7 @@ class Category extends Authenticatable
 
     protected $fillable = [
         'name',
+        'description',
     ];
 
     public function toSearchableArray(): array

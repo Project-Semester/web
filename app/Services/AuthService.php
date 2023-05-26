@@ -13,11 +13,7 @@ class AuthService
      */
     public static function login(array $creadentials): bool
     {
-        if (! auth()->attempt($creadentials)) {
-            return false;
-        }
-
-        return true;
+        return auth()->attempt($creadentials);
     }
 
     /**
@@ -59,8 +55,6 @@ class AuthService
      */
     public static function logout(Authenticatable $user): bool
     {
-        $response = $user->currentAccessToken()->delete();
-
-        return $response;
+        return $user->currentAccessToken()->delete();
     }
 }

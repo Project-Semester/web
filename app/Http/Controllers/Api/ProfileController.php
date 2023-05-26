@@ -7,6 +7,8 @@ use App\Http\Requests\UpdateUserRequest;
 use App\Models\User;
 use App\Services\UserService;
 use App\Traits\HttpResponses;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Validator;
 use Illuminate\Validation\Rules\Password;
 
 class ProfileController extends Controller
@@ -92,4 +94,36 @@ class ProfileController extends Controller
 
         return $this->success($user, 'This is your updated profile');
     }
+
+    // public function gantiKataSandi(Request $request)
+    // {
+    //     /*
+    //     [
+    //         'current_password' => 'password_lama',
+    //         'password => 'password_baru',
+    //         'password_confirmation => 'password_baru',
+    //     ]
+    //     */
+
+    //     $validator = Validator::make($request->all(), [
+    //         'current_password' => 'required|current_password:web',
+    //         'password' => [
+    //             'sometimes',
+    //             'confirmed',
+    //             Password::min(8)
+    //                 ->letters()
+    //                 ->mixedCase()
+    //                 ->numbers()
+    //                 ->symbols()
+    //                 ->uncompromised(),
+    //         ],
+    //     ]);
+
+    //     $validated = $validator->validated();
+    //     $user = auth()->user();
+
+    //     $user->updateOrFail([
+    //         'password' => bcrypt($validated['password'])
+    //     ]);
+    // }
 }
