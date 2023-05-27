@@ -18,28 +18,48 @@
           <div class="container text-center">
             <div class="row">
               <div class="col">
-                <div class="text-center overflow-hidden">
-                  <img src="{{ url('assets/wp1.jpg')}}" class="img-fluid rounded" alt="">
+                <div class="text-center">
+                  <div class="card text-bg-light">
+                    <div class="card-body d-flex">
+
+                    </div>
+                  </div>
                 </div>
               </div>
               <div class="col">
                 <div class="text-center">
-                  <a href="bacacerita"><img src="{{ url('assets/wp2.jpg') }}" class="rounded-full" alt=""></a>
+                  <div class="card text-bg-light">
+                    <div class="card-body d-flex">
+                      
+                    </div>
+                  </div>
                 </div>
               </div>
               <div class="col">
                 <div class="text-center">
-                  <img src="{{ url('assets/wp3.jpg') }}" class="rounded" alt="">
+                  <div class="card text-bg-light">
+                    <div class="card-body d-flex">
+
+                    </div>
+                  </div>
                 </div>
               </div>
               <div class="col">
                 <div class="text-center">
-                  <img src="{{ url('assets/wp4.jpg') }}" class="rounded" alt="">
+                  <div class="card text-bg-light">
+                    <div class="card-body d-flex">
+
+                    </div>
+                  </div>
                 </div>
               </div>
               <div class="col">
                 <div class="text-center">
-                  <img src="{{ url('assets/wp5.jpg') }}" class="rounded" alt="">
+                  <div class="card text-bg-light">
+                    <div class="card-body d-flex">
+
+                    </div>
+                  </div>
                 </div>
               </div>
             </div>

@@ -5,6 +5,8 @@ use App\Http\Controllers\Admin\CategoryController;
 use App\Http\Controllers\Admin\EpisodeController;
 use App\Http\Controllers\Admin\HomeController;
 use App\Http\Controllers\Admin\StoryController;
+use App\Http\Controllers\Author\AuthCategoryController;
+use App\Http\Controllers\Author\StoryController as AuthorStoryController;
 use App\Http\Controllers\LandingController;
 use Illuminate\Support\Facades\Route;
 use PharIo\Manifest\Author;
@@ -69,9 +71,11 @@ Route::get('/tuliscerita', function () {
     return view('author/tulisCerita');
 })->name('tulisCerita');
 
-Route::get('/kategoricerita', function () {
-    return view('author/kategoriCerita');
-})->name('kategoriCerita');
+Route::prefix('/kategori')->group(function () {
+    Route::get('/', [AuthCategoryController::class, 'index'])->name('author.kategori.index');
+    Route::get('/{category}', [AuthCategoryController::class, 'show'])->name('author.kategori.show');
+    Route::get('/stories/{story}', [AuthorStoryController::class, 'show'])->name('author.story.show');
+});
 
 Route::get('/bacacerita', function () {
     return view('author/bacaCerita');
@@ -80,6 +84,10 @@ Route::get('/bacacerita', function () {
 Route::get('/profil', function () {
     return view('author/profil');
 })->name('profil');
+
+Route::get('/tambahepisode', function () {
+    return view('author/episode/add-episode');
+})->name('add-episode');
 
 Route::get('/login', [AuthController::class, 'index'])->name('author.login.page');
 Route::get('/register', [AuthController::class, 'index'])->name('author.register.page');

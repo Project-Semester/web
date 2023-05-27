@@ -6,15 +6,7 @@
         </button>
         <div class="collapse navbar-collapse" id="navbarResponsive">
           <ul class="navbar-nav">
-            <li class="nav-item dropdown">
-              <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" id="themes">Kategori</a>
-              <div class="dropdown-menu" aria-labelledby="themes">
-                <a class="dropdown-item">Pilih Kategori</a>
-                <div class="dropdown-divider"></div>
-                @foreach (\App\Models\Category::pluck('name','id') as $key)
-                  <a class="dropdown-item" href="">{{ $key }}</a>
-                @endforeach
-              </div>
+              <a class="nav-link"  href="kategori" >Kategori</a>
           </ul>
           <ul class="navbar-nav ms-md-auto">
             <div class="d-flex gap-3" style="padding-right: 10px;">

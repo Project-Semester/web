@@ -9,8 +9,8 @@
         <div class="card-body text-center">
             <img src="{{ url('assets/46r.jpg') }}" width="180" height="180" class="rounded-circle"></a>
             <div class="container text-center" style="padding-top: 5px;">
-            <h5>Mohamad Taufiq Rahmadi</h5>
-            <p>user@email.com<p>
+            <h3 class="text-white fw-bold me-2 text-center">Nama</h3>
+            <p class="text-white text-center">email</p>
             <button class="btn btn-outline-light btn-sm" data-bs-toggle="modal" data-bs-target="#exampleModal"><i class="bi bi-pencil" style="padding-right: 10px"></i>Edit profil</button>
             </div>
         </div>
@@ -18,7 +18,14 @@
     <div class="container" style="padding-top: 20px;">
         <div class="card text-bg-dark">
             <div class="card-body">
-                <h3 style="padding-left: 20px;">Daftar ceritamu</h3>
+                <div class="row justify-content-between">
+                  <div class="col-4">
+                    <h3 style="padding-left:40px;">Daftar ceritamu</h3>
+                  </div>
+                  <div class="col-4" style="padding-left: 200px">
+                    <button type="button" class="btn btn-outline-secondary" data-bs-toggle="modal" data-bs-target="#addepisode" fdprocessedid="f48mc9">Tambah Episode<i class="bi bi-plus-circle" style="padding-left: 10px"></i></button>
+                  </div>
+                </div>
                 <hr class="solid">
                 <div class="container">
                     <div class="row" style="padding-left: 350px;">
@@ -72,7 +79,7 @@
         </div>
     </div>
 
-    <!-- Modal -->
+    <!-- Modal Edit Profil-->
     <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
       <div class="modal-dialog">
         <div class="modal-content">
@@ -93,6 +100,31 @@
           <div class="modal-footer">
             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
             <button type="button" class="btn btn-primary">Save changes</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Modal Tambah Episode-->
+    <div class="modal fade" id="addepisode" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h1 class="modal-title fs-5" id="exampleModalLabel">Pilih ceritamu</h1>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body">
+            <div class="card text-bg-dark">
+              <div class="card-body">
+                
+              </div>
+            </div>
+            <br>
+            <div class="card text-bg-dark">
+              <div class="card-body">
+                
+              </div>
+            </div>
           </div>
         </div>
       </div>

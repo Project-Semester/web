@@ -12,7 +12,7 @@
             <div class="card text-bg-dark">
               <div class="card-body">
                 <div class="col">
-                  <img src="/wp1.jpg" class="rounded" alt="">
+                  <a href=""><i class="bi bi-plus"></i></a>
                 </div>
               </div>
             </div>
@@ -33,10 +33,10 @@
                   </div>
                 <h5>Pilih Kategori</h5>
                 <select class="form-select" aria-label="Default select example">
-                  <option selected>Pilih kategori</option>
-                  <option value="1">One</option>
-                  <option value="2">Two</option>
-                  <option value="3">Three</option>
+                  @foreach (\App\Models\Category::pluck('name', 'id') as $key)
+                  <option hidden selected>Pilih kategori</option>
+                  <option value="">{{ $key }}</option>>
+                  @endforeach
                 </select>
                 <br>
               </div>

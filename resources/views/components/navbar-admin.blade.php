@@ -1,6 +1,6 @@
 <nav class="navbar navbar-expand-lg fixed-top navbar-dark bg-dark">
   <div class="container">
-    <a class="navbar-brand" href="{{ route('admin.story.index') }}"><h3 class="fw-bold">YukNulis</h3></a>
+    <a class="navbar-brand" href=""><h3 class="fw-bold">YukNulis</h3></a>
     @guest
         <div class="d-flex gap-3">
           <a href="{{ route('admin.login.page') }}" class="btn btn-primary">Masuk</a>

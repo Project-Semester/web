@@ -8,6 +8,7 @@ use App\Services\StoryService;
 use Illuminate\Contracts\View\View;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class StoryController extends Controller
 {
@@ -38,9 +39,27 @@ class StoryController extends Controller
     /**
      * Show the form for creating a new resource.
      */
-    public function create()
+    public function create(Request $request)
     {
-        //
+        // Validasi input
+        $request->validate([
+            'title' => 'required',
+            'synopsis' => 'required',
+            'episode' => 'required',
+            'category' => 'required',
+            'isi_cerita' => 'required'
+        ]);
+
+        // Simpan artikel baru ke dalam database
+        $story = new Story;
+        $story->user_id = Auth::id(); // Mengambil id pengguna yang sedang terautentikasi
+        $story->title = $request->input('title');
+        $story->synopsis = $request->input('synopsis');
+        $story->tanggal = now(); // Menggunakan fungsi now() untuk mendapatkan tanggal dan waktu saat ini
+        $story->save();
+
+        // Redirect atau lakukan tindakan lainnya (sesuai kebutuhan aplikasi)
+        return redirect()->route('author.tulisCerita', 'author.tambahcerita');
     }
 
     /**
@@ -54,12 +73,13 @@ class StoryController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(string $id)
+    public function show(Story $story)
     {
-        $stories = Story::findOrFail($id);
-        $komentar = $stories->komentar;
-
-        return view('bacaCerita', compact('stories', 'komentar'));
+        $result = StoryService::findStoryById($story);
+        
+        return view('author.story.show', [
+            'story' => $result
+        ]);
     }
 
     /**

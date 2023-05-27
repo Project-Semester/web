@@ -14,7 +14,7 @@
                         <strong class="fw-bold">Maaf,</strong> {{ session('failed') }}
                     </div>
                 @endif
-                <livewire:author.login-form />
+                <livewire:author.loginform />
             </div>
         </div>
     </div>
