@@ -8,7 +8,6 @@ use App\Http\Requests\UpdateCategoryRequest;
 use App\Models\Category;
 use App\Services\CategoryService;
 use Illuminate\Contracts\View\View;
-use Illuminate\Http\Request;
 
 class CategoryController extends Controller
 {
@@ -84,7 +83,9 @@ class CategoryController extends Controller
             return back()->with('failed', 'Kategori gagal diubah!');
         }
 
-        if (! $result) return back()->with('failed', 'Kategori gagal diubah!');
+        if (! $result) {
+            return back()->with('failed', 'Kategori gagal diubah!');
+        }
 
         return redirect()->route('admin.category.show', $category->id);
     }
@@ -100,7 +101,9 @@ class CategoryController extends Controller
             return back()->with('failed', 'Kategori gagal dihapus!');
         }
 
-        if (! $result) return back()->with('failed', 'Kategori gagal dihapus!');
+        if (! $result) {
+            return back()->with('failed', 'Kategori gagal dihapus!');
+        }
 
         return redirect()->route('admin.category.index');
     }

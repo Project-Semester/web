@@ -7,6 +7,7 @@ use Livewire\Component;
 class CategoryForm extends Component
 {
     public string $name;
+
     public string $description;
 
     protected $rules = [

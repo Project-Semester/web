@@ -3,6 +3,7 @@
 namespace App\Services;
 
 use App\Models\User;
+use Illuminate\Contracts\Auth\Authenticatable;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Http\UploadedFile;
 use Illuminate\Support\Facades\Storage;
@@ -50,6 +51,21 @@ class UserService
      * @param  UploadedFile  $photo
      */
     public static function changeUser(array $request, ?UploadedFile $photo, User $user): User
+    {
+        if ($photo) {
+            if ($user->photo) {
+                Storage::move($user->photo, $photo);
+            }
+
+            $request['photo'] = $photo->store('photo');
+        }
+
+        $user->updateOrFail($request);
+
+        return $user;
+    }
+
+    public static function changeUserProfile(array $request, ?UploadedFile $photo, Authenticatable $user): Authenticatable
     {
         if ($photo) {
             if ($user->photo) {

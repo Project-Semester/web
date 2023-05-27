@@ -23,7 +23,7 @@ class UpdateCategoryRequest extends FormRequest
     {
         return [
             'name' => 'sometimes|string|min:3|unique:categories,name',
-            'description' => 'sometimes|string|min:12'
+            'description' => 'sometimes|string|min:12',
         ];
     }
 }

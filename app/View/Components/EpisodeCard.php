@@ -16,7 +16,8 @@ class EpisodeCard extends Component
         public Episode $episode,
         public bool $link = false,
         public bool $body = false
-    ) {}
+    ) {
+    }
 
     /**
      * Get the view / contents that represent the component.
