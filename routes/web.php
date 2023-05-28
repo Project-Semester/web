@@ -1,9 +1,10 @@
 <?php
 
 use App\Http\Controllers\Admin\AuthController;
+use App\Http\Controllers\Admin\AuthorController;
 use App\Http\Controllers\Admin\CategoryController;
 use App\Http\Controllers\Admin\EpisodeController;
-use App\Http\Controllers\Admin\HomeController;
+use App\Http\Controllers\Admin\ProfileController;
 use App\Http\Controllers\Admin\StoryController;
 use App\Http\Controllers\Author\AuthCategoryController;
 use App\Http\Controllers\Author\AuthController as AuthorAuthController;
@@ -50,6 +51,15 @@ Route::prefix('/admin')->group(function () {
             Route::get('/{category}/edit', [CategoryController::class, 'edit'])->name('admin.category.edit');
             Route::patch('/{category}', [CategoryController::class, 'update'])->name('admin.category.update');
             Route::delete('/{category}', [CategoryController::class, 'destroy'])->name('admin.category.destroy');
+        });
+
+        Route::prefix('/authors')->group(function () {
+            Route::get('/', [AuthorController::class, 'index'])->name('admin.author.index');
+        });
+
+        Route::prefix('/profile')->group(function () {
+            Route::get('/', [ProfileController::class, 'index'])->name('admin.profile.index');
+            Route::patch('/{user}', [ProfileController::class, 'update'])->name('admin.profile.update');
         });
 
         Route::get('/logout', [AuthController::class, 'logout'])->name('admin.logout');

@@ -31,15 +31,15 @@ class AuthController extends Controller
         }
 
         if (! $response) {
-            return $this->error("Login Fail!");
+            return $this->error('Login Fail!');
         }
-        
+
         $user = auth()->user();
-        
+
         if ($user->role !== 'author') {
             $this->service->logout($user);
-            
-            return $this->error("Login Fail!");
+
+            return $this->error('Login Fail!');
         }
 
         $token = $user->createToken('API Token of '.$user->username)->plainTextToken;

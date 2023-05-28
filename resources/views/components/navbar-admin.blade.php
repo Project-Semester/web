@@ -20,11 +20,11 @@
               <a class="nav-link {{ request()->is('admin/categories*') ? 'active' : '' }}" href="{{ route('admin.category.index') }}">Kategori</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="">Pengguna</a>
+              <a class="nav-link {{ request()->is('admin/authors*') ? 'active' : '' }}" href="{{ route('admin.author.index') }}">Penulis</a>
             </li>
           </ul>
           <div class="d-flex">
-            <a href="" class="text-decoration-none">
+            <a href="{{ route('admin.profile.index') }}" class="text-decoration-none">
               <span class="text-white text-uppercase fw-bold me-2">{{ auth()->user()->username }}</span>
               @if (auth()->user()->photo)
                 <span class="overflow-hidden ">
