@@ -1,4 +1,4 @@
-@extends('layouts.author')
+@extends('layouts.app')
 
 @push('styles')
     @livewireStyles

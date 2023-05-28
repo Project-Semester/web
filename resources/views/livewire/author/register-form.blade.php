@@ -1,7 +1,7 @@
 <div>
     <div class="card text-bg-dark">
         <div class="card-body">
-            <form action="{{ route('auth.register') }}" method="POST" autocomplete="off">
+            <form action="{{ route('author.register') }}" method="POST" autocomplete="off">
                 @csrf
                 <div class="form-group mb-4">
                     <label class="col-form-label mb-2" for="username">Username</label>

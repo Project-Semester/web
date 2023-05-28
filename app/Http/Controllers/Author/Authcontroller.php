@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Author;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\LoginUserRequest;
@@ -10,7 +10,7 @@ use Illuminate\Http\RedirectResponse;
 use Illuminate\View\View;
 use Illuminate\Http\Request;
 
-class Authcontroller extends Controller
+class AuthController extends Controller
 {
     private $service;
 
@@ -21,7 +21,7 @@ class Authcontroller extends Controller
 
     public function index(): View
     {
-        return view('auhtor.login');
+        return view('author.auth.login');
     }
 
     public function authenticate(LoginUserRequest $request): RedirectResponse
@@ -45,7 +45,7 @@ class Authcontroller extends Controller
 
     public function create(): View
     {
-        return view('author.register');
+        return view('author.auth.register');
     }
 
     public function register(RegisterUserRequest $request): RedirectResponse

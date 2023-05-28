@@ -1,7 +1,7 @@
 <div>
     <div class="card text-bg-dark">
         <div class="card-body">
-            <form action="{{ route('auth.login') }}" method="POST" autocomplete="off">
+            <form action="{{ route('author.login') }}" method="POST" autocomplete="off">
                 @csrf
                 <div class="form-group mb-4">
                     <label class="col-form-label mb-2" for="email">E-mail</label>
