@@ -32,7 +32,7 @@ class RegisterUserRequest extends FormRequest
     {
         return [
             'username' => ['required', 'string', 'max:255'],
-            'photo' => ['sometimes', 'nullable', 'image', 'file', 'max:2048'],
+            'photo' => ['image', 'file', 'max:2048'],
             'email' => ['required', 'email:dns', 'unique:users,email', 'string'],
             'password' => [
                 'required',
