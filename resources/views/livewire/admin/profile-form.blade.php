@@ -1,7 +1,8 @@
 <div class="col-md-6">
     <div class="card text-bg-dark border">
-        <div class="card-header">
+        <div class="card-header d-flex justify-content-between">
             <h4>Ubah Profile Pengguna</h4>
+            <a href="{{ route('admin.logout') }}" class="btn btn-outline-danger">Keluar</a>
         </div>
         <div class="card-body">
             <form action="{{ route('admin.profile.update', auth()->id()) }}" method="POST" autocomplete="off">

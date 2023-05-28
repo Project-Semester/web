@@ -29,7 +29,7 @@ class AuthService
 
         $user = User::create([
             'username' => $input['username'],
-            'photo' => $input['photo'],
+            'photo' => $photo ? $input['photo'] : null,
             'email' => $input['email'],
             'role' => 'author',
             'password' => bcrypt($input['password']),
