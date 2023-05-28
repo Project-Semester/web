@@ -1,4 +1,4 @@
-<div>
+<div style="padding-top: 50px">
     <div class="card text-bg-dark">
         <div class="card-body">
             <form action="{{ route('author.register') }}" method="POST" autocomplete="off">
@@ -17,6 +17,13 @@
                         <div class="invalid-feedback">{{ $message }}</div>
                     @enderror
                 </div>
+                <div class="form-group mb-4">
+                    <label for="formFile" class="form-label mb-2">Input File Photo</label>
+                    <input type="file"  class="form-control @if ($errors->has('photo')) is-invalid @elseif($photo == null) @else is-valid @endif" id="formFile" wire:model='photo'>
+                    @error('photo')
+                        <div class="invalid-feedback">{{ $message }}</div>
+                    @enderror
+                  </div>
                 <div class="form-group mb-4">
                     <label class="col-form-label mb-2" for="password">Kata Sandi</label>
                     <input type="password" class="form-control @if ($errors->has('password')) is-invalid @elseif($password == null) @else is-valid @endif" id="password" name="password" wire:model='password'>

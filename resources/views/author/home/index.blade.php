@@ -4,12 +4,14 @@
     @livewireStyles
 @endpush
 
+@section('title', 'Home')
+
 @section('content')
     <div class="container" style="padding-top: 130px;">
       <div class="card text-bg-dark">
         <div class="card-body">
           <br>
-          <h1 style="padding-left: 5px">Selamat Datang, User!</h1>
+          <h1 style="padding-left: 5px">Selamat Datang, {{ auth()->user()->username }}</h1>
           <hr class="solid">
         </div>
         <br>

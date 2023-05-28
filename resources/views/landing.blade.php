@@ -8,12 +8,12 @@
   <div class="container" style="padding-top: 120px;">
     <div class="row">
       <div class="col-lg-8 col-md-7 col-sm-6">
-          <h1>Hai, Ini YUKNULIS!</h1>
+          <h1>Hai, Ini YukNulis.</h1>
           <br>
-          <h3>Platform sosial untuk bercerita yang paling</h3>
-          <h3>disukai</h3>
+          <h4>Platform sosial untuk menulis dan membaca sebuah</h4>
+          <h4>cerita yang telah ditulis</h4>
           <br>
-          <h5>YUKNULIS menghubungkan komuitas dari para pembaca dan penulis</h5>
+          <h5>YukNulis menghubungkan komuitas dari para pembaca dan penulis</h5>
           <h5>melalui ketukan cerita</h5>
       </div>
       <div class="col-sm-4" >

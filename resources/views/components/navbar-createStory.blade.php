@@ -16,7 +16,7 @@
                 </li>
                 </div>
                 <li class="nav-item">
-                  <a href="tuliscerita"><button class="btn btn-success">Next</button></a>
+                  <button class="btn btn-success" data-bs-target="#modalPublish" data-bs-toggle="modal">Publish</button>
                 </li>
             </div>
         </ul>

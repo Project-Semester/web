@@ -55,11 +55,14 @@ class StoryController extends Controller
         $story->user_id = Auth::id(); // Mengambil id pengguna yang sedang terautentikasi
         $story->title = $request->input('title');
         $story->synopsis = $request->input('synopsis');
+        $story->category = $request->input('category');
+        $story->episodes = $request->input('episode');
+        $story->isi_cerita = $request->input('isi_cerita');
         $story->tanggal = now(); // Menggunakan fungsi now() untuk mendapatkan tanggal dan waktu saat ini
         $story->save();
 
         // Redirect atau lakukan tindakan lainnya (sesuai kebutuhan aplikasi)
-        return redirect()->route('author.tulisCerita', 'author.tambahcerita');
+        return redirect()->route('author.tambahcerita');
     }
 
     /**

@@ -8,7 +8,6 @@ use App\Http\Requests\RegisterUserRequest;
 use App\Services\AuthService;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\View\View;
-use Illuminate\Http\Request;
 
 class AuthController extends Controller
 {
@@ -40,7 +39,7 @@ class AuthController extends Controller
 
         $request->session()->regenerate();
 
-        return redirect()->route('author.home');
+        return redirect()->route('author.home.index');
     }
 
     public function create(): View
@@ -76,3 +75,4 @@ class AuthController extends Controller
         return redirect()->route('author.login.page');
     }
 }
+

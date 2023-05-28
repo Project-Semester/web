@@ -19,11 +19,18 @@
               <li class="nav-item dropdown">
                 <a class="nav-link dropdown-toggle" href="#" id="themes" data-bs-toggle="dropdown"
                 data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                <img src="{{ url('assets/46r.jpg') }}" width="40" height="40" class="rounded-circle"></a>
+                @if (auth()->user()->photo)
+                  <span class="overflow-hidden ">
+                    <img src="{{ asset('/storage/'.auth()->user()->photo) }}" class="rounded-circle" alt="Profile Picture" width="60px" height="60px">
+                  </span>
+                @else
+                  <img src="https://via.placeholder.com/40x40.png/deddda/000000?Text=40x40" class="rounded-circle w-60" alt="">
+                @endif
+                </a>
                 <div class="dropdown-menu" aria-labelledby="themes">
                   <a class="dropdown-item" href="home">Dashboard</a>
                   <a class="dropdown-item" href="profil">Profil Saya</a>
-                  <a class="dropdown-item" href="#">Log Out</a>
+                  <a class="dropdown-item" href="logout">Log Out</a>
                 </div>
               </li>
             </div>

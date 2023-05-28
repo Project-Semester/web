@@ -8,6 +8,8 @@ use App\Http\Controllers\Admin\ProfileController;
 use App\Http\Controllers\Admin\StoryController;
 use App\Http\Controllers\Author\AuthCategoryController;
 use App\Http\Controllers\Author\AuthController as AuthorAuthController;
+use App\Http\Controllers\Author\HomeController;
+use App\Http\Controllers\Author\ProfileController as AuthorProfileController;
 use App\Http\Controllers\Author\StoryController as AuthorStoryController;
 use App\Http\Controllers\LandingController;
 use Illuminate\Support\Facades\Route;
@@ -76,17 +78,10 @@ Route::prefix('/author')->group(function () {
     });
 
     Route::middleware('isAuthor')->group(function () {
-        Route::get('/home', function () {
-            return view('author/home');
-        })->name('home');
-        
-        Route::get('/tambahcerita', function () {
-            return view('author/tambahCerita');
-        })->name('tambahCerita');
-        
-        Route::get('/tuliscerita', function () {
-            return view('author/tulisCerita');
-        })->name('tulisCerita');
+        Route::get('/home', [HomeController::class, 'index'])->name('author.home.index');
+        Route::get('/profil', [AuthorProfileController::class, 'index'])->name('author.profile.index');
+        Route::post('/tambahcerita', [AuthorStoryController::class, 'create'])->name('author.tambahcerita');
+        // Route::get('/profil', [AuthorProfileController::class, 'update'])->name('author.profile.update');
         
         Route::prefix('/kategori')->group(function () {
             Route::get('/', [AuthCategoryController::class, 'index'])->name('author.kategori.index');
@@ -98,17 +93,18 @@ Route::prefix('/author')->group(function () {
             return view('author/bacaCerita');
         })->name('bacaCerita');
         
-        Route::get('/profil', function () {
-            return view('author/profil');
-        })->name('profil');
         
         Route::get('/tambahepisode', function () {
             return view('author/episode/add-episode');
         })->name('add-episode');
-        
+
+        Route::get('/logout', [AuthorAuthController::class, 'logout'])->name('author.logout');
     });
+
     
 });
+
+
 
 Route::get('/', function () {
     return view('landing');

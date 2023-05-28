@@ -3,12 +3,16 @@
 namespace App\Http\Livewire\Author;
 
 use Livewire\Component;
+use Livewire\WithFileUploads;
 
 class RegisterForm extends Component
 {
+    use WithFileUploads;
     public string $username;
 
     public string $email;
+
+    public $photo;
 
     public string $password;
 
@@ -17,7 +21,7 @@ class RegisterForm extends Component
     protected $rules = [
         'username' => ['required', 'string', 'min:8'],
         'email' => ['required', 'email:dns', 'unique:users,email', 'string'],
-        'photo' => ['required', 'string'],
+        'photo' => ['image', 'file'],
         'password' => ['required', 'string', 'min:8'],
         'password_confirmation' => ['required', 'same:password'],
     ];
@@ -32,3 +36,4 @@ class RegisterForm extends Component
         return view('livewire.author.register-form');
     }
 }
+

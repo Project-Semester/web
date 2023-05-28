@@ -5,6 +5,8 @@
     @livewireStyles
 @endpush
 
+@section('title', 'Tambah Episode')
+
 @section('content')
     <div class="container" style="padding-top: 140px;">
         <div class="card text-bg-dark">

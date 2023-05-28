@@ -4,14 +4,22 @@
     @livewireStyles
 @endpush
 
+@section('title', 'Profil')
+
 @section('content')
     <div class="card text-bg-dark border-dark" style="padding-top: 65px;">
         <div class="card-body text-center">
-            <img src="{{ url('assets/46r.jpg') }}" width="180" height="180" class="rounded-circle"></a>
+          @if (auth()->user()->photo)
+          <span class="overflow-hidden ">
+            <img src="{{ asset('/storage/'.auth()->user()->photo) }}" class="rounded-circle" alt="Profile Picture" width="180px" height="180px">
+          </span>
+          @else
+          <img src="https://via.placeholder.com/40x40.png/deddda/000000?Text=40x40" class="rounded-circle w-60" alt="">
+          @endif
             <div class="container text-center" style="padding-top: 5px;">
-            <h3 class="text-white fw-bold me-2 text-center">Nama</h3>
-            <p class="text-white text-center">email</p>
-            <button class="btn btn-outline-light btn-sm" data-bs-toggle="modal" data-bs-target="#exampleModal"><i class="bi bi-pencil" style="padding-right: 10px"></i>Edit profil</button>
+            <h3 class="text-white fw-bold me-2 text-center">{{ auth()->user()->username }}</h3>
+            <p class="text-white text-center">{{ auth()->user()->email }}</p>
+            <button class="btn btn-outline-light btn-sm"><i class="bi bi-pencil" style="padding-right: 10px"></i>Edit profil</button>
             </div>
         </div>
     </div>
@@ -21,9 +29,6 @@
                 <div class="row justify-content-between">
                   <div class="col-4">
                     <h3 style="padding-left:40px;">Daftar ceritamu</h3>
-                  </div>
-                  <div class="col-4" style="padding-left: 200px">
-                    <button type="button" class="btn btn-outline-secondary" data-bs-toggle="modal" data-bs-target="#addepisode" fdprocessedid="f48mc9">Tambah Episode<i class="bi bi-plus-circle" style="padding-left: 10px"></i></button>
                   </div>
                 </div>
                 <hr class="solid">
