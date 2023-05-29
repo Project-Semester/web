@@ -1,4 +1,4 @@
-@extends('layouts.createStory')
+@extends('layouts.author')
 
 @push('styles')
     @livewireStyles

@@ -1,4 +1,4 @@
-  <div>
+  <div style="padding-top: 20px">
     <form action="{{ route('author.story.store') }}" method="POST" autocomplete="off">
       @csrf
       <div class="row">
@@ -49,29 +49,10 @@
                     @enderror
                   </select>
                   <br>
+                  <div class="d-flex justify-content-end">
+                    <button type="submit" class="btn btn-primary fw-bold w-20 mb-6">Yuk Publish</button>
+                  </div>
                 </div>
-            </div>
-          </div>
-        </div>
-      </div>
-      <div class="container" style="padding-top: 60px; ">
-        <div class="card text-bg-dark">
-          <div class="card-body">
-            <div class="col-lg-10" style="text-align: center; padding-left: 200px;">
-              <div class="container-center" >
-                <br>
-                <input type="text" class="form-control @if ($errors->has('episode')) is-invalid @elseif($episode == null) @else is-valid @endif" id="exampleFormControlInput1" placeholder="part tak berjudul">
-                @error('episode')
-                  <div class="invalid-feedback">{{ $message }}</div>
-                @enderror
-                <hr class="solid">
-                <div class="mb-5">
-                  <textarea class="form-control" id="exampleFormControlTextarea1" rows="40"></textarea>
-                  @error('isi_cerita')
-                    <div class="invalid-feedback">{{ $message }}</div>
-                  @enderror
-                </div>
-              </div>
             </div>
           </div>
         </div>
