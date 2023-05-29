@@ -78,10 +78,12 @@ Route::prefix('/author')->group(function () {
     });
 
     Route::middleware('isAuthor')->group(function () {
-        Route::get('/home', [HomeController::class, 'index'])->name('author.home.index');
+        Route::get('/stories', [AuthorStoryController::class, 'index'])->name('author.story.index');
+        Route::get('/addstories', [AuthorStoryController::class, 'create'])->name('author.story.create');
+        Route::post('/', [AuthorStoryController::class, 'store'])->name('author.story.store');
         Route::get('/profil', [AuthorProfileController::class, 'index'])->name('author.profile.index');
-        Route::post('/tambahcerita', [AuthorStoryController::class, 'create'])->name('author.tambahcerita');
         Route::post('/profil', [AuthorProfileController::class, 'update'])->name('author.profile.update');
+        
         
         Route::prefix('/kategori')->group(function () {
             Route::get('/', [AuthCategoryController::class, 'index'])->name('author.kategori.index');

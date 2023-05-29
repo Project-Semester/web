@@ -14,9 +14,10 @@
                     <strong class="fw-bold">Maaf,</strong> {{ session('failed') }}
                 </div>
             @endif
+            <livewire:author.profile-form :user="$user" />
         </div>
     </div>
-    <livewire:author.profile-form :user="$user" />
+    
 </div>
 @endsection
 
