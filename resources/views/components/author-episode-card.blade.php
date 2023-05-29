@@ -1,4 +1,7 @@
 <div class="col-12 col-md-10 col-lg-8 my-3">
+    <div class="d-flex justify-content-end" style="padding-top: 20px">
+        <a href="{{ route('author.episode.create') }}"><button type="submit" class="btn btn-primary fw-bold w-20 mb-6">Tambah Episode</button></a>
+    </div>
     <div class="card text-white bg-dark border">
         <div class="card-header py-3">
             @if ($link)

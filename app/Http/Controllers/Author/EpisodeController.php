@@ -9,6 +9,11 @@ use Illuminate\Http\Request;
 
 class EpisodeController extends Controller
 {
+    public function create()
+    {
+        return view('author.episode.create');
+    }
+
     public function show(Episode $episode)
     {
         try {

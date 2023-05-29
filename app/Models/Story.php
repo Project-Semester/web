@@ -35,6 +35,7 @@ class Story extends Authenticatable implements CanVisit
     protected $fillable = [
         'title',
         'synopsis',
+        'excerpt',
         'cover',
         'user_id',
         'category_id',

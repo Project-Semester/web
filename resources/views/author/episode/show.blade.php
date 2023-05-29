@@ -32,6 +32,7 @@
                 <x-author-episode-card :episode="$episode" link />
             @endforeach
         </div>
+        
     </div>
 @endsection
 

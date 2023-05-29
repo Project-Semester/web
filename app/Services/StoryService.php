@@ -24,6 +24,13 @@ class StoryService
         return $stories;
     }
 
+    public static function findPopularStories(): Collection
+    {
+        $stories = Story::with(['category', 'user', 'like'])->withCount(['episodes', 'comments', 'likes', 'visits as views'])->popularThisMonth()->orderBy('views', 'desc')->take(3)->get();
+        
+        return $stories;
+    }
+
     /**
      * Get all user's stories
      *
@@ -86,6 +93,7 @@ class StoryService
         $story = Story::create([
             'title' => $request['title'],
             'synopsis' => $request['synopsis'],
+            'excerpt' => str()->excerpt($request['synopsis']),
             'cover' => $cover ? $request['cover'] : null,
             'user_id' => auth()->id(),
             'category_id' => $request['category_id'],

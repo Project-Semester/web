@@ -21,9 +21,12 @@ class StoryFactory extends Factory
      */
     public function definition(): array
     {
+        $synopsis = fake()->paragraph(5);
+
         return [
             'title' => fake()->sentence(),
-            'synopsis' => fake()->paragraph(5),
+            'synopsis' => $synopsis,
+            'excerpt' => str()->excerpt($synopsis),
             'user_id' => User::all()->random()->id,
             'category_id' => Category::all()->random()->id,
         ];
