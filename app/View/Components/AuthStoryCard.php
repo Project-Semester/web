@@ -9,17 +9,13 @@ use Illuminate\View\Component;
 
 class AuthStoryCard extends Component
 {
-    public Story $story;
-    public bool $option;
-
     /**
      * Create a new component instance.
      */
-    public function __construct($story, bool $option = false)
-    {
-        $this->story = $story;
-        $this->option = $option;
-    }
+    public function __construct(
+        public Story $story,
+        public bool $option = false)
+    {}
 
     /**
      * Get the view / contents that represent the component.

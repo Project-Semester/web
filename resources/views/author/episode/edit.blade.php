@@ -4,7 +4,7 @@
     @livewireStyles
 @endpush
 
-@section('title', 'Tambah Cerita')
+@section('title', 'Episode')
 
 @section('content')
     <div class="container-md my-5 py-5 px-5">
@@ -18,12 +18,10 @@
                 @endif
             </div>
         </div>
-        @dd($story)
-        <livewire:author.story-form />
+        <livewire:author.episode-edit-form :episode="$episode"  />
     </div>
 @endsection
 
 @push('scripts')
     @livewireScripts
 @endpush
-

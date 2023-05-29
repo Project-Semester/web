@@ -43,12 +43,13 @@ Route::middleware('isAuthor')->group(function () {
         Route::delete('/{story}', [AuthorStoryController::class, 'destroy'])->name('author.story.destroy');
     });
 
-    Route::prefix('/episodes')->group(function () {
-
-    });
-
-    Route::get('addepisode', [AuthorEpisodeController::class, 'create'])->name('author.episode.create');
-    Route::get('episode', [AuthorEpisodeController::class, 'show'])->name('author.episode.show');
+    Route::get('/stories/{story}/episodes', [AuthorEpisodeController::class, 'index'])->name('author.episode.index');
+    Route::get('/stories/{story}/episodes/create', [AuthorEpisodeController::class, 'create'])->name('author.episode.create');
+    Route::post('/stories/{story}/episodes', [AuthorEpisodeController::class, 'store'])->name('author.episode.store');
+    Route::get('/episodes/{episode}', [AuthorEpisodeController::class, 'show'])->name('author.episode.show');
+    Route::get('/episodes/{episode}/edit', [AuthorEpisodeController::class, 'edit'])->name('author.episode.edit');
+    Route::patch('/episodes/{episode}', [AuthorEpisodeController::class, 'update'])->name('author.episode.update');
+    Route::delete('/episodes/{episode}', [AuthorEpisodeController::class, 'destroy'])->name('author.episode.destroy');
 
     Route::get('/profil', [AuthorProfileController::class, 'index'])->name('author.profile.index');
     Route::post('/profil', [AuthorProfileController::class, 'update'])->name('author.profile.update');
