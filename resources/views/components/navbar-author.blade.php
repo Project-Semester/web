@@ -8,6 +8,9 @@
           <ul class="navbar-nav">
               <a class="nav-link"  href="kategori" >Kategori</a>
           </ul>
+          <ul class="navbar-nav">
+              <a class="nav-link"  href="stories" >Cerita</a>
+          </ul>
           <ul class="navbar-nav ms-md-auto">
             <div class="d-flex gap-3" style="padding-right: 10px;">
               <li class="nav-item" style="padding-top: 8px;">
@@ -28,7 +31,7 @@
                 @endif
                 </a>
                 <div class="dropdown-menu" aria-labelledby="themes">
-                  <a class="dropdown-item" href="home">Home</a>
+                  <a class="dropdown-item" href="stories">Home</a>
                   <a class="dropdown-item" href="profil">Profil Saya</a>
                   <a class="dropdown-item" href="logout">Log Out</a>
                 </div>

@@ -5,7 +5,7 @@
             <small class="ms-2 text-info">{{ $story->created_at->diffForHumans() }}</small>
         </div>
         <div class="card-body pb-5">
-            <a href="{{ route('author.story.show', 'author.profile.index', $story->id) }}" class="card-title text-decoration-none text-white fw-bold fs-5">{{ $story->title }}</a>
+            <a href="{{ route('author.story.show', $story->id) }}" class="card-title text-decoration-none text-white fw-bold fs-5">{{ $story->title }}</a>
             <p class="card-text mt-1">
                 {{ $story->synopsis }}
             </p>
