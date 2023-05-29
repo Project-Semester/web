@@ -13,7 +13,12 @@
         </button>
         <div class="collapse navbar-collapse" id="navbarResponsive">
           <ul class="navbar-nav">
-              <a class="nav-link {{ request()->is('/author/categories*') ? 'active' : '' }}" href="{{ route('author.category.index') }}">Kategori</a>
+              <li class="nav-item">
+                <a class="nav-link {{ request()->is('stories*') ? 'active' : '' }}" href="{{ route('author.story.index') }}">Cerita</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link {{ request()->is('categories*') ? 'active' : '' }}" href="{{ route('author.category.index') }}">Kategori</a>
+              </li>
           </ul>
           <ul class="navbar-nav ms-md-auto">
             <div class="d-flex gap-3" style="padding-right: 10px;">

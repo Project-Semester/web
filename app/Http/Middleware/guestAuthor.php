@@ -16,7 +16,7 @@ class guestAuthor
     public function handle(Request $request, Closure $next): Response
     {
         if (auth()->check()) {
-            return redirect()->route('author.home.index');
+            return redirect()->route('author.story.index');
         }
 
         return $next($request);
