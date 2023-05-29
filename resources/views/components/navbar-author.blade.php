@@ -6,10 +6,10 @@
         </button>
         <div class="collapse navbar-collapse" id="navbarResponsive">
           <ul class="navbar-nav">
-              <a class="nav-link"  href="kategori" >Kategori</a>
+              <a class="nav-link"  href="{{ route('author.kategori.index') }}" >Kategori</a>
           </ul>
           <ul class="navbar-nav">
-              <a class="nav-link"  href="stories" >Cerita</a>
+              <a class="nav-link"  href="{{ route('author.story.index') }}" >Cerita</a>
           </ul>
           <ul class="navbar-nav ms-md-auto">
             <div class="d-flex gap-3" style="padding-right: 10px;">
@@ -31,9 +31,9 @@
                 @endif
                 </a>
                 <div class="dropdown-menu" aria-labelledby="themes">
-                  <a class="dropdown-item" href="stories">Home</a>
-                  <a class="dropdown-item" href="profil">Profil Saya</a>
-                  <a class="dropdown-item" href="logout">Log Out</a>
+                  <a class="dropdown-item" href="{{ route('author.story.index') }}">Home</a>
+                  <a class="dropdown-item" href="{{ route('author.profile.index') }}">Profil Saya</a>
+                  <a class="dropdown-item" href="{{ route('author.logout') }}">Log Out</a>
                 </div>
               </li>
             </div>

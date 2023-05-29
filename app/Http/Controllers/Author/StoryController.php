@@ -47,12 +47,12 @@ class StoryController extends Controller
         $cover = $request->file('cover');
 
         try {
-            $stories = $this->service->addStory($validated, $cover);
+            $story = $this->service->addStory($validated, $cover);
         } catch (\Exception $error) {
             return back()->with('failed', 'Kategori gagal ditambah!');
         }
 
-        if (! $stories) {
+        if (! $story) {
             return back()->with('failed', 'Kategori gagal ditambah!');
         }
 
