@@ -19,7 +19,7 @@
                 </div>
                 <div class="form-group mb-4">
                     <label for="formFile" class="form-label mb-2">Input File Photo</label>
-                    <input type="file"  class="form-control @if ($errors->has('photo')) is-invalid @elseif($photo == null) @else is-valid @endif" id="formFile" wire:model='photo'>
+                    <input type="file" class="form-control @if ($errors->has('photo')) is-invalid @elseif($photo == null) @else is-valid @endif" id="formFile" name="photo" wire:model='photo'>
                     @error('photo')
                         <div class="invalid-feedback">{{ $message }}</div>
                     @enderror

@@ -22,7 +22,7 @@
                 </div>
                 <div class="row justify-content-end align-items-end">
                     <div class="col-7" style="padding-left: 50px">
-                        <button type="button" class="btn btn-outline-primary" fdprocessedid="xvilt">Submit Cerita</button>
+                        <button type="button" class="btn btn-primary" fdprocessedid="xvilt">Submit Cerita</button>
                     </div>
                 </div>
             </div>

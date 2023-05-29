@@ -92,3 +92,52 @@ Route::prefix('/admin')->group(function () {
         Route::get('/logout', [AuthController::class, 'logout'])->name('admin.logout');
     });
 });
+
+Route::prefix('/author')->group(function () {
+    Route::middleware('guestAuthor')->group(function () {
+        Route::redirect('/', '/author/login');
+        Route::get('/login', [AuthorAuthController::class, 'index'])->name('author.login.page');
+        Route::post('/login', [AuthorAuthController::class, 'authenticate'])->name('author.login');
+        Route::get('/register', [AuthorAuthController::class, 'create'])->name('author.register.page');
+        Route::post('/register', [AuthorAuthController::class, 'register'])->name('author.register');
+    });
+
+    Route::middleware('isAuthor')->group(function () {
+        Route::get('/stories', [AuthorStoryController::class, 'index'])->name('author.story.index');
+        Route::get('/addstories', [AuthorStoryController::class, 'create'])->name('author.story.create');
+        Route::post('/', [AuthorStoryController::class, 'store'])->name('author.story.store');
+        Route::get('/profil', [AuthorProfileController::class, 'index'])->name('author.profile.index');
+        Route::post('/profil', [AuthorProfileController::class, 'update'])->name('author.profile.update');
+        
+        
+        Route::prefix('/kategori')->group(function () {
+            Route::get('/', [AuthCategoryController::class, 'index'])->name('author.kategori.index');
+            Route::get('/{category}', [AuthCategoryController::class, 'show'])->name('author.kategori.show');
+            Route::get('/stories/{story}', [AuthorStoryController::class, 'show'])->name('author.story.show');
+        });
+        
+        Route::get('/bacacerita', function () {
+            return view('author/bacaCerita');
+        })->name('bacaCerita');
+        
+        
+        Route::get('/tambahepisode', function () {
+            return view('author/episode/add-episode');
+        })->name('add-episode');
+
+        Route::get('/logout', [AuthorAuthController::class, 'logout'])->name('author.logout');
+    });
+
+    
+});
+
+
+
+Route::get('/', function () {
+    return view('landing');
+})->name('welcome');
+
+
+
+
+
