@@ -39,9 +39,9 @@ Route::prefix('/author')->group(function () {
         Route::post('/tambahcerita', [AuthorStoryController::class, 'create'])->name('author.tambahcerita');
         // Route::get('/profil', [AuthorProfileController::class, 'update'])->name('author.profile.update');
 
-        Route::prefix('/kategori')->group(function () {
-            Route::get('/', [AuthCategoryController::class, 'index'])->name('author.kategori.index');
-            Route::get('/{category}', [AuthCategoryController::class, 'show'])->name('author.kategori.show');
+        Route::prefix('/categories')->group(function () {
+            Route::get('/', [AuthCategoryController::class, 'index'])->name('author.category.index');
+            Route::get('/{category}', [AuthCategoryController::class, 'show'])->name('author.category.show');
             Route::get('/stories/{story}', [AuthorStoryController::class, 'show'])->name('author.story.show');
         });
 

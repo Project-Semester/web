@@ -13,7 +13,7 @@
         </button>
         <div class="collapse navbar-collapse" id="navbarResponsive">
           <ul class="navbar-nav">
-              <a class="nav-link"  href="kategori" >Kategori</a>
+              <a class="nav-link {{ request()->is('/author/categories*') ? 'active' : '' }}" href="{{ route('author.category.index') }}">Kategori</a>
           </ul>
           <ul class="navbar-nav ms-md-auto">
             <div class="d-flex gap-3" style="padding-right: 10px;">

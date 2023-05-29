@@ -2,7 +2,7 @@
     <div class="card text-white bg-dark border rounded">
         <div class="card-body">
             <h5 class="card-title fw-bold">
-                <a href="{{ route('author.kategori.show', $id) }}" class="text-decoration-none text-white">{{ $name }}</a>
+                <a href="{{ route('author.category.show', $id) }}" class="text-decoration-none text-white">{{ $name }}</a>
             </h5>
             <p class="card-text">{{ $description }}</p>
         </div>
