@@ -123,8 +123,8 @@ class StoryService
      */
     public static function deleteStory(Story $story): bool
     {
-        Storage::delete($story->cover);
-
+        if ($story->cover) Storage::delete($story->cover);
+        
         return $story->deleteOrFail();
     }
 }

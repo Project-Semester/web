@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Author;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\StoreStoryRequest;
+use App\Http\Requests\UpdateStoryRequest;
 use App\Models\Story;
 use App\Services\StoryService;
 use Illuminate\Contracts\View\View;
@@ -72,16 +73,29 @@ class StoryController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(UpdateStoryRequest $request, Story $story)
     {
-        //
+        $validated = $request->validated();
+        $cover = $request->file('cover');
+
+        try {
+            StoryService::changeStory($validated, $cover, $story);
+        } catch (\Exception $error) {
+            return back()->with('failed', 'Cerita gagal diubah!');
+        }
+
+        return redirect()->route('author.story.show', $story->id);
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy(Story $story)
     {
-        //
+        $response = StoryService::deleteStory($story);
+
+        if (! $response) return back()->with('failed', 'Cerita gagal dihapus!');
+
+        return redirect()->route('author.story.index');
     }
 }

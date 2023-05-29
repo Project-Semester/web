@@ -2,6 +2,7 @@
 
 namespace App\Http\Livewire\Author;
 
+use App\Models\Story;
 use App\Services\CategoryService;
 use Livewire\Component;
 use Livewire\WithFileUploads;
@@ -9,19 +10,13 @@ use Livewire\WithFileUploads;
 class StoryEditForm extends Component
 {
     use WithFileUploads;
-    public string $title;
-    
-    public string $synopsis;
-
-    public $cover;
-    
-    public string $category_id;
+    public Story $story;
 
     protected $rules = [
-        'title' => ['required', 'string', 'max:225'],
-        'synopsis' => ['required', 'string'],
-        'cover' => ['nullable', 'image', 'file', 'max:2048'],
-        'category_id' => ['required', 'string', 'uuid'],
+        'story.title' => ['required', 'string', 'max:225'],
+        'story.synopsis' => ['required', 'string'],
+        'story.cover' => ['nullable', 'image', 'file', 'max:2048'],
+        'story.category_id' => ['required', 'string', 'uuid'],
     ];
 
     public function updated($propertyName)

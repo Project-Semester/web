@@ -24,7 +24,7 @@ class UpdateStoryRequest extends FormRequest
         return [
             'title' => ['sometimes', 'string', 'max:255'],
             'synopsis' => ['sometimes', 'string'],
-            'cover' => ['sometimes', 'image', 'file', 'max:2048'],
+            'cover' => ['sometimes', 'nullable', 'image', 'file', 'max:2048'],
             'category_id' => ['sometimes', 'string', 'uuid'],
         ];
     }

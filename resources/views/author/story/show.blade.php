@@ -20,7 +20,7 @@
         </div>
 
         <div class="row justify-content-center align-items-center">
-            <x-auth-story-card :story="$story" />
+            <x-auth-story-card :story="$story" :option=true/>
         </div>
 
         <div class="row justify-content-center align-items-center">
