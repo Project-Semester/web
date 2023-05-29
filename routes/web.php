@@ -8,7 +8,6 @@ use App\Http\Controllers\Admin\ProfileController;
 use App\Http\Controllers\Admin\StoryController;
 use App\Http\Controllers\Author\AuthCategoryController;
 use App\Http\Controllers\Author\AuthController as AuthorAuthController;
-use App\Http\Controllers\Author\HomeController;
 use App\Http\Controllers\Author\ProfileController as AuthorProfileController;
 use App\Http\Controllers\Author\StoryController as AuthorStoryController;
 use Illuminate\Support\Facades\Route;
@@ -45,18 +44,16 @@ Route::middleware('isAuthor')->group(function () {
 
     Route::get('/profil', [AuthorProfileController::class, 'index'])->name('author.profile.index');
     Route::post('/profil', [AuthorProfileController::class, 'update'])->name('author.profile.update');
-    
-    
+
     Route::prefix('/categories')->group(function () {
         Route::get('/', [AuthCategoryController::class, 'index'])->name('author.category.index');
         Route::get('/{category}', [AuthCategoryController::class, 'show'])->name('author.category.show');
     });
-    
+
     Route::get('/bacacerita', function () {
         return view('author/bacaCerita');
     })->name('bacaCerita');
-    
-    
+
     Route::get('/tambahepisode', function () {
         return view('author/episode/add-episode');
     })->name('add-episode');
@@ -101,8 +98,3 @@ Route::prefix('/admin')->group(function () {
         Route::get('/logout', [AuthController::class, 'logout'])->name('admin.logout');
     });
 });
-
-
-
-
-

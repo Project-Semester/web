@@ -6,7 +6,7 @@ use App\Services\CategoryService;
 use Livewire\Component;
 use Livewire\WithFileUploads;
 
-class StoryForm extends Component
+class StoryEditForm extends Component
 {
     use WithFileUploads;
     public string $title;
@@ -33,6 +33,6 @@ class StoryForm extends Component
     {
         $categories = CategoryService::findAll(null);
 
-        return view('livewire.author.story-form', compact('categories'));
+        return view('livewire.author.story-edit-form', compact('categories'));
     }
 }

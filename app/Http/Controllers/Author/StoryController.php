@@ -6,21 +6,12 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\StoreStoryRequest;
 use App\Models\Story;
 use App\Services\StoryService;
-use Illuminate\Auth\Events\Validated;
 use Illuminate\Contracts\View\View;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
 
 class StoryController extends Controller
 {
-    private StoryService $service;
-
-    public function __construct(StoryService $storyService)
-    {
-        $this->service = $storyService;
-    }
-
     /**
      * Display a listing of the resource.
      */
@@ -46,16 +37,16 @@ class StoryController extends Controller
         $cover = $request->file('cover');
 
         try {
-            $stories = $this->service->addStory($validated, $cover);
+            $story = StoryService::addStory($validated, $cover);
         } catch (\Exception $error) {
-            return back()->with('failed', 'Kategori gagal ditambah!');
+            return back()->with('failed', 'Cerita gagal ditambah!');
         }
 
-        if (! $stories) {
-            return back()->with('failed', 'Kategori gagal ditambah!');
+        if (! $story) {
+            return back()->with('failed', 'Cerita gagal ditambah!');
         }
 
-        return redirect()->route('author.story.index');
+        return redirect()->route('author.story.show', $story->id);
     }
 
     /**
@@ -73,9 +64,9 @@ class StoryController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(string $id)
+    public function edit(Story $story)
     {
-        //
+        return view('author.story.edit', compact('story'));
     }
 
     /**
