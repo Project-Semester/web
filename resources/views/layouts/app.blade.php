@@ -15,7 +15,7 @@
 </head>
 <body>
     <header>
-        <x-navbar-admin/>
+        @yield('navbar')
     </header>
 
     <main>

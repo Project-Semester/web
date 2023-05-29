@@ -6,6 +6,10 @@
 
 @section('title', 'Daftar')
 
+@section('navbar')
+    <x-navbar-author />
+@endsection
+
 @section('content')
     <div class="container-md">
         <div class="row justify-content-center align-items-center" style="min-height: 100vh;">

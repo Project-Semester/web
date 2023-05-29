@@ -1,6 +1,13 @@
 <nav class="navbar navbar-expand-lg fixed-top navbar-dark bg-dark">
-    <div class="container">
-        <a href="" class="navbar-brand"><h3 class="fw-bold">YukNulis</h3></a>
+  <div class="container">
+      <a href="" class="navbar-brand"><h3 class="fw-bold">YukNulis</h3></a>
+      @guest
+          <div class="d-flex gap-3">
+            <a href="{{ route('author.login.page') }}" class="btn btn-primary">Masuk</a>
+            <a href="{{ route('author.register.page') }}" class="btn btn-outline-primary">Daftar</a>
+          </div>
+      @endguest
+      @auth
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
           <span class="navbar-toggler-icon"></span>
         </button>
@@ -36,5 +43,6 @@
             </div>
           </ul>
         </div>
-    </div>
+      @endauth
+  </div>
 </nav>

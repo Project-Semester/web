@@ -14,7 +14,7 @@ class StoryController extends Controller
 {
     private StoryService $service;
 
-    public function __construct(StoryService $storyService) 
+    public function __construct(StoryService $storyService)
     {
         $this->service = $storyService;
     }
@@ -22,7 +22,7 @@ class StoryController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index(): View | RedirectResponse
+    public function index(): View|RedirectResponse
     {
         try {
             $stories = $this->service->findAllStories(null);
@@ -30,11 +30,12 @@ class StoryController extends Controller
             return redirect()->route('bacaCerita');
         }
 
-        if (! $stories) return redirect()->route('bacaCerita');
+        if (! $stories) {
+            return redirect()->route('bacaCerita');
+        }
 
         return view('author.bacaCerita', compact('stories'));
     }
-
 
     /**
      * Show the form for creating a new resource.
@@ -47,7 +48,7 @@ class StoryController extends Controller
             'synopsis' => 'required',
             'episode' => 'required',
             'category' => 'required',
-            'isi_cerita' => 'required'
+            'isi_cerita' => 'required',
         ]);
 
         // Simpan artikel baru ke dalam database
@@ -79,9 +80,9 @@ class StoryController extends Controller
     public function show(Story $story)
     {
         $result = StoryService::findStoryById($story);
-        
+
         return view('author.story.show', [
-            'story' => $result
+            'story' => $result,
         ]);
     }
 

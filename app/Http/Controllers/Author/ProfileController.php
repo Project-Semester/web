@@ -8,14 +8,13 @@ use App\Services\UserService;
 use Illuminate\Contracts\Auth\Authenticatable;
 use Illuminate\Contracts\View\View;
 use Illuminate\Http\RedirectResponse;
-use Illuminate\Http\Request;
 
 class ProfileController extends Controller
 {
     public function index(): View
     {
         $user = auth()->user();
-        
+
         return view('author.profile.index', compact('user'));
     }
 
@@ -30,9 +29,10 @@ class ProfileController extends Controller
             return back()->with('failed', 'Profil gagal diubah!');
         }
 
-        if (! $result) return back()->with('failed', 'Kategori gagal diubah!');
+        if (! $result) {
+            return back()->with('failed', 'Kategori gagal diubah!');
+        }
 
         return redirect()->route('admin.profile.index');
     }
-
 }

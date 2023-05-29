@@ -6,6 +6,10 @@
 
 @section('title', 'Masuk')
 
+@section('navbar')
+    <x-navbar-author />
+@endsection
+
 @section('content')
     <div class="container-md">
         <div class="row justify-content-center align-items-center min-vh-100">

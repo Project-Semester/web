@@ -11,9 +11,7 @@ use App\Http\Controllers\Author\AuthController as AuthorAuthController;
 use App\Http\Controllers\Author\HomeController;
 use App\Http\Controllers\Author\ProfileController as AuthorProfileController;
 use App\Http\Controllers\Author\StoryController as AuthorStoryController;
-use App\Http\Controllers\LandingController;
 use Illuminate\Support\Facades\Route;
-use PharIo\Manifest\Author;
 
 /*
 |--------------------------------------------------------------------------
@@ -26,9 +24,38 @@ use PharIo\Manifest\Author;
 |
 */
 
-// Route::get('/', function () {
-//     return view('welcome');
-// });
+Route::middleware('guestAuthor')->group(function () {
+    Route::redirect('/', '/login');
+    Route::get('/login', [AuthorAuthController::class, 'index'])->name('author.login.page');
+    Route::post('/login', [AuthorAuthController::class, 'authenticate'])->name('author.login');
+    Route::get('/register', [AuthorAuthController::class, 'create'])->name('author.register.page');
+    Route::post('/register', [AuthorAuthController::class, 'register'])->name('author.register');
+});
+
+Route::prefix('/author')->group(function () {
+    Route::middleware('isAuthor')->group(function () {
+        Route::get('/home', [HomeController::class, 'index'])->name('author.home.index');
+        Route::get('/profile', [AuthorProfileController::class, 'index'])->name('author.profile.index');
+        Route::post('/tambahcerita', [AuthorStoryController::class, 'create'])->name('author.tambahcerita');
+        // Route::get('/profil', [AuthorProfileController::class, 'update'])->name('author.profile.update');
+
+        Route::prefix('/kategori')->group(function () {
+            Route::get('/', [AuthCategoryController::class, 'index'])->name('author.kategori.index');
+            Route::get('/{category}', [AuthCategoryController::class, 'show'])->name('author.kategori.show');
+            Route::get('/stories/{story}', [AuthorStoryController::class, 'show'])->name('author.story.show');
+        });
+
+        Route::get('/bacacerita', function () {
+            return view('author/bacaCerita');
+        })->name('bacaCerita');
+
+        Route::get('/tambahepisode', function () {
+            return view('author/episode/add-episode');
+        })->name('add-episode');
+
+        Route::get('/logout', [AuthorAuthController::class, 'logout'])->name('author.logout');
+    });
+});
 
 Route::prefix('/admin')->group(function () {
     Route::middleware('guestAdmin')->group(function () {
@@ -67,50 +94,3 @@ Route::prefix('/admin')->group(function () {
         Route::get('/logout', [AuthController::class, 'logout'])->name('admin.logout');
     });
 });
-
-Route::prefix('/author')->group(function () {
-    Route::middleware('guestAuthor')->group(function () {
-        Route::redirect('/', '/author/login');
-        Route::get('/login', [AuthorAuthController::class, 'index'])->name('author.login.page');
-        Route::post('/login', [AuthorAuthController::class, 'authenticate'])->name('author.login');
-        Route::get('/register', [AuthorAuthController::class, 'create'])->name('author.register.page');
-        Route::post('/register', [AuthorAuthController::class, 'register'])->name('author.register');
-    });
-
-    Route::middleware('isAuthor')->group(function () {
-        Route::get('/home', [HomeController::class, 'index'])->name('author.home.index');
-        Route::get('/profil', [AuthorProfileController::class, 'index'])->name('author.profile.index');
-        Route::post('/tambahcerita', [AuthorStoryController::class, 'create'])->name('author.tambahcerita');
-        // Route::get('/profil', [AuthorProfileController::class, 'update'])->name('author.profile.update');
-        
-        Route::prefix('/kategori')->group(function () {
-            Route::get('/', [AuthCategoryController::class, 'index'])->name('author.kategori.index');
-            Route::get('/{category}', [AuthCategoryController::class, 'show'])->name('author.kategori.show');
-            Route::get('/stories/{story}', [AuthorStoryController::class, 'show'])->name('author.story.show');
-        });
-        
-        Route::get('/bacacerita', function () {
-            return view('author/bacaCerita');
-        })->name('bacaCerita');
-        
-        
-        Route::get('/tambahepisode', function () {
-            return view('author/episode/add-episode');
-        })->name('add-episode');
-
-        Route::get('/logout', [AuthorAuthController::class, 'logout'])->name('author.logout');
-    });
-
-    
-});
-
-
-
-Route::get('/', function () {
-    return view('landing');
-})->name('welcome');
-
-
-
-
-
