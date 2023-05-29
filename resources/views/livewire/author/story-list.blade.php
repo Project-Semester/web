@@ -8,7 +8,7 @@
     </div>
     <div class="row justify-content-center align-items-center">
         @foreach ($stories as $story)
-            <x-author-story-card :story="$story" />
+            <x-auth-story-card :story="$story" />
         @endforeach
     </div>
 </div>

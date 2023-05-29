@@ -8,7 +8,7 @@
 @section('title', 'Tambah Episode')
 
 @section('content')
-    <div class="container" style="padding-top: 140px;">
+    <div class="container" style="padding-top: 120px;">
         <div class="card text-bg-dark">
             <div class="card-body">
                 <div class="col-lg-10" style="text-align: center; padding-left: 200px;">
