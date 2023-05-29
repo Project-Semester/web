@@ -8,12 +8,9 @@ use App\Http\Controllers\Admin\ProfileController;
 use App\Http\Controllers\Admin\StoryController;
 use App\Http\Controllers\Author\AuthCategoryController;
 use App\Http\Controllers\Author\AuthController as AuthorAuthController;
-use App\Http\Controllers\Author\HomeController;
 use App\Http\Controllers\Author\ProfileController as AuthorProfileController;
 use App\Http\Controllers\Author\StoryController as AuthorStoryController;
-use App\Http\Controllers\LandingController;
 use Illuminate\Support\Facades\Route;
-use PharIo\Manifest\Author;
 
 /*
 |--------------------------------------------------------------------------
@@ -26,9 +23,43 @@ use PharIo\Manifest\Author;
 |
 */
 
-// Route::get('/', function () {
-//     return view('welcome');
-// });
+Route::middleware('guestAuthor')->group(function () {
+    Route::redirect('/', '/login');
+    Route::get('/login', [AuthorAuthController::class, 'index'])->name('author.login.page');
+    Route::post('/login', [AuthorAuthController::class, 'authenticate'])->name('author.login');
+    Route::get('/register', [AuthorAuthController::class, 'create'])->name('author.register.page');
+    Route::post('/register', [AuthorAuthController::class, 'register'])->name('author.register');
+});
+
+Route::middleware('isAuthor')->group(function () {
+    Route::prefix('/stories')->group(function () {
+        Route::get('/', [AuthorStoryController::class, 'index'])->name('author.story.index');
+        Route::get('/create', [AuthorStoryController::class, 'create'])->name('author.story.create');
+        Route::post('/', [AuthorStoryController::class, 'store'])->name('author.story.store');
+        Route::get('/{story}', [AuthorStoryController::class, 'show'])->name('author.story.show');
+        Route::get('/{story}/edit', [AuthorStoryController::class, 'edit'])->name('author.story.edit');
+        Route::patch('/{story}', [AuthorStoryController::class, 'update'])->name('author.story.update');
+        Route::delete('/{story}', [AuthorStoryController::class, 'destroy'])->name('author.story.destroy');
+    });
+
+    Route::get('/profil', [AuthorProfileController::class, 'index'])->name('author.profile.index');
+    Route::post('/profil', [AuthorProfileController::class, 'update'])->name('author.profile.update');
+
+    Route::prefix('/categories')->group(function () {
+        Route::get('/', [AuthCategoryController::class, 'index'])->name('author.category.index');
+        Route::get('/{category}', [AuthCategoryController::class, 'show'])->name('author.category.show');
+    });
+
+    Route::get('/bacacerita', function () {
+        return view('author/bacaCerita');
+    })->name('bacaCerita');
+
+    Route::get('/tambahepisode', function () {
+        return view('author/episode/add-episode');
+    })->name('add-episode');
+
+    Route::get('/logout', [AuthorAuthController::class, 'logout'])->name('author.logout');
+});
 
 Route::prefix('/admin')->group(function () {
     Route::middleware('guestAdmin')->group(function () {
@@ -67,52 +98,3 @@ Route::prefix('/admin')->group(function () {
         Route::get('/logout', [AuthController::class, 'logout'])->name('admin.logout');
     });
 });
-
-Route::prefix('/author')->group(function () {
-    Route::middleware('guestAuthor')->group(function () {
-        Route::redirect('/', '/author/login');
-        Route::get('/login', [AuthorAuthController::class, 'index'])->name('author.login.page');
-        Route::post('/login', [AuthorAuthController::class, 'authenticate'])->name('author.login');
-        Route::get('/register', [AuthorAuthController::class, 'create'])->name('author.register.page');
-        Route::post('/register', [AuthorAuthController::class, 'register'])->name('author.register');
-    });
-
-    Route::middleware('isAuthor')->group(function () {
-        Route::get('/stories', [AuthorStoryController::class, 'index'])->name('author.story.index');
-        Route::get('/addstories', [AuthorStoryController::class, 'create'])->name('author.story.create');
-        Route::post('/', [AuthorStoryController::class, 'store'])->name('author.story.store');
-        Route::get('/profil', [AuthorProfileController::class, 'index'])->name('author.profile.index');
-        Route::post('/profil', [AuthorProfileController::class, 'update'])->name('author.profile.update');
-        
-        
-        Route::prefix('/kategori')->group(function () {
-            Route::get('/', [AuthCategoryController::class, 'index'])->name('author.kategori.index');
-            Route::get('/{category}', [AuthCategoryController::class, 'show'])->name('author.kategori.show');
-            Route::get('/stories/{story}', [AuthorStoryController::class, 'show'])->name('author.story.show');
-        });
-        
-        Route::get('/bacacerita', function () {
-            return view('author/bacaCerita');
-        })->name('bacaCerita');
-        
-        
-        Route::get('/tambahepisode', function () {
-            return view('author/episode/add-episode');
-        })->name('add-episode');
-
-        Route::get('/logout', [AuthorAuthController::class, 'logout'])->name('author.logout');
-    });
-
-    
-});
-
-
-
-Route::get('/', function () {
-    return view('landing');
-})->name('welcome');
-
-
-
-
-

@@ -4,7 +4,11 @@
     @livewireStyles
 @endpush
 
-@section('title', 'Cerita')
+@section('title', 'Profil')
+
+@section('navbar')
+    <x-navbar-admin />
+@endsection
 
 @section('content')
     <div class="container-md my-5 py-5 px-5">

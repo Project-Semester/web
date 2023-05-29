@@ -9,8 +9,8 @@ use Illuminate\View\Component;
 
 class AuthStoryCard extends Component
 {
-
     public Story $story;
+
     /**
      * Create a new component instance.
      */

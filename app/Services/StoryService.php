@@ -86,7 +86,7 @@ class StoryService
         $story = Story::create([
             'title' => $request['title'],
             'synopsis' => $request['synopsis'],
-            'cover' => $request['cover'],
+            'cover' => $cover ? $request['cover'] : null,
             'user_id' => auth()->id(),
             'category_id' => $request['category_id'],
         ]);

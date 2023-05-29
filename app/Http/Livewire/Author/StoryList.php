@@ -17,7 +17,7 @@ class StoryList extends Component
     public function render()
     {
         $stories = StoryService::findAllStories($this->search);
-        
+
         return view('livewire.author.story-list', compact('stories'));
     }
 }

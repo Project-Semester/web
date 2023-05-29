@@ -6,34 +6,24 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\StoreStoryRequest;
 use App\Models\Story;
 use App\Services\StoryService;
-use Illuminate\Auth\Events\Validated;
 use Illuminate\Contracts\View\View;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
 
 class StoryController extends Controller
 {
-    private StoryService $service;
-
-    public function __construct(StoryService $storyService) 
-    {
-        $this->service = $storyService;
-    }
-
     /**
      * Display a listing of the resource.
      */
-    public function index(): View | RedirectResponse
+    public function index(): View|RedirectResponse
     {
         return view('author.story.index');
     }
 
-
     /**
      * Show the form for creating a new resource.
      */
-    public function create(Request $request)
+    public function create()
     {
         return view('author.story.create');
     }
@@ -47,16 +37,16 @@ class StoryController extends Controller
         $cover = $request->file('cover');
 
         try {
-            $story = $this->service->addStory($validated, $cover);
+            $story = StoryService::addStory($validated, $cover);
         } catch (\Exception $error) {
+            return back()->with('failed', 'Cerita gagal ditambah!');
+        }
+
+        if (! $stories) {
             return back()->with('failed', 'Kategori gagal ditambah!');
         }
 
-        if (! $story) {
-            return back()->with('failed', 'Kategori gagal ditambah!');
-        }
-
-        return redirect()->route('author.story.index');
+        return redirect()->route('author.story.show', $story->id);
     }
 
     /**
@@ -65,18 +55,18 @@ class StoryController extends Controller
     public function show(Story $story)
     {
         $result = StoryService::findStoryById($story);
-        
+
         return view('author.story.show', [
-            'story' => $result
+            'story' => $result,
         ]);
     }
 
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(string $id)
+    public function edit(Story $story)
     {
-        //
+        return view('author.story.edit', compact('story'));
     }
 
     /**

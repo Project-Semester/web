@@ -8,6 +8,7 @@ use Livewire\WithFileUploads;
 class RegisterForm extends Component
 {
     use WithFileUploads;
+
     public string $username;
 
     public string $email;
@@ -36,4 +37,3 @@ class RegisterForm extends Component
         return view('livewire.author.register-form');
     }
 }
-

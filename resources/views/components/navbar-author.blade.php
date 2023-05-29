@@ -1,12 +1,24 @@
 <nav class="navbar navbar-expand-lg fixed-top navbar-dark bg-dark">
-    <div class="container">
-        <a href="" class="navbar-brand"><h3 class="fw-bold">YukNulis</h3></a>
+  <div class="container">
+      <a href="" class="navbar-brand"><h3 class="fw-bold">YukNulis</h3></a>
+      @guest
+          <div class="d-flex gap-3">
+            <a href="{{ route('author.login.page') }}" class="btn btn-primary">Masuk</a>
+            <a href="{{ route('author.register.page') }}" class="btn btn-outline-primary">Daftar</a>
+          </div>
+      @endguest
+      @auth
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
           <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse" id="navbarResponsive">
           <ul class="navbar-nav">
-              <a class="nav-link"  href="{{ route('author.kategori.index') }}" >Kategori</a>
+              <li class="nav-item">
+                <a class="nav-link {{ request()->is('stories*') ? 'active' : '' }}" href="{{ route('author.story.index') }}">Cerita</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link {{ request()->is('categories*') ? 'active' : '' }}" href="{{ route('author.category.index') }}">Kategori</a>
+              </li>
           </ul>
           <ul class="navbar-nav">
               <a class="nav-link"  href="{{ route('author.story.index') }}" >Cerita</a>
@@ -31,13 +43,14 @@
                 @endif
                 </a>
                 <div class="dropdown-menu" aria-labelledby="themes">
-                  <a class="dropdown-item" href="{{ route('author.story.index') }}">Home</a>
-                  <a class="dropdown-item" href="{{ route('author.profile.index') }}">Profil Saya</a>
-                  <a class="dropdown-item" href="{{ route('author.logout') }}">Log Out</a>
+                  <a class="dropdown-item" href="stories">Home</a>
+                  <a class="dropdown-item" href="profil">Profil Saya</a>
+                  <a class="dropdown-item" href="logout">Log Out</a>
                 </div>
               </li>
             </div>
           </ul>
         </div>
-    </div>
+      @endauth
+  </div>
 </nav>

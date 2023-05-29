@@ -2,11 +2,10 @@
 
 namespace App\Http\Controllers\Author;
 
-use App\Services\CategoryService;
 use App\Http\Controllers\Controller;
 use App\Models\Category;
+use App\Services\CategoryService;
 use Illuminate\Contracts\View\View;
-use Illuminate\Http\Request;
 
 class AuthCategoryController extends Controller
 {
@@ -29,6 +28,4 @@ class AuthCategoryController extends Controller
     {
         return view('author.kategori.kategorishow', compact('category'));
     }
-
-
 }

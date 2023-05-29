@@ -6,6 +6,10 @@
 
 @section('title', 'Kategori')
 
+@section('navbar')
+    <x-navbar-admin />
+@endsection
+
 @section('content')
     <div class="container-md my-5 py-5 px-5">
         <div class="row justify-content-center align-items-center">

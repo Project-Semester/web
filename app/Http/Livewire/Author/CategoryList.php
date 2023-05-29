@@ -17,6 +17,7 @@ class CategoryList extends Component
     public function render()
     {
         $categories = CategoryService::findAll($this->search);
+
         return view('livewire.author.category-list', compact('categories'));
     }
 }

@@ -16,7 +16,8 @@ class AuthCategorycard extends Component
         public string $id,
         public string $name,
         public string $description,
-    ) {}
+    ) {
+    }
 
     /**
      * Get the view / contents that represent the component.
