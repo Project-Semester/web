@@ -6,6 +6,8 @@ use Livewire\Component;
 
 class StoryForm extends Component
 {
+    public string $cover;
+
     public string $title;
 
     public string $synopsis;
@@ -17,6 +19,7 @@ class StoryForm extends Component
     public string $isi_cerita;
 
     protected $rules = [
+        'cover' => ['image', 'file'],
         'title' => ['required', 'string', 'min:3'],
         'synopsis' => ['required', 'text'],
         'category' => ['required', 'string'],

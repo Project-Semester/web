@@ -2,12 +2,18 @@
     <div class="row">
       <div class="col-lg-4 col-md-7 col-sm-6">
         <div class="text-center">
-          <div class="card text-bg-dark">
-            <div class="card-body">
-              <div class="col">
-                <a href=""><i class="bi bi-plus"></i></a>
-              </div>
-            </div>
+          <div class="col">
+            @if (auth()->user()->photo)
+            <span class="overflow-hidden ">
+              <img src="{{ asset('/storage/'.auth()->user()->photo) }}" class="rounded-square" alt="...">
+            </span>
+            @else
+            <img src="https://via.placeholder.com/200x300.png/c2c2c2/000000?Text=200x300" class="rounded-square w-60" alt="">
+            @endif
+            <input type="file" class="form-control @if ($errors->has('cover')) is-invalid @elseif($cover == null) @else is-valid @endif" id="formFile" name="cover" wire:model='cover'>
+            @error('cover')
+                <div class="invalid-feedback">{{ $message }}</div>
+            @enderror
           </div>
         </div>
       </div>

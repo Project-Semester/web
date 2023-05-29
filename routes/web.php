@@ -81,7 +81,7 @@ Route::prefix('/author')->group(function () {
         Route::get('/home', [HomeController::class, 'index'])->name('author.home.index');
         Route::get('/profil', [AuthorProfileController::class, 'index'])->name('author.profile.index');
         Route::post('/tambahcerita', [AuthorStoryController::class, 'create'])->name('author.tambahcerita');
-        // Route::get('/profil', [AuthorProfileController::class, 'update'])->name('author.profile.update');
+        Route::post('/profil', [AuthorProfileController::class, 'update'])->name('author.profile.update');
         
         Route::prefix('/kategori')->group(function () {
             Route::get('/', [AuthCategoryController::class, 'index'])->name('author.kategori.index');

@@ -50,7 +50,7 @@ class AuthController extends Controller
     public function register(RegisterUserRequest $request): RedirectResponse
     {
         $validated = $request->validated();
-        $photo = $request->validated();
+        $photo = $request->file('photo');
 
         try {
             $user = $this->service->registerAuthor($validated, $photo);

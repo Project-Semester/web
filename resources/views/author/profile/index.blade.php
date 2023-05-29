@@ -14,12 +14,12 @@
             <img src="{{ asset('/storage/'.auth()->user()->photo) }}" class="rounded-circle" alt="Profile Picture" width="180px" height="180px">
           </span>
           @else
-          <img src="https://via.placeholder.com/40x40.png/deddda/000000?Text=40x40" class="rounded-circle w-60" alt="">
+          <img src="https://via.placeholder.com/180x180.png/c2c2c2/000000?Text=180x180" class="rounded-circle w-60" alt="">
           @endif
             <div class="container text-center" style="padding-top: 5px;">
             <h3 class="text-white fw-bold me-2 text-center">{{ auth()->user()->username }}</h3>
             <p class="text-white text-center">{{ auth()->user()->email }}</p>
-            <button class="btn btn-outline-light btn-sm"><i class="bi bi-pencil" style="padding-right: 10px"></i>Edit profil</button>
+            <a href="{{ route('author.profile.update') }}" ><button class="btn btn-outline-light btn-sm"><i class="bi bi-pencil" style="padding-right: 10px"></i>Edit profil</button></a>
             </div>
         </div>
     </div>
@@ -38,7 +38,7 @@
                             <div class="card mb-3" style="max-width: 540px;">
                               <div class="row g-0">
                                 <div class="col-md-4">
-                                  <a href="bacacerita"><img src="{{ url('assets/wp1.jpg')}}" class="img-fluid rounded-start" alt=""></a>
+                                  <a href="tambahepisode"><img src="..." class="card-img-left" alt="cover"></a>
                                 </div>
                                 <div class="col-md-8">
                                   <div class="card-body">
@@ -52,7 +52,7 @@
                             <div class="card mb-3" style="max-width: 540px;">
                               <div class="row g-0">
                                 <div class="col-md-4">
-                                  <img src="{{ url('assets/wp3.jpg')}}" class="img-fluid rounded-start" alt="...">
+                                  <img src="..." class="card-img-left" alt="cover">
                                 </div>
                                 <div class="col-md-8">
                                   <div class="card-body">
@@ -66,7 +66,7 @@
                             <div class="card mb-3" style="max-width: 540px;">
                               <div class="row g-0">
                                 <div class="col-md-4">
-                                  <img src="{{ url('assets/wp5.jpg')}}" class="img-fluid rounded-start" alt="...">
+                                  <img src="..." class="card-img-left" alt="cover">
                                 </div>
                                 <div class="col-md-8">
                                   <div class="card-body">

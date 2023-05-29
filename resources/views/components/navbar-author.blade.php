@@ -28,7 +28,7 @@
                 @endif
                 </a>
                 <div class="dropdown-menu" aria-labelledby="themes">
-                  <a class="dropdown-item" href="home">Dashboard</a>
+                  <a class="dropdown-item" href="home">Home</a>
                   <a class="dropdown-item" href="profil">Profil Saya</a>
                   <a class="dropdown-item" href="logout">Log Out</a>
                 </div>
