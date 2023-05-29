@@ -32,7 +32,6 @@ Route::middleware('guestAuthor')->group(function () {
     Route::post('/register', [AuthorAuthController::class, 'register'])->name('author.register');
 });
 
-Route::prefix('/author')->group(function () {
     Route::middleware('isAuthor')->group(function () {
         Route::get('/home', [HomeController::class, 'index'])->name('author.home.index');
         Route::get('/profile', [AuthorProfileController::class, 'index'])->name('author.profile.index');
@@ -55,7 +54,6 @@ Route::prefix('/author')->group(function () {
 
         Route::get('/logout', [AuthorAuthController::class, 'logout'])->name('author.logout');
     });
-});
 
 Route::prefix('/admin')->group(function () {
     Route::middleware('guestAdmin')->group(function () {
