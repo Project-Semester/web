@@ -8,6 +8,7 @@ use App\Http\Controllers\Admin\ProfileController;
 use App\Http\Controllers\Admin\StoryController;
 use App\Http\Controllers\Author\AuthCategoryController;
 use App\Http\Controllers\Author\AuthController as AuthorAuthController;
+use App\Http\Controllers\Author\EpisodeController as AuthorEpisodeController;
 use App\Http\Controllers\Author\ProfileController as AuthorProfileController;
 use App\Http\Controllers\Author\StoryController as AuthorStoryController;
 use Illuminate\Support\Facades\Route;
@@ -41,6 +42,9 @@ Route::middleware('isAuthor')->group(function () {
         Route::patch('/{story}', [AuthorStoryController::class, 'update'])->name('author.story.update');
         Route::delete('/{story}', [AuthorStoryController::class, 'destroy'])->name('author.story.destroy');
     });
+
+    Route::get('addepisode', [AuthorEpisodeController::class, 'create'])->name('author.episode.create');
+    Route::get('episode', [AuthorEpisodeController::class, 'show'])->name('author.episode.show');
 
     Route::get('/profil', [AuthorProfileController::class, 'index'])->name('author.profile.index');
     Route::post('/profil', [AuthorProfileController::class, 'update'])->name('author.profile.update');

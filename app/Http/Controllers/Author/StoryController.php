@@ -42,7 +42,7 @@ class StoryController extends Controller
             return back()->with('failed', 'Cerita gagal ditambah!');
         }
 
-        if (! $stories) {
+        if (! $story) {
             return back()->with('failed', 'Kategori gagal ditambah!');
         }
 

@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Author;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\UpdateUserRequest;
+use App\Services\StoryService;
 use App\Services\UserService;
 use Illuminate\Contracts\Auth\Authenticatable;
 use Illuminate\Contracts\View\View;
@@ -13,9 +14,9 @@ class ProfileController extends Controller
 {
     public function index(): View
     {
-        $user = auth()->user();
+        $stories = StoryService::findAllUserStories(null);
 
-        return view('author.profile.index', compact('user'));
+        return view('author.profile.index', compact('stories'));
     }
 
     public function update(UpdateUserRequest $request, Authenticatable $user): RedirectResponse
