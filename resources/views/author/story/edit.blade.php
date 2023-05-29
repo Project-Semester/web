@@ -18,7 +18,7 @@
                 @endif
             </div>
         </div>
-        <livewire:author.story-edit-form />
+        <livewire:author.story-edit-form :story="$story" />
     </div>
 @endsection
 

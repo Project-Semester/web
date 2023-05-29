@@ -24,7 +24,7 @@ class UpdateUserRequest extends FormRequest
     {
         return [
             'username' => ['sometimes', 'string', 'max:255'],
-            'photo' => ['sometimes', 'image', 'file', 'max:2048'],
+            'photo' => ['sometimes', 'nullable', 'image', 'file', 'max:2048'],
             'email' => ['sometimes', 'email:dns', 'unique:users,email', 'string'],
             'password' => [
                 'sometimes',

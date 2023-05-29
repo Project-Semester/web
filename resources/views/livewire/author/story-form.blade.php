@@ -14,7 +14,7 @@
           </div>
         </div>
         <div class="col-lg-8 col-md-7 col-sm-6">
-          <div class="card text-bg-dark">
+          <div class="card text-bg-dark border pb-2">
             <div class="card-body">
                 <div class="container">
                   <h3>Detail Cerita</h3>
