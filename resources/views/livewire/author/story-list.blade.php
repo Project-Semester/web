@@ -4,33 +4,17 @@
             <h2 class="text-center fw-bold">Populer</h2>
             <br>
             <div class="row row-cols-1 row-cols-md-3 g-4">
+                @foreach ($stories as $story)
                 <div class="col">
-                  <div class="card h-100">
+                  <div class="card bg-dark border h-100">
                     <img src="/assets/cover.png" class="card-img-top" alt="...">
                     <div class="card-body">
-                      <h5 class="card-title">Card title</h5>
-                      <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
+                      <h5 class="card-title fw-bold">{{ $story->title }}</h5>
+                      <p class="card-text">{{ $story->synopsis }}</p>
                     </div>
                   </div>
                 </div>
-                <div class="col">
-                  <div class="card h-100">
-                    <img src="/assets/cover.png" class="card-img-top" alt="...">
-                    <div class="card-body">
-                      <h5 class="card-title">Card title</h5>
-                      <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
-                    </div>
-                  </div>
-                </div>
-                <div class="col">
-                  <div class="card h-100">
-                    <img src="/assets/cover.png" class="card-img-top" alt="...">
-                    <div class="card-body">
-                      <h5 class="card-title">Card title</h5>
-                      <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
-                    </div>
-                  </div>
-                </div>
+                @endforeach
             </div>
             <hr class="solid opacity-50">
         </div>

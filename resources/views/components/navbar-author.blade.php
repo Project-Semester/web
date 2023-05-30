@@ -40,8 +40,8 @@
                 @endif
                 </a>
                 <div class="dropdown-menu" aria-labelledby="themes">
-                  <a class="dropdown-item" href="stories">Home</a>
-                  <a class="dropdown-item" href="profil">Profil Saya</a>
+                  <a class="dropdown-item" href="{{ route('author.story.index') }}">Home</a>
+                  <a class="dropdown-item" href="{{ route('author.profile.index') }}">Profil Saya</a>
                   <a class="dropdown-item" href="{{ route('author.logout') }}">Log Out</a>
                 </div>
               </li>

@@ -23,41 +23,43 @@
             </div>
         </div>
     </div>
-    <div class="container" style="padding-top: 20px;">
+    <div class="container-md my-2 py-2 px-2 d-flex justify-content-center">
+      <div class="col-12 col-md-10 col-lg-8 my-3">
         <div class="card text-bg-dark">
-            <div class="card-body">
-                <div class="row justify-content-between">
-                  <div class="col-4">
-                    <h3 style="padding-left:40px;">Daftar ceritamu</h3>
-                  </div>
+          <div class="card-body">
+              <div class="row justify-content-between">
+                <div class="col-4">
+                  <h3 style="padding-left:10px;">Daftar ceritamu</h3>
                 </div>
-                <hr class="solid">
-                <div class="container">
-                    <div class="row" style="padding-left: 350px;">
-                        <div class="col-lg-8">
-                          @forelse ($stories as $story)
-                            <div class="card mb-3" style="max-width: 540px;">
-                              <div class="row g-0">
-                                <div class="col-md-4">
-                                  <img src="..." class="card-img-left" alt="cover">
-                                </div>
-                                <div class="col-md-8">
-                                  <div class="card-body">
-                                    <h5><a href="{{ route('author.story.show', $story->id) }}" class="card-title text-decoration-none text-white fw-bold fs-5">{{ $story->title }}</a></h5>
-                                    <p class="card-text">{{ $story->synopsis }}</p>
-                                    <p class="card-text"><small class="text-body-secondary">{{ $story->created_at }}</small></p>
-                                  </div>
+              </div>
+              <hr class="solid">
+              <div class="container">
+                  <div class="row d-flex justify-content-center">
+                      <div class="col-lg-7">
+                        @forelse ($stories as $story)
+                          <div class="card mb-3 border" style="max-width: 540px;">
+                            <div class="row g-0">
+                              <div class="col-md-4">
+                                <img src="..." class="card-img-left" alt="cover">
+                              </div>
+                              <div class="col-md-8">
+                                <div class="card-body">
+                                  <h5><a href="{{ route('author.story.show', $story->id) }}" class="card-title text-decoration-none text-white fw-bold fs-5">{{ $story->title }}</a></h5>
+                                  <p class="card-text">{{ $story->synopsis }}</p>
+                                  <p class="card-text"><small class="text-body-secondary">{{ $story->created_at }}</small></p>
                                 </div>
                               </div>
                             </div>
-                          @empty
-                            <p>Anda tidak memiliki cerita</p>
-                          @endforelse
-                        </div>
-                    </div>
-                </div>
-            </div>
+                          </div>
+                        @empty
+                          <p>Anda tidak memiliki cerita</p>
+                        @endforelse
+                      </div>
+                  </div>
+              </div>
+          </div>
         </div>
+      </div>
     </div>
 
     <!-- Modal Edit Profil-->

@@ -23,6 +23,10 @@ use Illuminate\Support\Facades\Route;
 | be assigned to the "web" middleware group. Make something great!
 |
 */
+Route::get('/', function () {
+    return view('author/landing');
+})->name('landing');
+
 
 Route::middleware('guestAuthor')->group(function () {
     Route::redirect('/', '/login');
