@@ -16,9 +16,11 @@ class StoryController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index(): View|RedirectResponse
+    public function index(): View
     {
-        return view('author.story.index');
+        $popular_stories = StoryService::findPopularStories();
+
+        return view('author.story.index', compact('popular_stories'));
     }
 
     /**

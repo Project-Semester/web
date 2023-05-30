@@ -20,17 +20,7 @@
         </div>
 
         <div class="row justify-content-center align-items-center">
-            <x-auth-story-card :story="$story" />
-        </div>
-
-        <div class="row justify-content-center align-items-center">
-            <hr class="border col-8 my-4">
-
-            <h2 class="text-center fw-bold">Episode</h2>
-
-            @foreach ($story->episodes as $episode)
-                <x-author-episode-card :episode="$episode" link />
-            @endforeach
+            <x-author-episode-card :episode="$episode" body option />
         </div>
         
     </div>

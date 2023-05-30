@@ -15,7 +15,8 @@ class AuthorEpisodeCard extends Component
     public function __construct(
         public Episode $episode,
         public bool $link = false,
-        public bool $body = false
+        public bool $body = false,
+        public bool $option = false,
     ) {
     }
 

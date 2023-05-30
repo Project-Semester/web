@@ -1,7 +1,4 @@
 <div class="col-12 col-md-10 col-lg-8 my-3">
-    <div class="d-flex justify-content-end" style="padding-top: 20px">
-        <a href="{{ route('author.episode.create') }}"><button type="submit" class="btn btn-primary fw-bold w-20 mb-6">Tambah Episode</button></a>
-    </div>
     <div class="card text-white bg-dark border">
         <div class="card-header py-3">
             @if ($link)
@@ -11,11 +8,24 @@
             @endif
             <small class="ms-2 text-info">{{ $episode->created_at->diffForHumans() }}</small>
         </div>
+        <div class="card-body">
         @if ($body)
-            <div class="card-body pb-5">
+                <p>
                     {{ $episode->body }}
                 </p>
-            </div>
         @endif
+        @if ($option)
+                @if (auth()->user()->role === 'author')
+                    <div class="d-flex justify-content-end align-text-middle gap-2">
+                        <a href="{{ route('author.episode.edit', $episode->id) }}" class="btn btn-primary">Edit <i class="ph ph-pencil-simple"></i></a>
+                        <form action="{{ route('author.episode.destroy', $episode->id) }}" method="POST">
+                            @method('DELETE')
+                            @csrf
+                            <button class="btn btn-danger" type="submit">Hapus <i class="ph ph-trash-simple"></i></button>
+                        </form>
+                    </div>
+                @endif
+            @endif
+        </div>
     </div>
 </div>

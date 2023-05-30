@@ -20,7 +20,7 @@
         </div>
 
         <div class="row justify-content-center align-items-center">
-            <x-auth-story-card :story="$story" :option=true/>
+            <x-auth-story-card :story="$story" option/>
         </div>
 
         <div class="row justify-content-center align-items-center">
@@ -31,6 +31,10 @@
             @foreach ($story->episodes as $episode)
                 <x-author-episode-card :episode="$episode" link />
             @endforeach
+
+            <div class="col-12 col-md-10 col-lg-8 my-3">
+                <a href="{{ route('author.episode.create', $story->id) }}" class="btn border-white w-100">Yuk Tambah Episode!</a>
+            </div>
         </div>
     </div>
 @endsection
