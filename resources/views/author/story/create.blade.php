@@ -18,7 +18,6 @@
                 @endif
             </div>
         </div>
-        @dd($story)
         <livewire:author.story-form />
     </div>
 @endsection

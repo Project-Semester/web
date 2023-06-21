@@ -2,7 +2,7 @@
     <div class="card text-white bg-dark border">
         <div class="card-header py-3">
             @if ($link)
-                <a href="{{ route('admin.episode.show', $episode->id) }}" class="text-decoration-none text-white"><strong>{{ $episode->title }}</strong></a>
+                <a href="{{ route('author.episode.show', $episode->id) }}" class="text-decoration-none text-white"><strong>{{ $episode->title }}</strong></a>
             @else
                 <strong>{{ $episode->title }}</strong>
             @endif

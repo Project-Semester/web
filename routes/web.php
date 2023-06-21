@@ -24,9 +24,8 @@ use Illuminate\Support\Facades\Route;
 |
 */
 Route::get('/', function () {
-    return view('author/landing');
-})->name('landing');
-
+    return view('welcome');
+})->name('welcome');
 
 Route::middleware('guestAuthor')->group(function () {
     Route::redirect('/', '/login');

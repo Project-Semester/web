@@ -52,7 +52,7 @@
                             </div>
                           </div>
                         @empty
-                          <p>Anda tidak memiliki cerita</p>
+                          <p class="text-center">-- Anda tidak memiliki cerita --</p>
                         @endforelse
                       </div>
                   </div>

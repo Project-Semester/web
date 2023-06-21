@@ -41,6 +41,7 @@ class StoryController extends Controller
 
         try {
             $story = StoryService::addStory($validated, $cover);
+            
         } catch (\Exception $error) {
             return back()->with('failed', 'Cerita gagal ditambah!');
         }
